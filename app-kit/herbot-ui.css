@@ -53,6 +53,36 @@
   --hb-sku-hover:#c9c9ff;
   --hb-sku-light:#4a4ad1;       /* 6.6:1 on white */
   --hb-sku-light-hover:#2e2ea8;
+
+  /* Marketplace and region colours: the same colour for a marketplace in every app that charts it.
+     Generated from config/marketplace-colours.json; don't edit here. These values are for the dark
+     ground; a light or paper ground adds .hb-on-paper (below). All meet 3:1 on their ground. */
+  --hb-mkt-uk:#56b4e9;   /* UK */
+  --hb-mkt-us:#e69f00;   /* US */
+  --hb-mkt-eu:#009e73;   /* EU */
+  --hb-mkt-de:#0072b2;   /* Germany */
+  --hb-mkt-fr:#cc79a7;   /* France */
+  --hb-mkt-it:#d55e00;   /* Italy */
+  --hb-mkt-es:#f0e442;   /* Spain */
+  --hb-mkt-nl:#8fd0a0;   /* Netherlands */
+  --hb-mkt-se:#7f7fd5;   /* Sweden */
+  --hb-mkt-pl:#b3823c;   /* Poland */
+  --hb-mkt-shopify:#9ad0c2;   /* Shopify */
+}
+
+/* The CFO's warm paper (#fff1e5) and any light chart ground. */
+.hb-on-paper{
+  --hb-mkt-uk:#4590ba;
+  --hb-mkt-us:#b87f00;
+  --hb-mkt-eu:#009e73;
+  --hb-mkt-de:#0072b2;
+  --hb-mkt-fr:#c2739f;
+  --hb-mkt-it:#d55e00;
+  --hb-mkt-es:#908928;
+  --hb-mkt-nl:#649270;
+  --hb-mkt-se:#7f7fd5;
+  --hb-mkt-pl:#b3823c;
+  --hb-mkt-shopify:#6c9288;
 }
 
 html{font-size:var(--hb-root-size)}

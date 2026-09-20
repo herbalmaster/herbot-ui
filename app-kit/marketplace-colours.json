@@ -1,0 +1,17 @@
+{
+  "note": "Marketplace and region colours, shared by every app that draws a chart (P12: the map is config, not code). Each entry has a value for the dark app ground (#0b1618) and one for the CFO's warm paper (#fff1e5); both meet 3:1 against their ground. Hues are from the Okabe-Ito colour-blind-safe set where possible. Adding a marketplace means adding a row here and regenerating the tokens; never picking a colour in an app.",
+  "grounds": { "dark": "#0b1618", "paper": "#fff1e5" },
+  "entries": [
+    { "id": "uk", "label": "UK", "kind": "region-and-marketplace", "dark": "#56b4e9", "paper": "#4590ba" },
+    { "id": "us", "label": "US", "kind": "region-and-marketplace", "dark": "#e69f00", "paper": "#b87f00" },
+    { "id": "eu", "label": "EU", "kind": "region", "dark": "#009e73", "paper": "#009e73" },
+    { "id": "de", "label": "Germany", "kind": "marketplace", "dark": "#0072b2", "paper": "#0072b2" },
+    { "id": "fr", "label": "France", "kind": "marketplace", "dark": "#cc79a7", "paper": "#c2739f" },
+    { "id": "it", "label": "Italy", "kind": "marketplace", "dark": "#d55e00", "paper": "#d55e00" },
+    { "id": "es", "label": "Spain", "kind": "marketplace", "dark": "#f0e442", "paper": "#908928" },
+    { "id": "nl", "label": "Netherlands", "kind": "marketplace", "dark": "#8fd0a0", "paper": "#649270" },
+    { "id": "se", "label": "Sweden", "kind": "marketplace", "dark": "#7f7fd5", "paper": "#7f7fd5" },
+    { "id": "pl", "label": "Poland", "kind": "marketplace", "dark": "#b3823c", "paper": "#b3823c" },
+    { "id": "shopify", "label": "Shopify", "kind": "channel", "dark": "#9ad0c2", "paper": "#6c9288" }
+  ]
+}
