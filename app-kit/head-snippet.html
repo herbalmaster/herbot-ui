@@ -1,0 +1,16 @@
+<!-- Herbot installable-app head snippet. Every Control Tower app with a UI ships this.
+     Serve the manifest, the icons and sw.js FROM THE APP'S OWN ORIGIN (not jsDelivr): Cloudflare
+     Access and the manifest's origin check will otherwise reject them.
+     Copy app-kit/icons/<your-app>/ to /icons/ and its manifest.webmanifest to the web root.
+     Replace THEME with your app's glyph colour from config/app-icons.json. -->
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="theme-color" content="THEME">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("/sw.js"); });
+  }
+</script>

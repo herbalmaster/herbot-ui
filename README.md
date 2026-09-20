@@ -9,7 +9,7 @@ Nothing brand-related is here: no logos, no brand colours, no product informatio
 ## Use it
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/herbalmaster/herbot-ui@v0.3.2/app-kit/herbot-ui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/herbalmaster/herbot-ui@v0.4.0/app-kit/herbot-ui.css">
 ```
 
 Pin a tag, never a branch. For a self-contained page that must work offline, inline the file's
@@ -18,6 +18,12 @@ contents at a tag instead, with `/* herbot-ui.css @ vX.Y.Z */` as the first line
 Then paste `app-kit/font-size-control.html` just inside `<body>`, unchanged.
 
 `app-kit/example.html` shows the kit in use.
+
+## Installable apps
+
+`app-kit/icons/<app>/` holds each internal app's icon set and manifest, with `app-kit/sw.js` and
+`app-kit/head-snippet.html`. **Serve those from your own origin, not from this CDN**: a manifest,
+its icons and a service worker must be same-origin.
 
 ## Notes
 
