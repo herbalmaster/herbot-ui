@@ -21,6 +21,8 @@
   --hb-fontsize-gutter:44px;
 
   --hb-font-ui:Poppins,"Segoe UI",system-ui,sans-serif;
+  /* Open-in-new-window glyph, drawn once here so no app pastes its own SVG. */
+  --hb-ext-icon:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>');
   --hb-font-mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
 
   /* Type scale: 1.2 through the UI, opening to 1.618 at the top two steps. */
@@ -44,6 +46,13 @@
   --hb-weight-semibold:600;
 
   --hb-tracking-caps:.08em; /* Poppins is geometric: capitals need air */
+
+  /* SKU links. Toby's colour, which is built for the dark app grounds (7.7:1 on #0b1618, 6.3:1 on a panel).
+     It only reaches 2.4:1 on white, so a light ground swaps to the darker tint below. */
+  --hb-sku:#9e9eff;
+  --hb-sku-hover:#c9c9ff;
+  --hb-sku-light:#4a4ad1;       /* 6.6:1 on white */
+  --hb-sku-light-hover:#2e2ea8;
 }
 
 html{font-size:var(--hb-root-size)}
@@ -73,6 +82,31 @@ small,.hb-small{font-size:var(--hb-text-sm)}
 .hb-micro{font-size:var(--hb-text-2xs);letter-spacing:var(--hb-tracking-caps);text-transform:uppercase}
 .hb-display{font-size:var(--hb-text-display);line-height:1;font-weight:var(--hb-weight-semibold);
   font-variant-numeric:tabular-nums}
+
+/* A SKU link: the identifier itself is the link. No underline at rest, dotted underline plus a
+   lighter colour on hover, so the row stays quiet until you point at it. Compose it with .hb-mono
+   (SKUs are set in the mono face, because Poppins has near-identical I and l):
+     <a class="hb-sku hb-mono" href="...">SDL-F-WILL-COTT</a> */
+.hb-sku{color:var(--hb-sku);font-weight:var(--hb-weight-semibold);text-decoration:none}
+.hb-sku:hover,.hb-sku:focus-visible{color:var(--hb-sku-hover);
+  text-decoration:underline dotted;text-underline-offset:3px}
+.hb-sku:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:2px}
+.hb-sku:visited{color:var(--hb-sku)}
+/* Light-ground apps (or a light panel): add .hb-on-light to the wrapper. */
+.hb-on-light .hb-sku{color:var(--hb-sku-light)}
+.hb-on-light .hb-sku:hover,.hb-on-light .hb-sku:focus-visible{color:var(--hb-sku-light-hover)}
+
+/* An external link that should look like a button: "View on Amazon", "Open listing".
+   The open-in-new-window icon is part of the class, so every app renders it the same:
+     <a class="hb-btn-ext" href="..." target="_blank" rel="noopener noreferrer">View</a> */
+.hb-btn-ext{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;
+  border:1px solid currentColor;border-radius:4px;background:transparent;color:inherit;
+  font-family:var(--hb-font-ui);font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium);
+  line-height:var(--hb-leading-dense);text-decoration:none;cursor:pointer}
+.hb-btn-ext::after{content:"";width:.8em;height:.8em;flex:none;background-color:currentColor;
+  -webkit-mask:var(--hb-ext-icon) center/contain no-repeat;mask:var(--hb-ext-icon) center/contain no-repeat}
+.hb-btn-ext:hover{background:rgba(127,208,160,.14)}
+.hb-btn-ext:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 /* Tables: dense but readable. Numbers line up; 13px is the floor. */
 table,.hb-table{font-size:var(--hb-text-sm);line-height:var(--hb-leading-dense)}

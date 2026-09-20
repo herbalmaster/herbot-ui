@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- Herbot Setup page skeleton. Copy to your app, serve it at /setup, and replace the rows with
+     your own checks. Spec and rules: docs/app-kit-setup-page.md.
+
+     THE RULES THIS FILE EXISTS TO ENFORCE:
+     1. Every row TRIES the credential (a call that fails on a wrong key). Never test that an
+        environment variable is non-empty: a wrong key must read "not set up".
+     2. NEVER render a value, not even a masked fragment or a prefix. The test is that the page
+        contains no part of any secret at all.
+     3. Also report runtime facts that fail silently: git checkout present, database reachable,
+        schema version, when the last job ran.
+     4. Put it behind whatever gate the app's own data sits behind. Never more open. -->
+<html lang="en" class="hb-dense">
+<head>
+<meta charset="utf-8">
+<title>Setup · APP NAME</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/herbalmaster/herbot-ui@v0.5.0/app-kit/herbot-ui.css">
+<style>
+  body{margin:0;background:#0b1618;color:#e3eee8}
+  main{max-width:820px;margin:0 auto;padding:24px 24px var(--hb-fontsize-gutter)}
+  .hb-setup{width:100%;border-collapse:collapse}
+  .hb-setup td,.hb-setup th{padding:10px 8px;border-bottom:1px solid #28473a;vertical-align:top}
+  .hb-setup .what{color:#93ac9e}
+  .hb-state{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-weight:500}
+  .hb-state::before{content:"";width:.6em;height:.6em;border-radius:50%;background:currentColor}
+  .is-ok{color:#7fd0a0}      /* set up — the call succeeded */
+  .is-fail{color:#e27a6e}    /* not set up — missing, wrong, or the call failed */
+  .is-warn{color:#e3b75c}    /* degraded — works, but not as expected */
+  .is-unknown{color:#9fb4a9} /* could not check */
+  footer{margin-top:24px;color:#93ac9e}
+</style>
+</head>
+<body>
+<main>
+  <h1>Setup</h1>
+  <p>What this app needs, and whether it has it. Each row is checked by <em>using</em> the
+     credential, not by looking at a setting. No values are shown on this page, ever.</p>
+
+  <h2>Credentials</h2>
+  <table class="hb-setup">
+    <tr><th>What</th><th>State</th><th>If it isn't set up</th></tr>
+    <tr>
+      <td>Odoo (read-only)</td>
+      <td><span class="hb-state is-ok">Set up</span></td>
+      <td class="what">—</td>
+    </tr>
+    <tr>
+      <td>Amazon SP-API</td>
+      <td><span class="hb-state is-fail">Not set up</span></td>
+      <td class="what">Set <code class="hb-mono">SPAPI_REFRESH_TOKEN</code> in hPanel →
+        Environment, then <strong>Restart</strong> the project (never Redeploy).</td>
+    </tr>
+  </table>
+
+  <h2>Runtime</h2>
+  <table class="hb-setup">
+    <tr><th>What</th><th>State</th><th>Detail</th></tr>
+    <tr><td>Code checkout</td><td><span class="hb-state is-ok">Present</span></td>
+        <td class="what">v0.0.0, deployed 00/00/26</td></tr>
+    <tr><td>Database</td><td><span class="hb-state is-ok">Reachable</span></td>
+        <td class="what">Schema 000, as expected</td></tr>
+    <tr><td>Last job</td><td><span class="hb-state is-warn">Stale</span></td>
+        <td class="what">Ran 00/00/26, ok, 000 rows — older than a day</td></tr>
+  </table>
+
+  <footer class="hb-small">APP NAME v0.0.0 · <a class="hb-btn-ext" href="#" target="_blank"
+    rel="noopener noreferrer">Changelog</a></footer>
+</main>
+</body>
+</html>
