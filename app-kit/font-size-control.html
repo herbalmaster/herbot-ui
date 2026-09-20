@@ -1,0 +1,40 @@
+<!-- Herbot universal font-size control. Copy this block into every Control Tower app that has a UI,
+     just inside <body>, unchanged, so all of them behave identically.
+     Requires herbot-ui.css (it styles .hb-fontsize and reads --hb-root-size).
+
+     IT ONLY SCALES rem-BASED SIZES. Any px font-size in your app (13px list text, 12px chips)
+     will not move at any setting: convert those to the kit's rem tokens, or they will look broken
+     beside everything that does scale.
+
+     The pill is position:fixed at the top right. If you have a header bar, move it in there
+     instead; otherwise pad your page by --hb-fontsize-gutter so nothing sits under it.
+
+     The setting is stored per origin, so each app remembers its own size. -->
+<div class="hb-fontsize" role="group" aria-label="Text size">
+  <button type="button" data-hb-font="-" aria-label="Smaller text">&minus;</button>
+  <output data-hb-font-value aria-live="polite">100%</output>
+  <button type="button" data-hb-font="+" aria-label="Larger text">+</button>
+</div>
+<script>
+(function () {
+  var MIN = 13, MAX = 22, STEP = 1, DEFAULT = 16, KEY = "herbot.rootFontSize";
+  var out = document.querySelector("[data-hb-font-value]");
+  var size = DEFAULT;
+  try { size = parseInt(localStorage.getItem(KEY), 10) || DEFAULT; } catch (e) {}
+
+  function apply() {
+    size = Math.min(MAX, Math.max(MIN, size));
+    document.documentElement.style.setProperty("--hb-root-size", size + "px");
+    if (out) out.textContent = Math.round((size / DEFAULT) * 100) + "%";
+    document.querySelectorAll("[data-hb-font]").forEach(function (b) {
+      b.disabled = b.dataset.hbFont === "-" ? size <= MIN : size >= MAX;
+    });
+    try { localStorage.setItem(KEY, String(size)); } catch (e) {}
+  }
+
+  document.querySelectorAll("[data-hb-font]").forEach(function (b) {
+    b.addEventListener("click", function () { size += b.dataset.hbFont === "+" ? STEP : -STEP; apply(); });
+  });
+  apply();
+})();
+</script>

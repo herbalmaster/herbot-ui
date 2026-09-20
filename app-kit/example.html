@@ -1,0 +1,49 @@
+<!doctype html><html lang=en><meta charset=utf-8><title>Herbot UI example</title>
+<link rel=stylesheet href=herbot-ui.css>
+<!-- Example page: the kit and the font-size control, as an app should use them. Open it in a browser. -->
+<!-- Herbot universal font-size control. Copy this block into every Control Tower app that has a UI,
+     just inside <body>, unchanged, so all of them behave identically.
+     Requires herbot-ui.css (it styles .hb-fontsize and reads --hb-root-size). -->
+<div class="hb-fontsize" role="group" aria-label="Text size">
+  <button type="button" data-hb-font="-" aria-label="Smaller text">&minus;</button>
+  <output data-hb-font-value>100%</output>
+  <button type="button" data-hb-font="+" aria-label="Larger text">+</button>
+</div>
+<script>
+(function () {
+  var MIN = 13, MAX = 22, STEP = 1, DEFAULT = 16, KEY = "herbot.rootFontSize";
+  var out = document.querySelector("[data-hb-font-value]");
+  var size = DEFAULT;
+  try { size = parseInt(localStorage.getItem(KEY), 10) || DEFAULT; } catch (e) {}
+
+  function apply() {
+    size = Math.min(MAX, Math.max(MIN, size));
+    document.documentElement.style.setProperty("--hb-root-size", size + "px");
+    if (out) out.textContent = Math.round((size / DEFAULT) * 100) + "%";
+    document.querySelectorAll("[data-hb-font]").forEach(function (b) {
+      b.disabled = b.dataset.hbFont === "-" ? size <= MIN : size >= MAX;
+    });
+    try { localStorage.setItem(KEY, String(size)); } catch (e) {}
+  }
+
+  document.querySelectorAll("[data-hb-font]").forEach(function (b) {
+    b.addEventListener("click", function () { size += b.dataset.hbFont === "+" ? STEP : -STEP; apply(); });
+  });
+  apply();
+})();
+</script>
+<main style="max-width:900px;margin:0 auto;padding:32px">
+<h1>Inventory</h1>
+<h2>Restock</h2>
+<h3>Due this week</h3>
+<h4>Suffolk warehouse</h4>
+<p>Body text sits at 16px and 1.6 line height by default. Use the control at the top right to scale the whole interface; everything here is in rem, so it all moves together.</p>
+<p class=hb-micro>Micro label</p>
+<table class="hb-table hb-table--dense" style="width:100%;border-collapse:collapse">
+<tr><th>SKU</th><th>Product</th><th class=hb-num>Days of cover</th></tr>
+<tr><td class=hb-mono>SDL-F-WILL-COTT</td><td>Willow, Fresh Cotton</td><td class=hb-num>42</td></tr>
+<tr><td class=hb-mono>WF-WILL-JASM</td><td>Willow, Summer Jasmine</td><td class=hb-num>7</td></tr>
+</table>
+<p class=hb-display>12</p>
+<p class=hb-small>Secondary text at 14px.</p>
+</main>

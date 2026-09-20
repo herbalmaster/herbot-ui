@@ -1,0 +1,85 @@
+/*! Herbot UI — typography for TMH's internal apps.
+ *  herbalmaster/tmh-design-system · app-kit/herbot-ui.css
+ *  INTERNAL APPS ONLY. The customer-facing brand (Gill Sans/Lato, Lora, the teal palette) is in
+ *  system/ and is not affected by this file. Colours and status vocabulary stay with the app kit.
+ */
+
+/* Poppins, from the stylesheet itself: apps need no Google Fonts link. Fontsource, OFL. */
+@font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-style:normal;font-weight:500;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-style:normal;font-weight:600;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-style:italic;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-italic.woff2) format('woff2')}
+
+:root{
+  /* The font-size control writes --hb-root-size; everything below is in rem, so it all scales. */
+  --hb-root-size:16px;
+  /* Room to keep under the floating font-size pill: pad your page or header by this. */
+  --hb-fontsize-gutter:44px;
+
+  --hb-font-ui:Poppins,"Segoe UI",system-ui,sans-serif;
+  --hb-font-mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
+
+  /* Type scale: 1.2 through the UI, opening to 1.618 at the top two steps. */
+  --hb-text-2xs:0.75rem;    /* 12px — micro labels only, never table data */
+  --hb-text-xs:0.8125rem;   /* 13px — dense table cells; the smallest comfortable size */
+  --hb-text-sm:0.875rem;    /* 14px — secondary text, table default, form help */
+  --hb-text-base:1rem;      /* 16px — body */
+  --hb-text-md:1.2rem;      /* 19px — card and section headings (h4) */
+  --hb-text-lg:1.44rem;     /* 23px — h3 */
+  --hb-text-xl:1.728rem;    /* 28px — h2, page section titles */
+  --hb-text-2xl:2.8rem;     /* 45px — h1, page title (×1.618) */
+  --hb-text-display:4.5rem; /* 72px — dashboard hero numbers only (×1.618) */
+
+  --hb-leading-tight:1.2;   /* headings */
+  --hb-leading-dense:1.45;  /* table rows, chips */
+  --hb-leading-body:1.6;    /* body text, the default */
+
+  --hb-weight-regular:400;
+  --hb-weight-medium:500;
+  --hb-weight-semibold:600;
+
+  --hb-tracking-caps:.08em; /* Poppins is geometric: capitals need air */
+}
+
+html{font-size:var(--hb-root-size)}
+body{font-family:var(--hb-font-ui);font-size:var(--hb-text-base);line-height:var(--hb-leading-body);
+  font-weight:var(--hb-weight-regular);-webkit-font-smoothing:antialiased}
+
+h1,h2,h3,h4{font-family:var(--hb-font-ui);font-weight:var(--hb-weight-semibold);
+  line-height:var(--hb-leading-tight);margin:0 0 .5em}
+h1{font-size:var(--hb-text-2xl)}
+h2{font-size:var(--hb-text-xl)}
+h3{font-size:var(--hb-text-lg)}
+h4{font-size:var(--hb-text-md);font-weight:var(--hb-weight-medium)}
+
+small,.hb-small{font-size:var(--hb-text-sm)}
+.hb-micro{font-size:var(--hb-text-2xs);letter-spacing:var(--hb-tracking-caps);text-transform:uppercase}
+.hb-display{font-size:var(--hb-text-display);line-height:1;font-weight:var(--hb-weight-semibold);
+  font-variant-numeric:tabular-nums}
+
+/* Tables: dense but readable. Numbers line up; 13px is the floor. */
+table,.hb-table{font-size:var(--hb-text-sm);line-height:var(--hb-leading-dense)}
+.hb-table--dense{font-size:var(--hb-text-xs)}
+th{font-weight:var(--hb-weight-semibold);text-align:left}
+td.hb-num,th.hb-num,.hb-num{font-variant-numeric:tabular-nums;text-align:right}
+code,kbd,pre,.hb-mono{font-family:var(--hb-font-mono);font-size:var(--hb-text-sm)}
+
+/* Form controls inherit the face and the chosen size. */
+button,input,select,textarea{font-family:inherit;font-size:var(--hb-text-sm);line-height:var(--hb-leading-dense)}
+label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
+
+/* The universal font-size control: top right, above the page content.
+   It floats, so pad the page by --hb-fontsize-gutter (or put the pill in your header bar). */
+.hb-fontsize{position:fixed;top:8px;right:8px;z-index:1000;display:inline-flex;align-items:center;gap:4px;
+  padding:2px;border:1px solid rgba(0,0,0,.15);border-radius:6px;background:#fff}
+.hb-fontsize button{width:28px;height:28px;padding:0;border:0;border-radius:4px;background:transparent;
+  font-size:15px;line-height:1;cursor:pointer;color:inherit}
+.hb-fontsize button:hover{background:rgba(0,0,0,.06)}
+.hb-fontsize button:focus-visible{outline:2px solid currentColor;outline-offset:1px}
+.hb-fontsize button[disabled]{opacity:.35;cursor:not-allowed}
+.hb-fontsize output{min-width:3.5ch;text-align:center;font-size:12px;opacity:.7}
+@media print{.hb-fontsize{display:none}}
