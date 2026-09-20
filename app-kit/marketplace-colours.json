@@ -1,5 +1,5 @@
 {
-  "note": "Marketplace and region colours, shared by every app that draws a chart (P12: the map is config, not code). Each entry has a value for the dark app ground (#0b1618) and one for the CFO's warm paper (#fff1e5); both meet 3:1 against their ground. Hues are from the Okabe-Ito colour-blind-safe set where possible. Sibling channels (two Shopify stores) share a hue and differ in lightness; in a stacked chart they also need a separator, because lightness alone cannot reach 3:1 between them on the paper ground. Adding a marketplace means adding a row here and regenerating the tokens; never picking a colour in an app.",
+  "note": "Two sets: selling-channel colours (--hb-mkt-*) and fulfilment-location colours (--hb-fl-*). A chart plots one set or the other, never a mix. shared by every app that draws a chart (P12: the map is config, not code). Each entry has a value for the dark app ground (#0b1618) and one for the CFO's warm paper (#fff1e5); both meet 3:1 against their ground. Hues are from the Okabe-Ito colour-blind-safe set where possible. Sibling channels (two Shopify stores) share a hue and differ in lightness; in a stacked chart they also need a separator, because lightness alone cannot reach 3:1 between them on the paper ground. Adding a marketplace means adding a row here and regenerating the tokens; never picking a colour in an app.",
   "grounds": {
     "dark": "#0b1618",
     "paper": "#fff1e5"
@@ -111,6 +111,36 @@
       "kind": "channel",
       "dark": "#a8b0ad",
       "paper": "#868d8a"
+    }
+  ],
+  "fulfilment": [
+    {
+      "id": "fba-uk",
+      "label": "FBA UK",
+      "dark": "#56b4e9",
+      "paper": "#4590ba",
+      "note": "Takes the UK hue: a location in the UK reads as UK."
+    },
+    {
+      "id": "fba-us",
+      "label": "FBA US",
+      "dark": "#e69f00",
+      "paper": "#b87f00",
+      "note": "Takes the US hue."
+    },
+    {
+      "id": "fba-eu",
+      "label": "FBA PAN-EU",
+      "dark": "#009e73",
+      "paper": "#009e73",
+      "note": "Takes the EU hue."
+    },
+    {
+      "id": "mwh",
+      "label": "MWH (our own warehouse)",
+      "dark": "#d8cfc0",
+      "paper": "#8a7f6d",
+      "note": "Stone: not a region, and not reused by any selling channel."
     }
   ]
 }

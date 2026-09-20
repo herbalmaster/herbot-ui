@@ -93,6 +93,10 @@
   --hb-mkt-shopify-sdl:#2f7a6c;
   --hb-mkt-b2b:#c9a0dc;
   --hb-mkt-other-marketplaces:#a8b0ad;
+  --hb-fl-fba-uk:#56b4e9;
+  --hb-fl-fba-us:#e69f00;
+  --hb-fl-fba-eu:#009e73;
+  --hb-fl-mwh:#d8cfc0;
 }
 
 .hb-on-paper{
@@ -111,6 +115,10 @@
   --hb-mkt-shopify-sdl:#2f7a6c;
   --hb-mkt-b2b:#a180b0;
   --hb-mkt-other-marketplaces:#868d8a;
+  --hb-fl-fba-uk:#4590ba;
+  --hb-fl-fba-us:#b87f00;
+  --hb-fl-fba-eu:#009e73;
+  --hb-fl-mwh:#8a7f6d;
 }
 /* .hb-auto — for a page that cannot swap a class: a saved report, a static file, anything with no
    JavaScript. Paper values at rest, dark values when the reader's system asks for dark. Use it
@@ -134,6 +142,10 @@
   --hb-mkt-shopify-sdl:#2f7a6c;
   --hb-mkt-b2b:#a180b0;
   --hb-mkt-other-marketplaces:#868d8a;
+  --hb-fl-fba-uk:#4590ba;
+  --hb-fl-fba-us:#b87f00;
+  --hb-fl-fba-eu:#009e73;
+  --hb-fl-mwh:#8a7f6d;
 }
 @media (prefers-color-scheme: dark){
   .hb-auto{
@@ -152,6 +164,10 @@
     --hb-mkt-shopify-sdl:#2f7a6c;
     --hb-mkt-b2b:#c9a0dc;
     --hb-mkt-other-marketplaces:#a8b0ad;
+    --hb-fl-fba-uk:#56b4e9;
+    --hb-fl-fba-us:#e69f00;
+    --hb-fl-fba-eu:#009e73;
+    --hb-fl-mwh:#d8cfc0;
   }
 }
 
