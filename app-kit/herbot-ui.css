@@ -67,10 +67,34 @@
   --hb-mkt-nl:#8fd0a0;   /* Netherlands */
   --hb-mkt-se:#7f7fd5;   /* Sweden */
   --hb-mkt-pl:#b3823c;   /* Poland */
-  --hb-mkt-shopify:#9ad0c2;   /* Shopify */
+  --hb-mkt-shopify:#7fbcae;   /* Shopify (both stores) */
+  --hb-mkt-shopify-tmh:#9ad0c2;   /* Shopify · The Master Herbalist */
+  --hb-mkt-shopify-sdl:#2f7a6c;   /* Shopify · Simply Drawer Liners */
+  --hb-mkt-b2b:#c9a0dc;   /* B2B (Faire and trade) */
+  --hb-mkt-other-marketplaces:#a8b0ad;   /* Other marketplaces (eBay, TikTok Shop, Walmart) */
 }
 
 /* The CFO's warm paper (#fff1e5) and any light chart ground. */
+/* .hb-on-dark restates the dark values, for an app whose dark mode sits inside a .hb-on-paper
+   page (the CFO's). Use it instead of setting the tokens to `unset`. */
+.hb-on-dark{
+  --hb-mkt-uk:#56b4e9;
+  --hb-mkt-us:#e69f00;
+  --hb-mkt-eu:#009e73;
+  --hb-mkt-de:#0072b2;
+  --hb-mkt-fr:#cc79a7;
+  --hb-mkt-it:#d55e00;
+  --hb-mkt-es:#f0e442;
+  --hb-mkt-nl:#8fd0a0;
+  --hb-mkt-se:#7f7fd5;
+  --hb-mkt-pl:#b3823c;
+  --hb-mkt-shopify:#7fbcae;
+  --hb-mkt-shopify-tmh:#9ad0c2;
+  --hb-mkt-shopify-sdl:#2f7a6c;
+  --hb-mkt-b2b:#c9a0dc;
+  --hb-mkt-other-marketplaces:#a8b0ad;
+}
+
 .hb-on-paper{
   --hb-mkt-uk:#4590ba;
   --hb-mkt-us:#b87f00;
@@ -82,7 +106,11 @@
   --hb-mkt-nl:#649270;
   --hb-mkt-se:#7f7fd5;
   --hb-mkt-pl:#b3823c;
-  --hb-mkt-shopify:#6c9288;
+  --hb-mkt-shopify:#5c8478;
+  --hb-mkt-shopify-tmh:#6c9288;
+  --hb-mkt-shopify-sdl:#2f7a6c;
+  --hb-mkt-b2b:#a180b0;
+  --hb-mkt-other-marketplaces:#868d8a;
 }
 
 html{font-size:var(--hb-root-size)}

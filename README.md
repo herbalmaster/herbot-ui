@@ -9,7 +9,7 @@ Nothing brand-related is here: no logos, no brand colours, no product informatio
 ## Use it
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/herbalmaster/herbot-ui@v0.6.0/app-kit/herbot-ui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/herbalmaster/herbot-ui@v0.7.0/app-kit/herbot-ui.css">
 ```
 
 Pin a tag, never a branch. For a self-contained page that must work offline, inline the file's
