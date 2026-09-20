@@ -58,6 +58,8 @@ h3{font-size:var(--hb-text-lg)}
 h4{font-size:var(--hb-text-md);font-weight:var(--hb-weight-medium)}
 
 .hb-mark{font-size:var(--hb-text-3xs);line-height:1}
+/* Carve-out: text INSIDE fixed-size media (a 520px proof card, a chart canvas) keeps a fixed px
+   size, because it scales with the media, not the page. Page chrome scales; media does not. */
 
 /* Dense pages: a ladder that keeps descending where 45px and 23px are too big.
    Put .hb-dense on a page wrapper (or <body>) for tables, planners and dashboards. */
