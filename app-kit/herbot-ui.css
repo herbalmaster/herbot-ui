@@ -24,6 +24,7 @@
   --hb-font-mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
 
   /* Type scale: 1.2 through the UI, opening to 1.618 at the top two steps. */
+  --hb-text-3xs:0.625rem;   /* 10px — marks that are seen, never read: superscripts, stockout dots */
   --hb-text-2xs:0.75rem;    /* 12px — micro labels only, never table data */
   --hb-text-xs:0.8125rem;   /* 13px — dense table cells; the smallest comfortable size */
   --hb-text-sm:0.875rem;    /* 14px — secondary text, table default, form help */
@@ -55,6 +56,16 @@ h1{font-size:var(--hb-text-2xl)}
 h2{font-size:var(--hb-text-xl)}
 h3{font-size:var(--hb-text-lg)}
 h4{font-size:var(--hb-text-md);font-weight:var(--hb-weight-medium)}
+
+.hb-mark{font-size:var(--hb-text-3xs);line-height:1}
+
+/* Dense pages: a ladder that keeps descending where 45px and 23px are too big.
+   Put .hb-dense on a page wrapper (or <body>) for tables, planners and dashboards. */
+.hb-dense h1{font-size:var(--hb-text-xl)}   /* 28px */
+.hb-dense h2{font-size:var(--hb-text-md)}   /* 19px */
+.hb-dense h3{font-size:var(--hb-text-base);font-weight:var(--hb-weight-semibold)} /* 16px */
+.hb-dense h4{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-semibold)}   /* 14px */
+.hb-dense{font-size:var(--hb-text-sm)}      /* body 14px on dense pages */
 
 small,.hb-small{font-size:var(--hb-text-sm)}
 .hb-micro{font-size:var(--hb-text-2xs);letter-spacing:var(--hb-tracking-caps);text-transform:uppercase}
