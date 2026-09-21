@@ -57,68 +57,68 @@
   /* Marketplace and region colours: the same colour for a marketplace in every app that charts it.
      Generated from config/marketplace-colours.json; don't edit here. These values are for the dark
      ground; a light or paper ground adds .hb-on-paper (below). All meet 3:1 on their ground. */
-  --hb-mkt-uk:#56b4e9;   /* UK */
-  --hb-mkt-us:#e69f00;   /* US */
-  --hb-mkt-eu:#009e73;   /* EU */
-  --hb-mkt-de:#0072b2;   /* Germany */
-  --hb-mkt-fr:#cc79a7;   /* France */
-  --hb-mkt-it:#d55e00;   /* Italy */
-  --hb-mkt-es:#f0e442;   /* Spain */
-  --hb-mkt-nl:#8fd0a0;   /* Netherlands */
-  --hb-mkt-se:#7f7fd5;   /* Sweden */
-  --hb-mkt-pl:#b3823c;   /* Poland */
+  --hb-mkt-uk:#e8c45a;   /* UK */
+  --hb-mkt-us:#dc7c75;   /* US */
+  --hb-mkt-eu:#6f93d6;   /* EU */
+  --hb-mkt-de:#6f93d6;   /* Germany */
+  --hb-mkt-fr:#a8c8f0;   /* France */
+  --hb-mkt-it:#4fb3a9;   /* Italy */
+  --hb-mkt-es:#b3823c;   /* Spain */
+  --hb-mkt-nl:#e69f00;   /* Netherlands */
+  --hb-mkt-se:#f0f0f0;   /* Sweden */
+  --hb-mkt-pl:#5a6b6b;   /* Poland */
   --hb-mkt-shopify:#7fbcae;   /* Shopify (both stores) */
   --hb-mkt-shopify-tmh:#9ad0c2;   /* Shopify · The Master Herbalist */
   --hb-mkt-shopify-sdl:#2f7a6c;   /* Shopify · Simply Drawer Liners */
   --hb-mkt-b2b:#c9a0dc;   /* B2B (Faire and trade) */
-  --hb-mkt-other-marketplaces:#a8b0ad;   /* Other marketplaces (eBay, TikTok Shop, Walmart) */
+  --hb-mkt-other-marketplaces:#9aa3a0;   /* Other marketplaces (eBay, TikTok Shop, Walmart) */
 }
 
 /* The CFO's warm paper (#fff1e5) and any light chart ground. */
 /* .hb-on-dark restates the dark values, for an app whose dark mode sits inside a .hb-on-paper
    page (the CFO's). Use it instead of setting the tokens to `unset`. */
 .hb-on-dark{
-  --hb-mkt-uk:#56b4e9;
-  --hb-mkt-us:#e69f00;
-  --hb-mkt-eu:#009e73;
-  --hb-mkt-de:#0072b2;
-  --hb-mkt-fr:#cc79a7;
-  --hb-mkt-it:#d55e00;
-  --hb-mkt-es:#f0e442;
-  --hb-mkt-nl:#8fd0a0;
-  --hb-mkt-se:#7f7fd5;
-  --hb-mkt-pl:#b3823c;
+  --hb-mkt-uk:#e8c45a;
+  --hb-mkt-us:#dc7c75;
+  --hb-mkt-eu:#6f93d6;
+  --hb-mkt-de:#6f93d6;
+  --hb-mkt-fr:#a8c8f0;
+  --hb-mkt-it:#4fb3a9;
+  --hb-mkt-es:#b3823c;
+  --hb-mkt-nl:#e69f00;
+  --hb-mkt-se:#f0f0f0;
+  --hb-mkt-pl:#5a6b6b;
   --hb-mkt-shopify:#7fbcae;
   --hb-mkt-shopify-tmh:#9ad0c2;
   --hb-mkt-shopify-sdl:#2f7a6c;
   --hb-mkt-b2b:#c9a0dc;
-  --hb-mkt-other-marketplaces:#a8b0ad;
-  --hb-fl-fba-uk:#56b4e9;
-  --hb-fl-fba-us:#e69f00;
-  --hb-fl-fba-eu:#009e73;
-  --hb-fl-mwh:#d8cfc0;
+  --hb-mkt-other-marketplaces:#9aa3a0;
+  --hb-fl-fba-uk:#e8c45a;
+  --hb-fl-fba-us:#dc7c75;
+  --hb-fl-fba-eu:#6f93d6;
+  --hb-fl-mwh:#407556;
 }
 
 .hb-on-paper{
-  --hb-mkt-uk:#4590ba;
-  --hb-mkt-us:#b87f00;
-  --hb-mkt-eu:#009e73;
-  --hb-mkt-de:#0072b2;
-  --hb-mkt-fr:#c2739f;
-  --hb-mkt-it:#d55e00;
-  --hb-mkt-es:#908928;
-  --hb-mkt-nl:#649270;
-  --hb-mkt-se:#7f7fd5;
-  --hb-mkt-pl:#b3823c;
+  --hb-mkt-uk:#a2893f;
+  --hb-mkt-us:#d46e67;
+  --hb-mkt-eu:#6b8dcd;
+  --hb-mkt-de:#6b8dcd;
+  --hb-mkt-fr:#768ca8;
+  --hb-mkt-it:#449a91;
+  --hb-mkt-es:#b3823c;
+  --hb-mkt-nl:#b87f00;
+  --hb-mkt-se:#8b8b8b;
+  --hb-mkt-pl:#5a6b6b;
   --hb-mkt-shopify:#5c8478;
   --hb-mkt-shopify-tmh:#6c9288;
   --hb-mkt-shopify-sdl:#2f7a6c;
   --hb-mkt-b2b:#a180b0;
-  --hb-mkt-other-marketplaces:#868d8a;
-  --hb-fl-fba-uk:#4590ba;
-  --hb-fl-fba-us:#b87f00;
-  --hb-fl-fba-eu:#009e73;
-  --hb-fl-mwh:#8a7f6d;
+  --hb-mkt-other-marketplaces:#848c8a;
+  --hb-fl-fba-uk:#a2893f;
+  --hb-fl-fba-us:#d46e67;
+  --hb-fl-fba-eu:#6b8dcd;
+  --hb-fl-mwh:#39684c;
 }
 /* .hb-auto — for a page that cannot swap a class: a saved report, a static file, anything with no
    JavaScript. Paper values at rest, dark values when the reader's system asks for dark. Use it
@@ -127,47 +127,47 @@
      fixed dark ground   -> :root (default) or .hb-on-dark inside a paper page
      follows the reader  -> .hb-auto */
 .hb-auto{
-  --hb-mkt-uk:#4590ba;
-  --hb-mkt-us:#b87f00;
-  --hb-mkt-eu:#009e73;
-  --hb-mkt-de:#0072b2;
-  --hb-mkt-fr:#c2739f;
-  --hb-mkt-it:#d55e00;
-  --hb-mkt-es:#908928;
-  --hb-mkt-nl:#649270;
-  --hb-mkt-se:#7f7fd5;
-  --hb-mkt-pl:#b3823c;
+  --hb-mkt-uk:#a2893f;
+  --hb-mkt-us:#d46e67;
+  --hb-mkt-eu:#6b8dcd;
+  --hb-mkt-de:#6b8dcd;
+  --hb-mkt-fr:#768ca8;
+  --hb-mkt-it:#449a91;
+  --hb-mkt-es:#b3823c;
+  --hb-mkt-nl:#b87f00;
+  --hb-mkt-se:#8b8b8b;
+  --hb-mkt-pl:#5a6b6b;
   --hb-mkt-shopify:#5c8478;
   --hb-mkt-shopify-tmh:#6c9288;
   --hb-mkt-shopify-sdl:#2f7a6c;
   --hb-mkt-b2b:#a180b0;
-  --hb-mkt-other-marketplaces:#868d8a;
-  --hb-fl-fba-uk:#4590ba;
-  --hb-fl-fba-us:#b87f00;
-  --hb-fl-fba-eu:#009e73;
-  --hb-fl-mwh:#8a7f6d;
+  --hb-mkt-other-marketplaces:#848c8a;
+  --hb-fl-fba-uk:#a2893f;
+  --hb-fl-fba-us:#d46e67;
+  --hb-fl-fba-eu:#6b8dcd;
+  --hb-fl-mwh:#39684c;
 }
 @media (prefers-color-scheme: dark){
   .hb-auto{
-    --hb-mkt-uk:#56b4e9;
-    --hb-mkt-us:#e69f00;
-    --hb-mkt-eu:#009e73;
-    --hb-mkt-de:#0072b2;
-    --hb-mkt-fr:#cc79a7;
-    --hb-mkt-it:#d55e00;
-    --hb-mkt-es:#f0e442;
-    --hb-mkt-nl:#8fd0a0;
-    --hb-mkt-se:#7f7fd5;
-    --hb-mkt-pl:#b3823c;
+    --hb-mkt-uk:#e8c45a;
+    --hb-mkt-us:#dc7c75;
+    --hb-mkt-eu:#6f93d6;
+    --hb-mkt-de:#6f93d6;
+    --hb-mkt-fr:#a8c8f0;
+    --hb-mkt-it:#4fb3a9;
+    --hb-mkt-es:#b3823c;
+    --hb-mkt-nl:#e69f00;
+    --hb-mkt-se:#f0f0f0;
+    --hb-mkt-pl:#5a6b6b;
     --hb-mkt-shopify:#7fbcae;
     --hb-mkt-shopify-tmh:#9ad0c2;
     --hb-mkt-shopify-sdl:#2f7a6c;
     --hb-mkt-b2b:#c9a0dc;
-    --hb-mkt-other-marketplaces:#a8b0ad;
-    --hb-fl-fba-uk:#56b4e9;
-    --hb-fl-fba-us:#e69f00;
-    --hb-fl-fba-eu:#009e73;
-    --hb-fl-mwh:#d8cfc0;
+    --hb-mkt-other-marketplaces:#9aa3a0;
+    --hb-fl-fba-uk:#e8c45a;
+    --hb-fl-fba-us:#dc7c75;
+    --hb-fl-fba-eu:#6f93d6;
+    --hb-fl-mwh:#407556;
   }
 }
 
