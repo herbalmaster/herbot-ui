@@ -32,18 +32,21 @@
   apply();
 })();
 </script>
-<main style="max-width:900px;margin:0 auto;padding:32px">
+<main class="hb-page hb-dense hb-on-light">
 <h1>Inventory</h1>
+<p class="hb-small">Headings are Poppins (<code>--hb-font-head</code>). Everything else, including this line, is DM Sans (<code>--hb-font-body</code>, alias <code>--hb-font-ui</code>). Neither face is named in this page: both come from <code>herbot-ui.css</code>.</p>
 <h2>Restock</h2>
 <h3>Due this week</h3>
 <h4>Suffolk warehouse</h4>
-<p>Body text sits at 16px and 1.6 line height by default. Use the control at the top right to scale the whole interface; everything here is in rem, so it all moves together.</p>
-<p class=hb-micro>Micro label</p>
-<table class="hb-table hb-table--dense" style="width:100%;border-collapse:collapse">
-<tr><th>SKU</th><th>Product</th><th class=hb-num>Days of cover</th></tr>
-<tr><td class=hb-mono>SDL-F-WILL-COTT</td><td>Willow, Fresh Cotton</td><td class=hb-num>42</td></tr>
-<tr><td class=hb-mono>WF-WILL-JASM</td><td>Willow, Summer Jasmine</td><td class=hb-num>7</td></tr>
+<p>Body text in DM Sans, 14px on a dense page, at 1.6 line height. Use the control at the top right to scale the whole interface; everything here is in rem, so it all moves together.</p>
+<p class="hb-micro">Micro label</p>
+<table class="hb-table hb-table--dense hb-table--full">
+<tr><th>SKU</th><th>Product</th><th class="hb-num">Days of cover</th><th>Listing</th></tr>
+<tr><td><a class="hb-sku hb-mono" href="#">SDL-F-WILL-COTT</a></td><td>Willow, Fresh Cotton</td><td class="hb-num">42</td><td><a class="hb-btn-ext" href="#" target="_blank" rel="noopener noreferrer">View</a></td></tr>
+<tr><td><a class="hb-sku hb-mono" href="#">WF-WILL-JASM</a></td><td>Willow, Summer Jasmine</td><td class="hb-num">7</td><td><a class="hb-btn-ext" href="#" target="_blank" rel="noopener noreferrer">View</a></td></tr>
 </table>
-<p class=hb-display>12</p>
-<p class=hb-small>Secondary text at 14px.</p>
+<p class="hb-display">12</p>
+<p class="hb-small">Secondary text at 14px.</p>
 </main>
+</body>
+</html>

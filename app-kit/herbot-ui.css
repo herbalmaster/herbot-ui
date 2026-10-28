@@ -1,18 +1,29 @@
-/*! Herbot UI — typography for TMH's internal apps.
+/*! Herbot UI — the house style for TMH's internal apps: DM Sans for text, Poppins for headings.
  *  herbalmaster/tmh-design-system · app-kit/herbot-ui.css
  *  INTERNAL APPS ONLY. The customer-facing brand (Gill Sans/Lato, Lora, the teal palette) is in
  *  system/ and is not affected by this file. Colours and status vocabulary stay with the app kit.
  */
 
-/* Poppins, from the stylesheet itself: apps need no Google Fonts link. Fontsource, OFL. */
+/* Fonts (D262): DM Sans for text, Poppins for headings. Loaded from the stylesheet itself, so no app needs a
+   Google Fonts link. Fontsource via jsDelivr, both PINNED to @fontsource 5.3.0 (an unpinned URL lets a
+   font update change every app at once). Latin subset only: characters outside it, such as the Polish
+   l-stroke, fall back to the system font. OFL. */
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@5.3.0/latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:500;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@5.3.0/latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:600;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@5.3.0/latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:"DM Sans";font-style:italic;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@5.3.0/latin-400-italic.woff2) format('woff2')}
 @font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;
-  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff2) format('woff2')}
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@5.3.0/latin-400-normal.woff2) format('woff2')}
 @font-face{font-family:Poppins;font-style:normal;font-weight:500;font-display:swap;
-  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-500-normal.woff2) format('woff2')}
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@5.3.0/latin-500-normal.woff2) format('woff2')}
 @font-face{font-family:Poppins;font-style:normal;font-weight:600;font-display:swap;
-  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-600-normal.woff2) format('woff2')}
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@5.3.0/latin-600-normal.woff2) format('woff2')}
 @font-face{font-family:Poppins;font-style:italic;font-weight:400;font-display:swap;
-  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-italic.woff2) format('woff2')}
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@5.3.0/latin-400-italic.woff2) format('woff2')}
 
 :root{
   /* The font-size control writes --hb-root-size; everything below is in rem, so it all scales. */
@@ -20,7 +31,12 @@
   /* Room to keep under the floating font-size pill: pad your page or header by this. */
   --hb-fontsize-gutter:44px;
 
-  --hb-font-ui:Poppins,"Segoe UI",system-ui,sans-serif;
+  /* Two faces (D262). --hb-font-ui is KEPT as an alias of the body face, and the body reads it, so an
+     app (or the CFO, D032) that overrides --hb-font-ui still changes its text. Headings read
+     --hb-font-head: an app that overrides the body face and wants its own headings sets that too. */
+  --hb-font-body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  --hb-font-head:Poppins,"Segoe UI",system-ui,sans-serif;
+  --hb-font-ui:var(--hb-font-body);
   /* Open-in-new-window glyph, drawn once here so no app pastes its own SVG. */
   --hb-ext-icon:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>');
   --hb-font-mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
@@ -176,7 +192,7 @@ html{font-size:var(--hb-root-size)}
 body{font-family:var(--hb-font-ui);font-size:var(--hb-text-base);line-height:var(--hb-leading-body);
   font-weight:var(--hb-weight-regular);-webkit-font-smoothing:antialiased}
 
-h1,h2,h3,h4{font-family:var(--hb-font-ui);font-weight:var(--hb-weight-semibold);
+h1,h2,h3,h4{font-family:var(--hb-font-head);font-weight:var(--hb-weight-semibold);
   line-height:var(--hb-leading-tight);margin:0 0 .5em}
 h1{font-size:var(--hb-text-2xl)}
 h2{font-size:var(--hb-text-xl)}
@@ -197,7 +213,7 @@ h4{font-size:var(--hb-text-md);font-weight:var(--hb-weight-medium)}
 
 small,.hb-small{font-size:var(--hb-text-sm)}
 .hb-micro{font-size:var(--hb-text-2xs);letter-spacing:var(--hb-tracking-caps);text-transform:uppercase}
-.hb-display{font-size:var(--hb-text-display);line-height:1;font-weight:var(--hb-weight-semibold);
+.hb-display{font-family:var(--hb-font-head);font-size:var(--hb-text-display);line-height:1;font-weight:var(--hb-weight-semibold);
   font-variant-numeric:tabular-nums}
 
 /* A SKU link: the identifier itself is the link. No underline at rest, dotted underline plus a
@@ -224,6 +240,12 @@ small,.hb-small{font-size:var(--hb-text-sm)}
   -webkit-mask:var(--hb-ext-icon) center/contain no-repeat;mask:var(--hb-ext-icon) center/contain no-repeat}
 .hb-btn-ext:hover{background:rgba(127,208,160,.14)}
 .hb-btn-ext:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+/* A page body: a readable column, padded clear of the floating font-size pill. Use it instead of
+   an inline style on <main>. .hb-table--full makes a table fill the column. */
+.hb-page{max-width:56rem;margin:0 auto;padding:2rem 1rem var(--hb-fontsize-gutter)}
+.hb-table--full{width:100%;border-collapse:collapse}
+.hb-table--full th,.hb-table--full td{padding:.4rem .6rem;border-bottom:1px solid rgba(127,127,127,.25)}
 
 /* Tables: dense but readable. Numbers line up; 13px is the floor. */
 table,.hb-table{font-size:var(--hb-text-sm);line-height:var(--hb-leading-dense)}
