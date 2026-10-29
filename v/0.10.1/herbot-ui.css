@@ -1,0 +1,249 @@
+/*! Herbot UI — typography for TMH's internal apps.
+ *  herbalmaster/tmh-design-system · app-kit/herbot-ui.css
+ *  INTERNAL APPS ONLY. The customer-facing brand (Gill Sans/Lato, Lora, the teal palette) is in
+ *  system/ and is not affected by this file. Colours and status vocabulary stay with the app kit.
+ */
+
+/* Poppins, from the stylesheet itself: apps need no Google Fonts link. Fontsource, OFL. */
+@font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-style:normal;font-weight:500;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-style:normal;font-weight:600;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Poppins;font-style:italic;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-italic.woff2) format('woff2')}
+
+:root{
+  /* The font-size control writes --hb-root-size; everything below is in rem, so it all scales. */
+  --hb-root-size:16px;
+  /* Room to keep under the floating font-size pill: pad your page or header by this. */
+  --hb-fontsize-gutter:44px;
+
+  --hb-font-ui:Poppins,"Segoe UI",system-ui,sans-serif;
+  /* Open-in-new-window glyph, drawn once here so no app pastes its own SVG. */
+  --hb-ext-icon:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>');
+  --hb-font-mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
+
+  /* Type scale: 1.2 through the UI, opening to 1.618 at the top two steps. */
+  --hb-text-3xs:0.625rem;   /* 10px — marks that are seen, never read: superscripts, stockout dots */
+  --hb-text-2xs:0.75rem;    /* 12px — micro labels only, never table data */
+  --hb-text-xs:0.8125rem;   /* 13px — dense table cells; the smallest comfortable size */
+  --hb-text-sm:0.875rem;    /* 14px — secondary text, table default, form help */
+  --hb-text-base:1rem;      /* 16px — body */
+  --hb-text-md:1.2rem;      /* 19px — card and section headings (h4) */
+  --hb-text-lg:1.44rem;     /* 23px — h3 */
+  --hb-text-xl:1.728rem;    /* 28px — h2, page section titles */
+  --hb-text-2xl:2.8rem;     /* 45px — h1, page title (×1.618) */
+  --hb-text-display:4.5rem; /* 72px — dashboard hero numbers only (×1.618) */
+
+  --hb-leading-tight:1.2;   /* headings */
+  --hb-leading-dense:1.45;  /* table rows, chips */
+  --hb-leading-body:1.6;    /* body text, the default */
+
+  --hb-weight-regular:400;
+  --hb-weight-medium:500;
+  --hb-weight-semibold:600;
+
+  --hb-tracking-caps:.08em; /* Poppins is geometric: capitals need air */
+
+  /* SKU links. Toby's colour, which is built for the dark app grounds (7.7:1 on #0b1618, 6.3:1 on a panel).
+     It only reaches 2.4:1 on white, so a light ground swaps to the darker tint below. */
+  --hb-sku:#9e9eff;
+  --hb-sku-hover:#c9c9ff;
+  --hb-sku-light:#4a4ad1;       /* 6.6:1 on white */
+  --hb-sku-light-hover:#2e2ea8;
+
+  /* Marketplace and region colours: the same colour for a marketplace in every app that charts it.
+     Generated from config/marketplace-colours.json; don't edit here. These values are for the dark
+     ground; a light or paper ground adds .hb-on-paper (below). All meet 3:1 on their ground. */
+  --hb-mkt-uk:#e8c45a;   /* UK */
+  --hb-mkt-us:#dc7c75;   /* US */
+  --hb-mkt-eu:#6f93d6;   /* EU */
+  --hb-mkt-de:#6f93d6;   /* Germany */
+  --hb-mkt-fr:#a8c8f0;   /* France */
+  --hb-mkt-it:#4fb3a9;   /* Italy */
+  --hb-mkt-es:#b3823c;   /* Spain */
+  --hb-mkt-nl:#e69f00;   /* Netherlands */
+  --hb-mkt-se:#f0f0f0;   /* Sweden */
+  --hb-mkt-pl:#5a6b6b;   /* Poland */
+  --hb-mkt-shopify:#7fbcae;   /* Shopify (both stores) */
+  --hb-mkt-shopify-tmh:#9ad0c2;   /* Shopify · The Master Herbalist */
+  --hb-mkt-shopify-sdl:#2f7a6c;   /* Shopify · Simply Drawer Liners */
+  --hb-mkt-b2b:#c9a0dc;   /* B2B (Faire and trade) */
+  --hb-mkt-other-marketplaces:#9aa3a0;   /* Other marketplaces (eBay, TikTok Shop, Walmart) */
+}
+
+/* The CFO's warm paper (#fff1e5) and any light chart ground. */
+/* .hb-on-dark restates the dark values, for an app whose dark mode sits inside a .hb-on-paper
+   page (the CFO's). Use it instead of setting the tokens to `unset`. */
+.hb-on-dark{
+  --hb-mkt-uk:#e8c45a;
+  --hb-mkt-us:#dc7c75;
+  --hb-mkt-eu:#6f93d6;
+  --hb-mkt-de:#6f93d6;
+  --hb-mkt-fr:#a8c8f0;
+  --hb-mkt-it:#4fb3a9;
+  --hb-mkt-es:#b3823c;
+  --hb-mkt-nl:#e69f00;
+  --hb-mkt-se:#f0f0f0;
+  --hb-mkt-pl:#5a6b6b;
+  --hb-mkt-shopify:#7fbcae;
+  --hb-mkt-shopify-tmh:#9ad0c2;
+  --hb-mkt-shopify-sdl:#2f7a6c;
+  --hb-mkt-b2b:#c9a0dc;
+  --hb-mkt-other-marketplaces:#9aa3a0;
+  --hb-fl-fba-uk:#e8c45a;
+  --hb-fl-fba-us:#dc7c75;
+  --hb-fl-fba-eu:#6f93d6;
+  --hb-fl-mwh:#407556;
+}
+
+.hb-on-paper{
+  --hb-mkt-uk:#a2893f;
+  --hb-mkt-us:#d46e67;
+  --hb-mkt-eu:#6b8dcd;
+  --hb-mkt-de:#6b8dcd;
+  --hb-mkt-fr:#768ca8;
+  --hb-mkt-it:#449a91;
+  --hb-mkt-es:#b3823c;
+  --hb-mkt-nl:#b87f00;
+  --hb-mkt-se:#8b8b8b;
+  --hb-mkt-pl:#5a6b6b;
+  --hb-mkt-shopify:#5c8478;
+  --hb-mkt-shopify-tmh:#6c9288;
+  --hb-mkt-shopify-sdl:#2f7a6c;
+  --hb-mkt-b2b:#a180b0;
+  --hb-mkt-other-marketplaces:#848c8a;
+  --hb-fl-fba-uk:#a2893f;
+  --hb-fl-fba-us:#d46e67;
+  --hb-fl-fba-eu:#6b8dcd;
+  --hb-fl-mwh:#39684c;
+}
+/* .hb-auto — for a page that cannot swap a class: a saved report, a static file, anything with no
+   JavaScript. Paper values at rest, dark values when the reader's system asks for dark. Use it
+   INSTEAD of .hb-on-paper / .hb-on-dark, never with them.
+     fixed paper ground  -> .hb-on-paper
+     fixed dark ground   -> :root (default) or .hb-on-dark inside a paper page
+     follows the reader  -> .hb-auto */
+.hb-auto{
+  --hb-mkt-uk:#a2893f;
+  --hb-mkt-us:#d46e67;
+  --hb-mkt-eu:#6b8dcd;
+  --hb-mkt-de:#6b8dcd;
+  --hb-mkt-fr:#768ca8;
+  --hb-mkt-it:#449a91;
+  --hb-mkt-es:#b3823c;
+  --hb-mkt-nl:#b87f00;
+  --hb-mkt-se:#8b8b8b;
+  --hb-mkt-pl:#5a6b6b;
+  --hb-mkt-shopify:#5c8478;
+  --hb-mkt-shopify-tmh:#6c9288;
+  --hb-mkt-shopify-sdl:#2f7a6c;
+  --hb-mkt-b2b:#a180b0;
+  --hb-mkt-other-marketplaces:#848c8a;
+  --hb-fl-fba-uk:#a2893f;
+  --hb-fl-fba-us:#d46e67;
+  --hb-fl-fba-eu:#6b8dcd;
+  --hb-fl-mwh:#39684c;
+}
+@media (prefers-color-scheme: dark){
+  .hb-auto{
+    --hb-mkt-uk:#e8c45a;
+    --hb-mkt-us:#dc7c75;
+    --hb-mkt-eu:#6f93d6;
+    --hb-mkt-de:#6f93d6;
+    --hb-mkt-fr:#a8c8f0;
+    --hb-mkt-it:#4fb3a9;
+    --hb-mkt-es:#b3823c;
+    --hb-mkt-nl:#e69f00;
+    --hb-mkt-se:#f0f0f0;
+    --hb-mkt-pl:#5a6b6b;
+    --hb-mkt-shopify:#7fbcae;
+    --hb-mkt-shopify-tmh:#9ad0c2;
+    --hb-mkt-shopify-sdl:#2f7a6c;
+    --hb-mkt-b2b:#c9a0dc;
+    --hb-mkt-other-marketplaces:#9aa3a0;
+    --hb-fl-fba-uk:#e8c45a;
+    --hb-fl-fba-us:#dc7c75;
+    --hb-fl-fba-eu:#6f93d6;
+    --hb-fl-mwh:#407556;
+  }
+}
+
+
+html{font-size:var(--hb-root-size)}
+body{font-family:var(--hb-font-ui);font-size:var(--hb-text-base);line-height:var(--hb-leading-body);
+  font-weight:var(--hb-weight-regular);-webkit-font-smoothing:antialiased}
+
+h1,h2,h3,h4{font-family:var(--hb-font-ui);font-weight:var(--hb-weight-semibold);
+  line-height:var(--hb-leading-tight);margin:0 0 .5em}
+h1{font-size:var(--hb-text-2xl)}
+h2{font-size:var(--hb-text-xl)}
+h3{font-size:var(--hb-text-lg)}
+h4{font-size:var(--hb-text-md);font-weight:var(--hb-weight-medium)}
+
+.hb-mark{font-size:var(--hb-text-3xs);line-height:1}
+/* Carve-out: text INSIDE fixed-size media (a 520px proof card, a chart canvas) keeps a fixed px
+   size, because it scales with the media, not the page. Page chrome scales; media does not. */
+
+/* Dense pages: a ladder that keeps descending where 45px and 23px are too big.
+   Put .hb-dense on a page wrapper (or <body>) for tables, planners and dashboards. */
+.hb-dense h1{font-size:var(--hb-text-xl)}   /* 28px */
+.hb-dense h2{font-size:var(--hb-text-md)}   /* 19px */
+.hb-dense h3{font-size:var(--hb-text-base);font-weight:var(--hb-weight-semibold)} /* 16px */
+.hb-dense h4{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-semibold)}   /* 14px */
+.hb-dense{font-size:var(--hb-text-sm)}      /* body 14px on dense pages */
+
+small,.hb-small{font-size:var(--hb-text-sm)}
+.hb-micro{font-size:var(--hb-text-2xs);letter-spacing:var(--hb-tracking-caps);text-transform:uppercase}
+.hb-display{font-size:var(--hb-text-display);line-height:1;font-weight:var(--hb-weight-semibold);
+  font-variant-numeric:tabular-nums}
+
+/* A SKU link: the identifier itself is the link. No underline at rest, dotted underline plus a
+   lighter colour on hover, so the row stays quiet until you point at it. Compose it with .hb-mono
+   (SKUs are set in the mono face, because Poppins has near-identical I and l):
+     <a class="hb-sku hb-mono" href="...">SDL-F-WILL-COTT</a> */
+.hb-sku{color:var(--hb-sku);font-weight:var(--hb-weight-semibold);text-decoration:none}
+.hb-sku:hover,.hb-sku:focus-visible{color:var(--hb-sku-hover);
+  text-decoration:underline dotted;text-underline-offset:3px}
+.hb-sku:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:2px}
+.hb-sku:visited{color:var(--hb-sku)}
+/* Light-ground apps (or a light panel): add .hb-on-light to the wrapper. */
+.hb-on-light .hb-sku{color:var(--hb-sku-light)}
+.hb-on-light .hb-sku:hover,.hb-on-light .hb-sku:focus-visible{color:var(--hb-sku-light-hover)}
+
+/* An external link that should look like a button: "View on Amazon", "Open listing".
+   The open-in-new-window icon is part of the class, so every app renders it the same:
+     <a class="hb-btn-ext" href="..." target="_blank" rel="noopener noreferrer">View</a> */
+.hb-btn-ext{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;
+  border:1px solid currentColor;border-radius:4px;background:transparent;color:inherit;
+  font-family:var(--hb-font-ui);font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium);
+  line-height:var(--hb-leading-dense);text-decoration:none;cursor:pointer}
+.hb-btn-ext::after{content:"";width:.8em;height:.8em;flex:none;background-color:currentColor;
+  -webkit-mask:var(--hb-ext-icon) center/contain no-repeat;mask:var(--hb-ext-icon) center/contain no-repeat}
+.hb-btn-ext:hover{background:rgba(127,208,160,.14)}
+.hb-btn-ext:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+/* Tables: dense but readable. Numbers line up; 13px is the floor. */
+table,.hb-table{font-size:var(--hb-text-sm);line-height:var(--hb-leading-dense)}
+.hb-table--dense{font-size:var(--hb-text-xs)}
+th{font-weight:var(--hb-weight-semibold);text-align:left}
+td.hb-num,th.hb-num,.hb-num{font-variant-numeric:tabular-nums;text-align:right}
+code,kbd,pre,.hb-mono{font-family:var(--hb-font-mono);font-size:var(--hb-text-sm)}
+
+/* Form controls inherit the face and the chosen size. */
+button,input,select,textarea{font-family:inherit;font-size:var(--hb-text-sm);line-height:var(--hb-leading-dense)}
+label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
+
+/* The universal font-size control: top right, above the page content.
+   It floats, so pad the page by --hb-fontsize-gutter (or put the pill in your header bar). */
+.hb-fontsize{position:fixed;top:8px;right:8px;z-index:1000;display:inline-flex;align-items:center;gap:4px;
+  padding:2px;border:1px solid rgba(0,0,0,.15);border-radius:6px;background:#fff}
+.hb-fontsize button{width:28px;height:28px;padding:0;border:0;border-radius:4px;background:transparent;
+  font-size:15px;line-height:1;cursor:pointer;color:inherit}
+.hb-fontsize button:hover{background:rgba(0,0,0,.06)}
+.hb-fontsize button:focus-visible{outline:2px solid currentColor;outline-offset:1px}
+.hb-fontsize button[disabled]{opacity:.35;cursor:not-allowed}
+.hb-fontsize output{min-width:3.5ch;text-align:center;font-size:12px;opacity:.7}
+@media print{.hb-fontsize{display:none}}
