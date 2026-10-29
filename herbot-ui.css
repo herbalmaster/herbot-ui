@@ -269,3 +269,139 @@ label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
 .hb-fontsize button[disabled]{opacity:.35;cursor:not-allowed}
 .hb-fontsize output{min-width:3.5ch;text-align:center;font-size:12px;opacity:.7}
 @media print{.hb-fontsize{display:none}}
+
+/* ===================================================================================================
+   THE CALMER UI (D230, approved by Toby 29 Oct 2026, DS-024). New classes only, all prefixed hbc-.
+   The prefix is deliberate: the PIM and the Hub already use hb-btn, hb-menu, hb-count, hb-main, so
+   nothing here may reuse those names. Dark grounds only (the apps' own gradients); drawn in
+   docs/design/d230-calmer-ui.html, used in app-kit/calm-ui-example.html, explained in
+   docs/app-kit-calm-ui.md. Green is an accent: the primary button, the focus ring and the page marker.
+   =================================================================================================== */
+:root{
+  --hbc-text:#e8ebea;--hbc-muted:#a4aeaa;--hbc-faint:#8a9692;
+  --hbc-line:rgba(255,255,255,.10);--hbc-surface:rgba(255,255,255,.045);--hbc-surface2:rgba(255,255,255,.08);
+  --hbc-accent:#7fd0a0;--hbc-accent-ink:#0b1f14;
+  --hbc-amber:#e3b75c;--hbc-lilac:#b9a0e8;--hbc-red:#e27a6e;
+  --hbc-bg1:#12301f;--hbc-bg2:#0d2016;--hbc-bg3:#0a1611;
+}
+/* Optional ground: the same gradient the apps already use. data-theme="teal" is the PIM's. */
+.hbc-ground{background:linear-gradient(165deg,var(--hbc-bg1),var(--hbc-bg2) 55%,var(--hbc-bg3));color:var(--hbc-text);min-height:100vh}
+.hbc-ground[data-theme=teal]{--hbc-bg1:#12303a;--hbc-bg2:#0d2128;--hbc-bg3:#0a1519}
+
+/* Icons: CSS masks in currentColor, so they scale with the text-size control and need no files. */
+.hbc-i{display:inline-block;width:1.25em;height:1.25em;flex:none;background-color:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+.hbc-i-needs{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/></svg>')}
+.hbc-i-products{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>')}
+.hbc-i-images{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-8 8"/></svg>')}
+.hbc-i-golive{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 12l6-6 6 6M5 21h14"/></svg>')}
+.hbc-i-history{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>')}
+.hbc-i-more{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>')}
+.hbc-i-help{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg>')}
+.hbc-i-info{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>')}
+.hbc-i-check{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>')}
+.hbc-i-chev{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>')}
+.hbc-i-menu{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')}
+.hbc-i-search{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg>')}
+.hbc-i-x{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>')}
+
+/* Shell: sidebar + main. Under 700px the menu goes off-canvas behind the menu button. */
+.hbc-shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh;font-family:var(--hb-font-body);font-size:var(--hb-text-sm);line-height:1.45;color:var(--hbc-text)}
+.hbc-shell a{color:inherit;text-decoration:none}
+.hbc-main{min-width:0;display:flex;flex-direction:column}
+.hbc-content{padding:20px 16px 28px;max-width:860px}
+.hbc-content h1{font-family:var(--hb-font-head);font-size:var(--hb-text-xl);line-height:1.15;margin:0;color:var(--hbc-text)}
+.hbc-lede{color:var(--hbc-muted);margin:4px 0 14px}
+
+/* Header: one slim bar, the same on every page. Put the app switcher (data-tmh-switcher) at its left. */
+.hbc-header{display:flex;align-items:center;gap:10px;min-height:52px;padding:0 16px;border-bottom:1px solid var(--hbc-line)}
+.hbc-spacer{flex:1}
+.hbc-iconbtn,.hbc-menubtn{display:inline-grid;place-items:center;width:34px;height:34px;border:0;border-radius:8px;background:none;color:var(--hbc-muted);font:inherit;cursor:pointer;padding:0}
+.hbc-menubtn{display:none}
+.hbc-iconbtn:hover,.hbc-iconbtn:focus-visible,.hbc-menubtn:hover{background:var(--hbc-surface2);color:var(--hbc-text)}
+.hbc-textsize{display:inline-flex;align-items:center;border:1px solid var(--hbc-line);border-radius:8px;overflow:hidden}
+.hbc-textsize button{border:0;background:none;width:30px;height:30px;color:var(--hbc-muted);font:inherit;font-weight:600;cursor:pointer}
+.hbc-textsize button:hover{background:var(--hbc-surface2);color:var(--hbc-text)}
+.hbc-textsize button[disabled]{opacity:.35;cursor:not-allowed}
+.hbc-textsize output{font-size:var(--hb-text-2xs);color:var(--hbc-muted);min-width:3.4ch;text-align:center}
+
+/* The needs-you strip: ONE line, under the header on every page. */
+.hbc-needs{display:flex;align-items:center;gap:10px;padding:9px 16px;background:var(--hbc-surface);border-bottom:1px solid var(--hbc-line);min-height:50px}
+.hbc-count{display:inline-grid;place-items:center;min-width:1.7em;height:1.7em;padding:0 .45em;border-radius:999px;background:var(--hbc-surface2);color:var(--hbc-text);font-weight:600;font-size:var(--hb-text-xs)}
+.hbc-needs--urgent .hbc-count{background:var(--hbc-amber);color:#2a1d02}
+.hbc-needs .hbc-lead{color:var(--hbc-muted);white-space:nowrap}
+.hbc-needs .hbc-next{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500;color:var(--hbc-text)}
+.hbc-needs .hbc-more{display:inline-flex;align-items:center;gap:2px;color:var(--hbc-muted);white-space:nowrap}
+.hbc-needs .hbc-more:hover{color:var(--hbc-text)}
+.hbc-needs--clear .hbc-i-check{color:var(--hbc-accent)}
+
+/* Buttons: outlined by default; exactly ONE filled green button on a screen, the next thing to do. */
+.hbc-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.28);background:none;color:var(--hbc-text);border-radius:8px;padding:5px 12px;font:inherit;font-weight:500;white-space:nowrap;cursor:pointer;text-decoration:none}
+.hbc-btn:hover,.hbc-btn:focus-visible{border-color:var(--hbc-accent);color:var(--hbc-accent)}
+.hbc-btn--primary{background:var(--hbc-accent);border-color:var(--hbc-accent);color:var(--hbc-accent-ink);font-weight:600}
+.hbc-btn--primary:hover,.hbc-btn--primary:focus-visible{background:#9be0b6;color:var(--hbc-accent-ink);border-color:#9be0b6}
+.hbc-btn:focus-visible,.hbc-iconbtn:focus-visible,.hbc-menu a:focus-visible,.hbc-chip:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:2px}
+
+/* Tooltip: the explainer lives here, not on the page. Real elements, so a keyboard and a screen reader reach them.
+   Inside .hbc-act it spans the row; elsewhere add hbc-tip--self. */
+.hbc-tip{display:inline-block;vertical-align:middle}
+.hbc-tip--self{position:relative}
+.hbc-tip>button{display:inline-grid;place-items:center;width:22px;height:22px;border:0;background:none;color:var(--hbc-faint);border-radius:50%;padding:0;cursor:pointer}
+.hbc-tip>button:hover,.hbc-tip>button:focus-visible{color:var(--hbc-text);background:var(--hbc-surface2)}
+.hbc-tip [role=tooltip]{display:none;position:absolute;z-index:5;left:14px;right:14px;top:calc(100% - 4px);max-width:420px;padding:10px 12px;border-radius:10px;background:#0a1210;color:var(--hbc-text);border:1px solid rgba(255,255,255,.22);box-shadow:0 8px 24px rgba(0,0,0,.45);font-size:var(--hb-text-xs);line-height:1.45;text-align:left;font-weight:400}
+.hbc-tip--self [role=tooltip]{left:0;right:auto;width:300px}
+.hbc-tip [role=tooltip] b{display:block;color:var(--hbc-muted);font-weight:600;font-size:var(--hb-text-2xs);letter-spacing:.06em;text-transform:uppercase;margin:6px 0 1px}
+.hbc-tip [role=tooltip] b:first-child{margin-top:0}
+.hbc-tip:hover [role=tooltip],.hbc-tip:focus-within [role=tooltip],.hbc-tip.is-shown [role=tooltip]{display:block}
+
+/* The menu: at most 7 top-level items, an icon on each, a red count where something waits,
+   everything else folded into one item. The active page has a green marker, not green text. */
+.hbc-menu{display:flex;flex-direction:column;gap:2px;padding:14px 12px;border-right:1px solid var(--hbc-line);background:rgba(0,0,0,.14)}
+.hbc-brand{display:flex;align-items:center;gap:9px;padding:4px 8px 12px;font:600 var(--hb-text-base)/1 var(--hb-font-head);color:var(--hbc-text)}
+.hbc-find{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:7px 10px;border:1px solid var(--hbc-line);border-radius:8px;color:var(--hbc-faint)}
+.hbc-find kbd{margin-left:auto;font:inherit;font-size:var(--hb-text-2xs);border:1px solid var(--hbc-line);border-radius:5px;padding:0 5px}
+.hbc-menu a,.hbc-menu summary{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:8px;color:var(--hbc-muted);list-style:none;cursor:pointer;text-decoration:none}
+.hbc-menu summary::-webkit-details-marker{display:none}
+.hbc-menu a:hover,.hbc-menu summary:hover{background:var(--hbc-surface);color:var(--hbc-text)}
+.hbc-menu a[aria-current=page]{background:var(--hbc-surface2);color:var(--hbc-text);box-shadow:inset 3px 0 0 var(--hbc-accent)}
+.hbc-menu a[aria-current=page] .hbc-i{color:var(--hbc-accent)}
+.hbc-dot{margin-left:auto;min-width:1.6em;height:1.6em;border-radius:999px;background:var(--hbc-red);color:#2a0d09;font-size:var(--hb-text-2xs);font-weight:700;display:grid;place-items:center;padding:0 .4em}
+.hbc-menu details[open] summary .hbc-i-chev{transform:rotate(90deg)}
+.hbc-menu summary .hbc-i-chev{margin-left:auto;width:1em;height:1em}
+.hbc-subnav a{padding:6px 10px 6px 40px;font-size:var(--hb-text-xs)}
+.hbc-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--hbc-line);color:var(--hbc-faint);font-size:var(--hb-text-xs);display:flex;gap:8px;align-items:center}
+.hbc-scrim{display:none}
+
+/* The actions page: sections named for what you do with them, one-line rows, explainers in tooltips. */
+.hbc-chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 6px}
+.hbc-chip{border:1px solid var(--hbc-line);background:none;border-radius:999px;padding:3px 11px;color:var(--hbc-muted);font:inherit;font-size:var(--hb-text-xs);cursor:pointer}
+.hbc-chip[aria-pressed=true]{background:var(--hbc-surface2);color:var(--hbc-text);border-color:rgba(255,255,255,.28)}
+.hbc-sec h2{font-family:var(--hb-font-head);font-size:var(--hb-text-md);margin:22px 0 8px;display:flex;align-items:center;gap:8px;color:var(--hbc-text)}
+.hbc-sec h2 .hbc-n{font:600 var(--hb-text-xs)/1 var(--hb-font-body);color:var(--hbc-muted);background:var(--hbc-surface2);border-radius:999px;padding:3px 8px}
+.hbc-acts{list-style:none;margin:0;padding:0;border:1px solid var(--hbc-line);border-radius:12px;background:var(--hbc-surface)}
+.hbc-act{position:relative;display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:12px 14px;border-top:1px solid var(--hbc-line)}
+.hbc-act:first-child{border-top:0}
+.hbc-kind{display:inline-flex;align-items:center;gap:5px;font-size:var(--hb-text-2xs);font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--kc,var(--hbc-muted))}
+.hbc-kind::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.hbc-kind--decide{--kc:var(--hbc-amber)}.hbc-kind--review{--kc:var(--hbc-lilac)}.hbc-kind--keys{--kc:var(--hbc-red)}
+.hbc-what{min-width:0}
+.hbc-title{font-weight:500;color:var(--hbc-text);font-size:var(--hb-text-base);line-height:1.3}
+.hbc-meta{color:var(--hbc-muted);font-size:var(--hb-text-xs);margin-top:2px}
+.hbc-do{display:flex;gap:6px;align-items:center}
+.hbc-held{margin-top:10px;border:1px solid var(--hbc-line);border-radius:12px;background:var(--hbc-surface)}
+.hbc-held summary{display:flex;align-items:center;gap:8px;padding:11px 14px;color:var(--hbc-muted);cursor:pointer;list-style:none}
+.hbc-held summary::-webkit-details-marker{display:none}
+.hbc-held[open] summary .hbc-i-chev{transform:rotate(90deg)}
+.hbc-held .hbc-i-chev{width:1em;height:1em}
+.hbc-quiet{color:var(--hbc-faint);font-size:var(--hb-text-xs);margin:12px 2px 0}
+
+@media (max-width:700px){
+  .hbc-shell{grid-template-columns:minmax(0,1fr)}
+  .hbc-menu{position:fixed;inset:0 auto 0 0;width:78%;max-width:300px;z-index:20;transform:translateX(-102%);background:#0b1713;box-shadow:12px 0 36px rgba(0,0,0,.5);overflow-y:auto}
+  .hbc-menu.is-open{transform:none}
+  .hbc-scrim.is-open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:15}
+  .hbc-menubtn{display:inline-grid}
+  .hbc-needs .hbc-lead,.hbc-needs .hbc-more span{display:none}
+  .hbc-act{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"kind kind" "what what" "do do"}
+  .hbc-act .hbc-kind{grid-area:kind}.hbc-act .hbc-what{grid-area:what}.hbc-act .hbc-do{grid-area:do;justify-content:flex-start;margin-top:4px}
+}
+@media print{.hbc-menu,.hbc-header,.hbc-needs{display:none}}
