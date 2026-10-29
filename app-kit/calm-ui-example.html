@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calmer UI example</title>
+<!-- An app links the fixed address instead: https://herbalmaster.github.io/herbot-ui/herbot-ui.css (D271).
+     This copy links the file beside it so the repo can be checked before a release. -->
+<link rel="stylesheet" href="herbot-ui.css">
+</head>
+<body class="hbc-ground">
+<!-- The calmer UI (D230), as an app uses it: classes only, no style block, no inline style. Sample data.
+     Copy the markup of the parts you need; the script at the bottom is the whole behaviour (menu on a
+     phone, text size, the tick, the filter chips). Full recipe: docs/app-kit-calm-ui.md. -->
+<div class="hbc-shell">
+
+  <nav class="hbc-menu" id="menu" aria-label="Menu">
+    <div class="hbc-brand">TMH PIM</div>
+    <div class="hbc-find"><span class="hbc-i hbc-i-search"></span>Search<kbd>/</kbd></div>
+    <a href="#" aria-current="page"><span class="hbc-i hbc-i-needs"></span>What needs you<span class="hbc-dot">5</span></a>
+    <a href="#"><span class="hbc-i hbc-i-products"></span>Products</a>
+    <a href="#"><span class="hbc-i hbc-i-images"></span>Images</a>
+    <a href="#"><span class="hbc-i hbc-i-golive"></span>Go live<span class="hbc-dot">3</span></a>
+    <a href="#"><span class="hbc-i hbc-i-history"></span>History</a>
+    <details class="hbc-subnav">
+      <summary><span class="hbc-i hbc-i-more"></span>Reference<span class="hbc-i hbc-i-chev"></span></summary>
+      <a href="#">Channel rules</a><a href="#">Field mapping</a><a href="#">Value lists</a><a href="#">Locks</a>
+    </details>
+    <div class="hbc-foot">v0.0.0 · all well</div>
+  </nav>
+  <div class="hbc-scrim" id="scrim"></div>
+
+  <div class="hbc-main">
+    <header class="hbc-header">
+      <button type="button" class="hbc-menubtn" id="menubtn" aria-label="Menu"><span class="hbc-i hbc-i-menu"></span></button>
+      <span data-tmh-switcher></span>
+      <span class="hbc-spacer"></span>
+      <button type="button" class="hbc-iconbtn" aria-label="Help"><span class="hbc-i hbc-i-help"></span></button>
+      <div class="hbc-textsize" role="group" aria-label="Text size">
+        <button type="button" data-hb-font="-" aria-label="Smaller text">A&minus;</button>
+        <output data-hb-font-value aria-live="polite">100%</output>
+        <button type="button" data-hb-font="+" aria-label="Larger text">A+</button>
+      </div>
+    </header>
+
+    <div class="hbc-needs hbc-needs--urgent" id="needs">
+      <span class="hbc-count" id="needs-n">5</span><span class="hbc-lead">need you</span>
+      <a class="hbc-next" href="#">Approve the text for 4 new Willow variants</a>
+      <a class="hbc-btn hbc-btn--primary" href="#">Review</a>
+      <button type="button" class="hbc-iconbtn" data-done aria-label="Done: remove from my list"><span class="hbc-i hbc-i-check"></span></button>
+      <a class="hbc-more" href="#"><span>4 more</span><span class="hbc-i hbc-i-chev"></span></a>
+    </div>
+
+    <main class="hbc-content">
+      <h1>What needs you</h1>
+      <p class="hbc-lede">Everything waiting on you, most urgent first.</p>
+      <div class="hbc-chips" role="group" aria-label="Show">
+        <button class="hbc-chip" type="button" aria-pressed="true" data-kind="all">All 5</button>
+        <button class="hbc-chip" type="button" aria-pressed="false" data-kind="decide">Decide 2</button>
+        <button class="hbc-chip" type="button" aria-pressed="false" data-kind="review">Review 1</button>
+        <button class="hbc-chip" type="button" aria-pressed="false" data-kind="keys">Keys 1</button>
+        <button class="hbc-chip" type="button" aria-pressed="false" data-kind="do">Do 1</button>
+      </div>
+
+      <section class="hbc-sec">
+        <h2>Do now <span class="hbc-n">3</span></h2>
+        <ul class="hbc-acts">
+          <li class="hbc-act" data-kind="review">
+            <span class="hbc-kind hbc-kind--review">Review</span>
+            <div class="hbc-what"><div class="hbc-title">Approve the text for 4 new Willow variants
+              <span class="hbc-tip"><button type="button" aria-label="More about this" aria-describedby="t1"><span class="hbc-i hbc-i-info"></span></button>
+                <span role="tooltip" id="t1"><b>What it changes</b>4 products get their listing text and move on to Push live.<b>I would</b>Approve: the claims check passed.</span></span></div>
+              <div class="hbc-meta">4 products · waiting 2 days</div></div>
+            <div class="hbc-do"><a class="hbc-btn hbc-btn--primary" href="#">Review</a><button type="button" class="hbc-iconbtn" data-done aria-label="Done"><span class="hbc-i hbc-i-check"></span></button></div>
+          </li>
+          <li class="hbc-act" data-kind="keys">
+            <span class="hbc-kind hbc-kind--keys">Keys</span>
+            <div class="hbc-what"><div class="hbc-title">Reconnect the Amazon UK sign-in
+              <span class="hbc-tip"><button type="button" aria-label="More about this" aria-describedby="t2"><span class="hbc-i hbc-i-info"></span></button>
+                <span role="tooltip" id="t2"><b>What it changes</b>UK sales and stock stop refreshing until it is reconnected.</span></span></div>
+              <div class="hbc-meta">Amazon UK · waiting 1 day</div></div>
+            <div class="hbc-do"><a class="hbc-btn" href="#">Open</a><button type="button" class="hbc-iconbtn" data-done aria-label="Done"><span class="hbc-i hbc-i-check"></span></button></div>
+          </li>
+          <li class="hbc-act" data-kind="decide">
+            <span class="hbc-kind hbc-kind--decide">Decide</span>
+            <div class="hbc-what"><div class="hbc-title">Prices proposed by Inventory for 12 products</div>
+              <div class="hbc-meta">12 products · today</div></div>
+            <div class="hbc-do"><a class="hbc-btn" href="#">Decide</a><button type="button" class="hbc-iconbtn" data-done aria-label="Done"><span class="hbc-i hbc-i-check"></span></button></div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="hbc-sec">
+        <h2>Soon <span class="hbc-n">2</span></h2>
+        <ul class="hbc-acts">
+          <li class="hbc-act" data-kind="do">
+            <span class="hbc-kind">Do</span>
+            <div class="hbc-what"><div class="hbc-title">Render the 3 missing main images</div><div class="hbc-meta">3 products · waiting 5 days</div></div>
+            <div class="hbc-do"><a class="hbc-btn" href="#">Open</a><button type="button" class="hbc-iconbtn" data-done aria-label="Done"><span class="hbc-i hbc-i-check"></span></button></div>
+          </li>
+          <li class="hbc-act" data-kind="decide">
+            <span class="hbc-kind hbc-kind--decide">Decide</span>
+            <div class="hbc-what"><div class="hbc-title">Which wording for the A+ strip on the Varsity designs?</div><div class="hbc-meta">3 designs · waiting 6 days</div></div>
+            <div class="hbc-do"><a class="hbc-btn" href="#">Decide</a><button type="button" class="hbc-iconbtn" data-done aria-label="Done"><span class="hbc-i hbc-i-check"></span></button></div>
+          </li>
+        </ul>
+      </section>
+
+      <details class="hbc-held"><summary><span class="hbc-i hbc-i-chev"></span>Held up <span class="hbc-count">2</span></summary></details>
+      <p class="hbc-quiet">1 removed</p>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var all = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+  /* The menu on a phone. */
+  function menu(open) { $("#menu").classList.toggle("is-open", open); $("#scrim").classList.toggle("is-open", open); }
+  $("#menubtn").addEventListener("click", function () { menu(!$("#menu").classList.contains("is-open")); });
+  $("#scrim").addEventListener("click", function () { menu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") menu(false); });
+
+  /* Text size: the same script and the same data attributes as the floating control (font-size-control.html);
+     only the markup moved into the header. */
+  var MIN = 13, MAX = 22, STEP = 1, DEFAULT = 16, KEY = "herbot.rootFontSize", size = DEFAULT;
+  try { size = parseInt(localStorage.getItem(KEY), 10) || DEFAULT; } catch (e) {}
+  function apply() {
+    size = Math.min(MAX, Math.max(MIN, size));
+    document.documentElement.style.setProperty("--hb-root-size", size + "px");
+    $("[data-hb-font-value]").textContent = Math.round(size / DEFAULT * 100) + "%";
+    all("[data-hb-font]").forEach(function (b) { b.disabled = b.dataset.hbFont === "-" ? size <= MIN : size >= MAX; });
+    try { localStorage.setItem(KEY, String(size)); } catch (e) {}
+  }
+  all("[data-hb-font]").forEach(function (b) { b.addEventListener("click", function () { size += b.dataset.hbFont === "+" ? STEP : -STEP; apply(); }); });
+  apply();
+
+  /* The tick removes a row and updates the count. In a real app this calls the app's own "done". */
+  function recount() {
+    var n = all(".hbc-act").length;
+    $("#needs-n").textContent = n;
+    all(".hbc-dot")[0].textContent = n;
+  }
+  document.addEventListener("click", function (e) {
+    var d = e.target.closest("[data-done]"); if (!d) return;
+    var row = d.closest(".hbc-act"); if (row) { row.remove(); recount(); }
+  });
+
+  /* Filter chips. */
+  all(".hbc-chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      all(".hbc-chip").forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); });
+      all(".hbc-act").forEach(function (r) { r.hidden = c.dataset.kind !== "all" && r.dataset.kind !== c.dataset.kind; });
+    });
+  });
+})();
+</script>
+</body>
+</html>
