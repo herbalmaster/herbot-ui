@@ -11,10 +11,10 @@ Nothing brand-related is here: no logos, no brand colours, no product informatio
 ## Use it
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/herbalmaster/herbot-ui@1/app-kit/herbot-ui.css">
+<link rel="stylesheet" href="https://herbalmaster.github.io/herbot-ui/herbot-ui.css">
 ```
 
-`@1` follows the latest 1.x release (D071); a breaking change would be `@2`. An exact tag (`@v1.1.0`) is also fine and never changes. Never a branch. For a self-contained page that must work offline, inline the file's
+The fixed address above is overwritten at each release (10-minute cache), and every version is kept at `https://herbalmaster.github.io/herbot-ui/v/<version>/herbot-ui.css`. The jsDelivr address (`@1`, `@v1.1.1`) still works but a browser may keep `@1` for 7 days. For a self-contained page that must work offline, inline the file's
 contents at a tag instead, with `/* herbot-ui.css @ vX.Y.Z */` as the first line.
 
 Then paste `app-kit/font-size-control.html` just inside `<body>`, unchanged.
