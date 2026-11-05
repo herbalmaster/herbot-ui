@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House shell example</title>
+<!-- An app links the fixed address instead: https://herbalmaster.github.io/herbot-ui/herbot-ui.css (D271).
+     This copy links the file beside it so the repo can be checked before a release. -->
+<link rel="stylesheet" href="herbot-ui.css">
+</head>
+<body class="hbc-ground" data-theme="teal">
+<!-- The house shell (D379), as the PIM agreed it with Toby on 5 Nov 2026: a words-only menu that hides, a slim
+     top bar on the title row, the Herbot apps bottom left, explanations behind tooltips. Classes only, no style
+     block, no inline style. Sample content. The script at the bottom is the whole behaviour. Each app keeps its
+     own menu items and its own sources in the freshness panel. Recipe: docs/app-kit-calm-ui.md section 7. -->
+<div class="hbc-shell hbc-shell--words" id="shell">
+
+  <nav class="hbc-menu hbc-menu--words" aria-label="Menu">
+    <div class="hbc-brand">TMH PIM
+      <button type="button" class="hbc-fold" aria-label="Hide the menu" title="Hide the menu" data-hbc-fold><span class="hbc-i hbc-i-chev" aria-hidden="true"></span></button>
+    </div>
+    <div class="hbc-find"><span class="hbc-i hbc-i-search" aria-hidden="true"></span>Search SKU, title, ASIN<kbd>/</kbd></div>
+    <a href="#">What needs you<span class="hbc-dot">5</span></a>
+    <a href="#">Products</a>
+    <div class="hbc-mh">Text</div>
+    <a class="hbc-ms" href="#">Ours vs Live</a>
+    <a class="hbc-ms" href="#">Gaps</a>
+    <div class="hbc-mh">Pictures</div>
+    <a class="hbc-ms" href="#">Ours vs Live</a>
+    <a class="hbc-ms" href="#">Gaps</a>
+    <div class="hbc-mh">Go live</div>
+    <a class="hbc-ms" href="#" aria-current="page">Push live</a>
+    <a class="hbc-ms" href="#">Check it landed</a>
+    <a href="#">History</a>
+    <details class="hbc-subnav">
+      <summary>More</summary>
+      <a class="hbc-ms" href="#">Reference</a>
+    </details>
+  </nav>
+  <button type="button" class="hbc-unfold" data-hbc-unfold><span class="hbc-i hbc-i-menu" aria-hidden="true"></span>Menu</button>
+
+  <main class="hbc-main">
+    <div class="hbc-content">
+      <div class="hbc-titlerow">
+        <h1>Push live</h1>
+        <div class="hbc-topbar">
+          <div>
+            <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="fresh" aria-label="When each source last arrived" title="When each source last arrived" data-hbc-pop>
+              <span class="hbc-i hbc-i-history" aria-hidden="true"></span><span class="hbc-fresh hbc-fresh--old"></span>
+            </button>
+            <div class="hbc-pop" id="fresh" role="dialog" aria-label="When each source last arrived" hidden>
+              <strong>When each source last arrived</strong>
+              <div class="hbc-pop-row"><span class="hbc-i hbc-i-products" aria-hidden="true"></span><div>Text, from the Content Writer<div class="hbc-pop-when">today 21:30 · sent when you approve there</div></div><span></span></div>
+              <div class="hbc-pop-row"><span class="hbc-i hbc-i-images" aria-hidden="true"></span><div>Pictures, from ImageGen<div class="hbc-pop-when hbc-pop-when--old">19 h ago (yesterday 02:40)</div></div><button type="button" class="hbc-btn">Read now</button></div>
+              <div class="hbc-pop-row"><span class="hbc-i hbc-i-golive" aria-hidden="true"></span><div>Live: Website, Amazon UK, Amazon US<div class="hbc-pop-when">today 02:35 · also every night</div></div><button type="button" class="hbc-btn">Pull now</button></div>
+              <div class="hbc-pop-note">The dot: green, all read within a day; amber, something is older.</div>
+            </div>
+          </div>
+          <button type="button" class="hbc-tb" aria-label="Help for this page" title="Help for this page"><span class="hbc-i hbc-i-help" aria-hidden="true"></span></button>
+          <div>
+            <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="more" aria-label="Text size and version" title="Text size and version" data-hbc-pop>⋯</button>
+            <div class="hbc-pop" id="more" role="dialog" aria-label="Text size and version" hidden>
+              <strong>Text size</strong>
+              <div class="hbc-textsize" role="group" aria-label="Text size">
+                <button type="button" data-hb-font="down" aria-label="Smaller text">A−</button><output data-hb-font="value">100%</output><button type="button" data-hb-font="up" aria-label="Larger text">A+</button>
+              </div>
+              <div class="hbc-pop-note">TMH PIM v0.0.0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="hbc-lede">The page starts here. Explanations sit behind the <span class="hbc-tip hbc-tip--self"><button type="button" aria-label="About this page" aria-describedby="t1"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button><span role="tooltip" id="t1"><b>Push live</b>Only the gaps are listed, each ticked.<br>Nothing live is removed.</span></span> button.</p>
+    </div>
+  </main>
+
+  <div class="hbc-apps">
+    <div class="hbc-apps-panel" id="apps" role="dialog" aria-label="Herbot apps" hidden>
+      <strong>Herbot apps</strong>
+      <a class="hbc-app" href="#"><span class="hbc-app-ic"><span class="hbc-i hbc-i-needs" aria-hidden="true"></span></span>Herbot home</a>
+      <a class="hbc-app" href="#"><span class="hbc-app-ic"><span class="hbc-i hbc-i-products" aria-hidden="true"></span></span>Inventory</a>
+      <a class="hbc-app" href="#" aria-current="page"><span class="hbc-app-ic"><span class="hbc-i hbc-i-products" aria-hidden="true"></span></span>PIM (here)</a>
+    </div>
+    <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="apps" aria-label="Herbot apps" title="Herbot apps" data-hbc-pop><span class="hbc-i hbc-i-apps" aria-hidden="true"></span></button>
+  </div>
+</div>
+
+<script>
+/* The whole behaviour: fold the menu, and open one roll-out at a time (Escape or a click outside closes it). */
+(function () {
+  var shell = document.getElementById("shell");
+  document.querySelector("[data-hbc-fold]").addEventListener("click", function () { shell.classList.add("is-folded"); });
+  document.querySelector("[data-hbc-unfold]").addEventListener("click", function () { shell.classList.remove("is-folded"); });
+  var btns = document.querySelectorAll("[data-hbc-pop]");
+  function closeAll(except) {
+    btns.forEach(function (b) { if (b !== except) { b.setAttribute("aria-expanded", "false"); document.getElementById(b.getAttribute("aria-controls")).hidden = true; } });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var pop = document.getElementById(b.getAttribute("aria-controls"));
+      closeAll(b);
+      pop.hidden = !pop.hidden;
+      b.setAttribute("aria-expanded", pop.hidden ? "false" : "true");
+    });
+  });
+  document.addEventListener("click", function (e) { if (!e.target.closest(".hbc-pop,.hbc-apps-panel")) closeAll(null); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(null); });
+})();
+</script>
+</body>
+</html>
