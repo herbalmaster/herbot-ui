@@ -353,8 +353,9 @@ label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
 .hbc-tip [role=tooltip] b:first-child{margin-top:0}
 .hbc-tip:hover [role=tooltip],.hbc-tip:focus-within [role=tooltip],.hbc-tip.is-shown [role=tooltip]{display:block}
 
-/* The menu: at most 7 top-level items, an icon on each, a red count where something waits,
-   everything else folded into one item. The active page has a green marker, not green text. */
+/* The menu with icons (D230): a red count where something waits, the rest folded into one item. The active
+   page has a green marker, not green text. Since D379 the house menu is words only: hbc-menu--words, below.
+   No fixed number of items (Toby, 4 Nov). */
 .hbc-menu{display:flex;flex-direction:column;gap:2px;padding:14px 12px;border-right:1px solid var(--hbc-line);background:rgba(0,0,0,.14)}
 .hbc-brand{display:flex;align-items:center;gap:9px;padding:4px 8px 12px;font:600 var(--hb-text-base)/1 var(--hb-font-head);color:var(--hbc-text)}
 .hbc-find{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:7px 10px;border:1px solid var(--hbc-line);border-radius:8px;color:var(--hbc-faint)}
@@ -405,3 +406,73 @@ label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
   .hbc-act .hbc-kind{grid-area:kind}.hbc-act .hbc-what{grid-area:what}.hbc-act .hbc-do{grid-area:do;justify-content:flex-start;margin-top:4px}
 }
 @media print{.hbc-menu,.hbc-header,.hbc-needs{display:none}}
+
+/* ===================================================================================================
+   THE HOUSE SHELL (D379, Toby 5 Nov 2026: "yes this is good", the PIM's menu and top bar, the pattern for
+   every Herbot app). Additions only, hbc- prefix. Shown in app-kit/house-shell-example.html and
+   docs/app-kit-calm-ui.md section 7. Four parts:
+   1. a words-only menu that hides (hbc-menu--words, hbc-mh, hbc-ms, hbc-fold, hbc-unfold);
+   2. a slim top bar on the page's first row, beside the title: one freshness roll-out, help, then
+      text size and version behind one button (hbc-titlerow, hbc-topbar, hbc-tb, hbc-fresh, hbc-pop);
+   3. the Herbot apps fixed bottom left (hbc-apps, hbc-apps-panel, hbc-app);
+   4. explanations behind tooltips (hbc-tip, above).
+   =================================================================================================== */
+/* 1. The words-only menu. No icons, no fixed number of items: groups are a heading (hbc-mh) over their
+   pages (hbc-ms). It hides with the ‹ button (hbc-fold); hbc-shell.is-folded drops the column and shows
+   the "Menu" button (hbc-unfold) top left. */
+.hbc-shell--words{grid-template-columns:210px minmax(0,1fr)}
+.hbc-shell.is-folded{grid-template-columns:minmax(0,1fr)}
+.hbc-shell.is-folded .hbc-menu{display:none}
+.hbc-menu--words{padding:16px 10px 72px;gap:1px;font-size:var(--hb-text-base)}
+.hbc-menu--words .hbc-brand{justify-content:space-between;padding:2px 2px 10px 10px}
+.hbc-menu--words a,.hbc-menu--words summary{padding:6px 10px;color:#cfdfe2;font-weight:500}
+.hbc-menu--words a[aria-current=page]{background:var(--hbc-accent);color:var(--hbc-accent-ink);font-weight:600;box-shadow:none}
+.hbc-mh{padding:12px 10px 2px;font-weight:600;color:var(--hbc-text)}
+.hbc-menu--words .hbc-ms{padding:4px 10px 4px 20px;font-size:var(--hb-text-sm);font-weight:400}
+.hbc-tb,.hbc-fold,.hbc-unfold{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:36px;height:36px;padding:0 9px;box-sizing:border-box;border-radius:8px;border:1px solid rgba(255,255,255,.18);background:var(--hbc-surface2);color:var(--hbc-text);font:500 var(--hb-text-xs)/1 var(--hb-font-body);cursor:pointer}
+.hbc-fold{min-width:32px;height:32px;padding:0 8px}
+.hbc-fold .hbc-i-chev{transform:rotate(180deg)}
+.hbc-menu--words .hbc-find{font-size:var(--hb-text-xs)}
+.hbc-shell--words .hbc-content{max-width:none;padding:14px 32px 48px}
+.hbc-tb:hover,.hbc-fold:hover,.hbc-unfold:hover{background:rgba(255,255,255,.13)}
+.hbc-tb:focus-visible,.hbc-fold:focus-visible,.hbc-unfold:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:2px}
+.hbc-unfold{display:none;position:fixed;z-index:50;left:max(12px,env(safe-area-inset-left,0px));top:max(14px,env(safe-area-inset-top,0px))}
+.hbc-shell.is-folded .hbc-unfold{display:inline-flex}
+.hbc-shell.is-folded .hbc-content{padding-left:120px}
+
+/* 2. The top bar sits on the title row: nothing above the page. Title left, the bar right. */
+.hbc-titlerow{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
+.hbc-titlerow h1{flex:1 1 auto;min-width:0}
+.hbc-topbar{position:relative;display:inline-flex;align-items:center;gap:8px}
+.hbc-topbar>div{position:relative}
+/* The freshness roll-out: one button with a dot, green when every source was read within a day, amber when
+   one is older. Its panel lists each source, when it last arrived, and a Read now or Pull now button. */
+.hbc-fresh{width:8px;height:8px;border-radius:50%;background:var(--hbc-accent)}
+.hbc-fresh--old{background:var(--hbc-amber)}
+.hbc-pop{position:absolute;right:0;top:44px;z-index:40;width:360px;max-width:calc(100vw - 32px);box-sizing:border-box;background:#10262a;border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.5);color:var(--hbc-text);font:400 var(--hb-text-sm)/1.45 var(--hb-font-body)}
+.hbc-pop[hidden]{display:none}
+.hbc-pop>strong{display:block;font-weight:600;padding-bottom:6px}
+.hbc-pop-row{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--hbc-line)}
+.hbc-pop-when{font-size:var(--hb-text-xs);color:var(--hbc-muted)}
+.hbc-pop-when--old{color:#fbe7b0}
+.hbc-pop-note{font-size:var(--hb-text-2xs);color:var(--hbc-muted);padding-top:6px}
+.hbc-pop .hbc-btn{padding:4px 10px;font-size:var(--hb-text-xs)}
+
+/* 3. The Herbot apps, fixed bottom left. Put the switcher (data-tmh-switcher, D144) inside hbc-apps, or a
+   grid button and an hbc-apps-panel of hbc-app tiles; the current app's tile has aria-current="page". */
+.hbc-i-apps{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>')}
+.hbc-apps{position:fixed;z-index:60;left:max(12px,env(safe-area-inset-left,0px));bottom:max(12px,env(safe-area-inset-bottom,0px))}
+.hbc-apps-panel{position:absolute;left:0;bottom:44px;width:296px;box-sizing:border-box;background:#10262a;border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px;box-shadow:0 14px 40px rgba(0,0,0,.5);color:var(--hbc-text);display:flex;flex-wrap:wrap;gap:4px}
+.hbc-apps-panel[hidden]{display:none}
+.hbc-apps-panel>strong{flex:1 0 100%;font-weight:600;padding:0 4px 8px}
+.hbc-app{display:flex;flex-direction:column;align-items:center;gap:6px;width:84px;padding:8px 4px;border-radius:10px;color:var(--hbc-text);text-decoration:none;font:500 var(--hb-text-2xs)/1.2 var(--hb-font-body);text-align:center}
+.hbc-app:hover,.hbc-app[aria-current=page]{background:var(--hbc-surface2)}
+.hbc-app-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--hbc-surface2)}
+.hbc-app[aria-current=page] .hbc-app-ic{background:var(--hbc-accent);color:var(--hbc-accent-ink)}
+
+@media (max-width:700px){
+  .hbc-shell--words{grid-template-columns:minmax(0,1fr)}
+  .hbc-shell.is-folded .hbc-content{padding-left:16px}
+  .hbc-titlerow h1{flex-basis:100%}
+}
+@media print{.hbc-topbar,.hbc-apps,.hbc-unfold{display:none}}
