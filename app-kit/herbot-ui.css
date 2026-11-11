@@ -1177,3 +1177,42 @@ a.hbc-mark:focus-visible{outline:none}
   .hbc-shell--words .hbc-main:has(>.hbc-actionbar){overflow-x:clip}
 }
 @media print{.hbc-actionbar{position:static;box-shadow:none}.hbc-handoff .hbc-tip{display:none}}
+
+/* ── App kit 1.7: column-width switch for wide tables (D418 kit first; Toby in the TMH Content chat, 11 Nov
+   2026: "3 options to set column widths so I can widen the view ... small icons at the top right of the table").
+   Three small icon buttons above the table's top right set every column's width at once: Narrow fits more
+   columns on screen, Normal is the table as it is, Wide gives each column room and the box scrolls sideways.
+   The first column (the field or product) keeps its width. Works on any table inside a scroll box
+   (hbc-compare-wrap, or the app's own); the app keeps the choice per page (<app>.colw, localStorage in
+   try/catch). Markup:
+     <div class="hbc-colw" role="group" aria-label="Column width">
+       <span class="hbc-tip hbc-tip--self hbc-tip--end"><button type="button" aria-label="About column width"
+         aria-describedby="cw-t"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button>
+         <span role="tooltip" id="cw-t">…</span></span>
+       <button type="button" class="hbc-colw-b" data-colw="narrow" aria-pressed="false" title="Narrow columns"
+         aria-label="Narrow columns"><span class="hbc-i hbc-i-colw-narrow" aria-hidden="true"></span></button>
+       … data-colw="normal" aria-pressed="true" … data-colw="wide" …
+     </div>
+     <div class="hbc-compare-wrap"><table class="hbc-compare hbc-colw--normal" data-colw-table>…
+   Recipe: docs/app-kit-calm-ui.md section 12. ── */
+:root{--hbc-colw-narrow:10rem;--hbc-colw-wide:26rem}
+.hbc-colw{display:flex;justify-content:flex-end;align-items:center;gap:2px;margin:0 0 4px}
+.hbc-colw-b{display:inline-grid;place-items:center;width:28px;height:26px;padding:0;border:1px solid transparent;border-radius:6px;background:none;color:var(--hbc-faint);cursor:pointer}
+.hbc-colw-b:hover{color:var(--hbc-text);background:var(--hbc-surface2)}
+.hbc-colw-b:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:1px}
+.hbc-colw-b[aria-pressed=true]{color:var(--hbc-accent);border-color:var(--hbc-line);background:var(--hbc-surface)}
+.hbc-colw-b .hbc-i{width:18px;height:18px}
+.hbc-colw .hbc-tip{margin-right:4px}
+.hbc-i-colw-narrow{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7.5 4v16M12 4v16M16.5 4v16"/></svg>')}
+.hbc-i-colw-normal{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>')}
+.hbc-i-colw-wide{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16M5.5 12h4M7.5 10l2 2-2 2M18.5 12h-4M16.5 10l-2 2 2 2"/></svg>')}
+/* Narrow and Wide set each column after the first. A fixed-layout table is as wide as its columns add up to
+   when that is more than its own width, so width:1px lets it grow past the box, which then scrolls sideways. */
+table.hbc-colw--narrow,table.hbc-colw--wide{table-layout:fixed;width:1px;min-width:0}
+table.hbc-colw--narrow thead th:not(:first-child){width:var(--hbc-colw-narrow)}
+table.hbc-colw--wide thead th:not(:first-child){width:var(--hbc-colw-wide)}
+table.hbc-colw--narrow:not(.hbc-compare) thead th:first-child,table.hbc-colw--wide:not(.hbc-compare) thead th:first-child{width:14rem}
+/* A plain text link in the kit colours, for pages that have no link style of their own (the kit page uses it). */
+.hbc-link{color:var(--hbc-accent);text-decoration:none}
+.hbc-link:hover,.hbc-link:focus-visible{text-decoration:underline;text-underline-offset:2px}
+@media print{.hbc-colw{display:none}}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI kit</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312303a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%234cc47f'/%3E%3Cpath d='M11.5 16.4l3 3 6-6.6' fill='none' stroke='%2312303a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<!-- An app links the fixed address instead: https://herbalmaster.github.io/herbot-ui/herbot-ui.css (D271).
+     This copy links the file beside it so the repo can be checked before a release. -->
+<link rel="stylesheet" href="herbot-ui.css">
+</head>
+<body class="hbc-ground hb-dense" data-theme="teal">
+<!-- The kit's own /ui-kit page (D419 rule 14): every house part, the release that added it, the page that shows it
+     with sample data and the guide section that says how to use it. This table itself carries the column-width
+     switch (kit 1.7), to show it works on any wide table, not only the compare table. No style block; no inline style. -->
+<main class="hbc-content">
+<h1>UI kit</h1>
+<p class="hbc-lede">Every house part, where to see it and how to use it. Link the stylesheet at its one fixed address; copy the markup, never the CSS. A part another app could use comes here first (D418).</p>
+<section class="hbc-sec"><h2>House parts</h2>
+<div class="hbc-colw" role="group" aria-label="Column width"><span class="hbc-tip hbc-tip--self hbc-tip--end"><button type="button" aria-label="About column width" aria-describedby="cw-t"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button><span role="tooltip" id="cw-t"><b>Column width</b>Sets every column at once.<br>Narrow: more columns on screen.<br>Normal: the table fits the page.<br>Wide: room for long text; scroll sideways.<br>Kept for this page on this computer.</span></span><button type="button" class="hbc-colw-b" data-colw="narrow" aria-pressed="false" title="Narrow columns" aria-label="Narrow columns"><span class="hbc-i hbc-i-colw-narrow" aria-hidden="true"></span></button><button type="button" class="hbc-colw-b" data-colw="normal" aria-pressed="true" title="Normal columns" aria-label="Normal columns"><span class="hbc-i hbc-i-colw-normal" aria-hidden="true"></span></button><button type="button" class="hbc-colw-b" data-colw="wide" aria-pressed="false" title="Wide columns" aria-label="Wide columns"><span class="hbc-i hbc-i-colw-wide" aria-hidden="true"></span></button></div>
+<div class="hbc-compare-wrap"><table class="hbc-ptable hbc-colw--normal" data-colw-table>
+<thead><tr><th scope="col">Part</th><th scope="col">Classes</th><th scope="col">Since</th><th scope="col">See it</th><th scope="col">How</th></tr></thead>
+<tbody>
+<tr><td>Page, header, strip, buttons, tooltip, menu, actions page, icons</td><td><code>hbc-shell, hbc-header, hbc-needs, hbc-btn, hbc-tip, hbc-menu, hbc-acts, hbc-i-*</code></td><td>1.2</td><td><a class="hbc-link" href="calm-ui-example.html">calm-ui-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#2-what-is-in-the-kit">2. What is in the kit</a></td></tr>
+<tr><td>The house shell: words menu that hides, top bar on the title row, Herbot apps</td><td><code>hbc-shell--words, hbc-menu--words, hbc-titlerow, hbc-topbar, hbc-pop, hbc-apps</code></td><td>1.3</td><td><a class="hbc-link" href="house-shell-example.html">house-shell-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#7-the-house-shell">7. The house shell</a></td></tr>
+<tr><td>Section tabs</td><td><code>hbc-tabs</code></td><td>1.4</td><td><a class="hbc-link" href="house-shell-example.html">house-shell-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#8-app-kit-14-part-1">8. App kit 1.4, part 1</a></td></tr>
+<tr><td>Filter bar</td><td><code>hbc-fbar</code></td><td>1.4</td><td><a class="hbc-link" href="inventory-patterns-example.html">inventory-patterns-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#91-the-filter-bar">9.1 The filter bar</a></td></tr>
+<tr><td>Shared product table and product cell</td><td><code>hbc-ptable, hbc-pcell</code></td><td>1.4</td><td><a class="hbc-link" href="inventory-patterns-example.html">inventory-patterns-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#92-the-shared-product-table">9.2 The shared product table</a></td></tr>
+<tr><td>Forecast cards</td><td><code>hbc-fc</code></td><td>1.4</td><td><a class="hbc-link" href="inventory-patterns-example.html">inventory-patterns-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#93-forecast-cards">9.3 Forecast cards</a></td></tr>
+<tr><td>Shipment page</td><td><code>hbc-ship</code></td><td>1.4</td><td><a class="hbc-link" href="inventory-patterns-example.html">inventory-patterns-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#94-the-shipment-page">9.4 The shipment page</a></td></tr>
+<tr><td>State icons: Ready, Same, Gap, Wrong live</td><td><code>hbc-state, hbc-i-ready, -same, -gap, -wrong</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html#part-state">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#101-state-icons">10.1 State icons</a></td></tr>
+<tr><td>Market mark and market filter bar</td><td><code>hbc-mark, hbc-flag-*, hbc-markbar</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html#part-mark">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#102-the-market-mark">10.2 The market mark</a></td></tr>
+<tr><td>Where it stands</td><td><code>hbc-stands</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html#part-stands">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#103-where-it-stands">10.3 Where it stands</a></td></tr>
+<tr><td>Needs attention</td><td><code>hbc-attn</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html#part-attn">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#104-needs-attention">10.4 Needs attention</a></td></tr>
+<tr><td>Pop-up window</td><td><code>hbc-dialog</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html#part-dialog">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#105-the-pop-up-window">10.5 The pop-up window</a></td></tr>
+<tr><td>Compare table</td><td><code>hbc-compare</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html#part-compare">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#106-the-compare-table">10.6 The compare table</a></td></tr>
+<tr><td>Picture slot strip</td><td><code>hbc-slots</code></td><td>1.5</td><td><a class="hbc-link" href="pim-parts-example.html">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#107-the-picture-slot-strip">10.7 The picture slot strip</a></td></tr>
+<tr><td>Action bar</td><td><code>hbc-actionbar</code></td><td>1.6</td><td><a class="hbc-link" href="action-bar-example.html">action-bar-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#111-the-action-bar">11.1 The action bar</a></td></tr>
+<tr><td>Hand-off button</td><td><code>hbc-handoff, hbc-tip--up, hbc-tip--end</code></td><td>1.6</td><td><a class="hbc-link" href="action-bar-example.html">action-bar-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#112-the-hand-off-button">11.2 The hand-off button</a></td></tr>
+<tr><td>Column-width switch</td><td><code>hbc-colw, hbc-colw-b, hbc-colw--narrow / --normal / --wide</code></td><td>1.7</td><td><a class="hbc-link" href="pim-parts-example.html#part-compare">pim-parts-example.html</a></td><td><a class="hbc-link" href="../docs/app-kit-calm-ui.md#12-the-column-width-switch">12. The column-width switch</a></td></tr>
+</tbody></table></div>
+</section>
+</main>
+<script>
+/* Column width (kit 1.7): the three buttons set every column of the table that follows them; the choice is kept per
+   page. An app names its own key, <app>.colw. */
+(function () {
+  document.querySelectorAll(".hbc-colw").forEach(function (g) {
+    var KEY = "kit.uikit.colw", t = g.nextElementSibling.querySelector("[data-colw-table]");
+    function set(w) {
+      t.classList.remove("hbc-colw--narrow", "hbc-colw--normal", "hbc-colw--wide"); t.classList.add("hbc-colw--" + w);
+      g.querySelectorAll("[data-colw]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-colw") === w)); });
+    }
+    try { var saved = localStorage.getItem(KEY); if (/^(narrow|normal|wide)$/.test(saved)) set(saved); } catch (e) {}
+    g.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-colw]"); if (!b) return;
+      set(b.getAttribute("data-colw")); try { localStorage.setItem(KEY, b.getAttribute("data-colw")); } catch (e2) {}
+    });
+  });
+})();
+</script>
+</body>
+</html>
