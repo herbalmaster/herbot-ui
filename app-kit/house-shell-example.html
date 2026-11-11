@@ -15,11 +15,11 @@
      own menu items and its own sources in the freshness panel. Recipe: docs/app-kit-calm-ui.md section 7. -->
 <div class="hbc-shell hbc-shell--words" id="shell">
 
-  <nav class="hbc-menu hbc-menu--words" aria-label="Menu">
-    <div class="hbc-brand">TMH PIM
+  <nav class="hbc-menu hbc-menu--words" id="menu" aria-label="Menu">
+    <div class="hbc-brand"><a href="#">TMH PIM</a>
       <button type="button" class="hbc-fold" aria-label="Hide the menu" title="Hide the menu" data-hbc-fold><span class="hbc-i hbc-i-chev" aria-hidden="true"></span></button>
     </div>
-    <div class="hbc-find"><span class="hbc-i hbc-i-search" aria-hidden="true"></span>Search SKU, title, ASIN<kbd>/</kbd></div>
+    <form class="hbc-find" role="search" action="#"><span class="hbc-i hbc-i-search" aria-hidden="true"></span><input name="q" id="find" placeholder="Search SKU, title, ASIN" aria-label="Search SKU, title, ASIN"><kbd>/</kbd></form>
     <a href="#">What needs you<span class="hbc-dot">5</span></a>
     <a href="#">Products</a>
     <div class="hbc-mh">Text</div>
@@ -37,12 +37,14 @@
       <a class="hbc-ms" href="#">Reference</a>
     </details>
   </nav>
+  <div class="hbc-scrim" id="scrim"></div>
   <button type="button" class="hbc-unfold" data-hbc-unfold><span class="hbc-i hbc-i-menu" aria-hidden="true"></span>Menu</button>
 
   <main class="hbc-main">
     <div class="hbc-content">
-      <div class="hbc-titlerow">
-        <h1>Push live</h1>
+      <nav class="hbc-tabs" aria-label="Go live">
+        <a href="#" aria-current="page">Push live</a>
+        <a href="#">Check it landed <span class="hbc-count">2</span></a>
         <div class="hbc-topbar">
           <div>
             <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="fresh" aria-label="When each source last arrived" title="When each source last arrived" data-hbc-pop>
@@ -56,19 +58,21 @@
               <div class="hbc-pop-note">The dot: green, all read within a day; amber, something is older.</div>
             </div>
           </div>
-          <button type="button" class="hbc-tb" aria-label="Help for this page" title="Help for this page"><span class="hbc-i hbc-i-help" aria-hidden="true"></span></button>
+          <!-- Help: the help drawer fills this slot (help-drawer.js data-mount="#helpslot"). -->
+          <span id="helpslot"><button type="button" class="hbc-tb" aria-label="Help for this page" title="Help for this page"><span class="hbc-i hbc-i-help" aria-hidden="true"></span></button></span>
           <div>
             <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="more" aria-label="Text size and version" title="Text size and version" data-hbc-pop>⋯</button>
             <div class="hbc-pop" id="more" role="dialog" aria-label="Text size and version" hidden>
               <strong>Text size</strong>
               <div class="hbc-textsize" role="group" aria-label="Text size">
-                <button type="button" data-hb-font="down" aria-label="Smaller text">A−</button><output data-hb-font="value">100%</output><button type="button" data-hb-font="up" aria-label="Larger text">A+</button>
+                <button type="button" data-hb-font="-" aria-label="Smaller text">A−</button><output data-hb-font-value aria-live="polite">100%</output><button type="button" data-hb-font="+" aria-label="Larger text">A+</button>
               </div>
               <div class="hbc-pop-note">TMH PIM v0.0.0</div>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
+      <h1>Push live</h1>
       <p class="hbc-lede">The page starts here. Explanations sit behind the <span class="hbc-tip hbc-tip--self"><button type="button" aria-label="About this page" aria-describedby="t1"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button><span role="tooltip" id="t1"><b>Push live</b>Only the gaps are listed, each ticked.<br>Nothing live is removed.</span></span> button.</p>
     </div>
   </main>
@@ -85,26 +89,49 @@
 </div>
 
 <script>
-/* The whole behaviour: fold the menu, and open one roll-out at a time (Escape or a click outside closes it). */
+/* The whole behaviour, as the PIM runs it: fold the menu (remembered per app), the phone menu with its scrim,
+   one roll-out at a time (Escape or a click outside closes it), "/" to search, and the text size. */
 (function () {
-  var shell = document.getElementById("shell");
-  document.querySelector("[data-hbc-fold]").addEventListener("click", function () { shell.classList.add("is-folded"); });
-  document.querySelector("[data-hbc-unfold]").addEventListener("click", function () { shell.classList.remove("is-folded"); });
+  var KEY = "pim.menuFolded";            /* one key per app: <app>.menuFolded */
+  var $ = function (id) { return document.getElementById(id); };
+  var shell = $("shell"), phone = matchMedia("(max-width:700px)");
+  var fold = function (on) { shell.classList.toggle("is-folded", on); try { localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) {} };
+  var menu = function (open) { $("menu").classList.toggle("is-open", open); $("scrim").classList.toggle("is-open", open); };
+  try { if (localStorage.getItem(KEY) === "1") shell.classList.add("is-folded"); } catch (e) {}
+  document.querySelector("[data-hbc-fold]").addEventListener("click", function () { phone.matches ? menu(false) : fold(true); });
+  document.querySelector("[data-hbc-unfold]").addEventListener("click", function () { phone.matches ? menu(true) : fold(false); });
+  $("scrim").addEventListener("click", function () { menu(false); });
   var btns = document.querySelectorAll("[data-hbc-pop]");
   function closeAll(except) {
-    btns.forEach(function (b) { if (b !== except) { b.setAttribute("aria-expanded", "false"); document.getElementById(b.getAttribute("aria-controls")).hidden = true; } });
+    btns.forEach(function (b) { if (b !== except) { b.setAttribute("aria-expanded", "false"); $(b.getAttribute("aria-controls")).hidden = true; } });
   }
   btns.forEach(function (b) {
     b.addEventListener("click", function (e) {
       e.stopPropagation();
-      var pop = document.getElementById(b.getAttribute("aria-controls"));
+      var pop = $(b.getAttribute("aria-controls"));
       closeAll(b);
       pop.hidden = !pop.hidden;
       b.setAttribute("aria-expanded", pop.hidden ? "false" : "true");
     });
   });
   document.addEventListener("click", function (e) { if (!e.target.closest(".hbc-pop,.hbc-apps-panel")) closeAll(null); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(null); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeAll(null); menu(false); }
+    if (e.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+      e.preventDefault(); if (phone.matches) menu(true); else fold(false); $("find").focus();
+    }
+  });
+  /* Text size: the same keys as every app (herbot.rootFontSize, 13 to 22 px, --hb-root-size). */
+  var MIN = 13, MAX = 22, DEFAULT = 16, size = DEFAULT;
+  try { size = parseInt(localStorage.getItem("herbot.rootFontSize"), 10) || DEFAULT; } catch (e) {}
+  function apply() {
+    size = Math.min(MAX, Math.max(MIN, size));
+    document.documentElement.style.setProperty("--hb-root-size", size + "px");
+    try { localStorage.setItem("herbot.rootFontSize", size); } catch (e) {}
+    document.querySelector("[data-hb-font-value]").textContent = Math.round(size / DEFAULT * 100) + "%";
+  }
+  document.querySelectorAll("[data-hb-font]").forEach(function (b) { b.addEventListener("click", function () { size += b.dataset.hbFont === "+" ? 1 : -1; apply(); }); });
+  apply();
 })();
 </script>
 </body>
