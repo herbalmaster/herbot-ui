@@ -1195,7 +1195,10 @@ a.hbc-mark:focus-visible{outline:none}
      </div>
      <div class="hbc-compare-wrap"><table class="hbc-compare hbc-colw--normal" data-colw-table>…
    Recipe: docs/app-kit-calm-ui.md section 12. ── */
-:root{--hbc-colw-narrow:10rem;--hbc-colw-wide:26rem}
+/* 1.7.1: Narrow is 6rem, below the narrowest a Normal compare column can be (its 68.75rem floor shared by up to nine
+   columns), so Narrow is always narrower. Wide is at least 26rem and grows with the window (22vw), so on a wide
+   screen, where Normal columns are already broad, Wide is still wider. */
+:root{--hbc-colw-narrow:6rem;--hbc-colw-wide:max(26rem,22vw)}
 .hbc-colw{display:flex;justify-content:flex-end;align-items:center;gap:2px;margin:0 0 4px}
 .hbc-colw-b{display:inline-grid;place-items:center;width:28px;height:26px;padding:0;border:1px solid transparent;border-radius:6px;background:none;color:var(--hbc-faint);cursor:pointer}
 .hbc-colw-b:hover{color:var(--hbc-text);background:var(--hbc-surface2)}
