@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Action bar example</title>
+<!-- An app links the fixed address instead: https://herbalmaster.github.io/herbot-ui/herbot-ui.css (D271).
+     This copy links the file beside it so the repo can be checked before a release. -->
+<link rel="stylesheet" href="herbot-ui.css">
+</head>
+<body class="hbc-ground" data-theme="teal">
+<!-- App kit 1.6 (D424): the action bar fixed to the foot of the window, and the hand-off button with its info
+     tooltip, on the house shell. Sample content, worded as the Content Writer's product page (CON-150 draft).
+     Classes only, no style block, no inline style. Recipe: docs/app-kit-calm-ui.md section 11. -->
+<div class="hbc-shell hbc-shell--words" id="shell">
+
+  <nav class="hbc-menu hbc-menu--words" id="menu" aria-label="Menu">
+    <div class="hbc-brand"><a href="#">TMH Content Writer</a>
+      <button type="button" class="hbc-fold" aria-label="Hide the menu" title="Hide the menu" data-hbc-fold><span class="hbc-i hbc-i-chev" aria-hidden="true"></span></button>
+    </div>
+    <form class="hbc-find" role="search" action="#"><span class="hbc-i hbc-i-search" aria-hidden="true"></span><input name="q" id="find" placeholder="Search SKU or title" aria-label="Search SKU or title"><kbd>/</kbd></form>
+    <div class="hbc-mh">Work</div>
+    <a class="hbc-ms" href="#" aria-current="page">Queue</a>
+    <a class="hbc-ms" href="#">Edits</a>
+    <a class="hbc-ms" href="#">Actions<span class="hbc-dot">2</span></a>
+    <div class="hbc-mh">Reference</div>
+    <a class="hbc-ms" href="#">History</a>
+    <a class="hbc-ms" href="#">A/B compare</a>
+    <a class="hbc-ms" href="#">EU languages</a>
+    <a class="hbc-ms" href="#">How it works</a>
+  </nav>
+  <div class="hbc-scrim" id="scrim"></div>
+  <button type="button" class="hbc-unfold" data-hbc-unfold><span class="hbc-i hbc-i-menu" aria-hidden="true"></span>Menu</button>
+
+  <main class="hbc-main">
+    <div class="hbc-content">
+      <nav class="hbc-tabs" aria-label="Product">
+        <a href="#" aria-current="page">Master</a>
+        <a href="#">Amazon UK</a>
+        <a href="#">Amazon US</a>
+        <a href="#">Website</a>
+        <div class="hbc-topbar">
+          <div>
+            <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="fresh" aria-label="When each source last arrived" title="When each source last arrived" data-hbc-pop>
+              <span class="hbc-i hbc-i-history" aria-hidden="true"></span><span class="hbc-fresh hbc-fresh--old"></span>
+            </button>
+            <div class="hbc-pop" id="fresh" role="dialog" aria-label="When each source last arrived" hidden>
+              <strong>When each source last arrived</strong>
+              <div class="hbc-pop-row"><span class="hbc-i hbc-i-products" aria-hidden="true"></span><div>Text, from the Content Writer<div class="hbc-pop-when">today 21:30 · sent when you approve there</div></div><span></span></div>
+              <div class="hbc-pop-row"><span class="hbc-i hbc-i-images" aria-hidden="true"></span><div>Pictures, from ImageGen<div class="hbc-pop-when hbc-pop-when--old">19 h ago (yesterday 02:40)</div></div><button type="button" class="hbc-btn">Read now</button></div>
+              <div class="hbc-pop-row"><span class="hbc-i hbc-i-golive" aria-hidden="true"></span><div>Live: Website, Amazon UK, Amazon US<div class="hbc-pop-when">today 02:35 · also every night</div></div><button type="button" class="hbc-btn">Pull now</button></div>
+              <div class="hbc-pop-note">The dot: green, all read within a day; amber, something is older.</div>
+            </div>
+          </div>
+          <!-- Help: the help drawer fills this slot (help-drawer.js data-mount="#helpslot"). -->
+          <span id="helpslot"><button type="button" class="hbc-tb" aria-label="Help for this page" title="Help for this page"><span class="hbc-i hbc-i-help" aria-hidden="true"></span></button></span>
+          <div>
+            <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="more" aria-label="Text size and version" title="Text size and version" data-hbc-pop>⋯</button>
+            <div class="hbc-pop" id="more" role="dialog" aria-label="Text size and version" hidden>
+              <strong>Text size</strong>
+              <div class="hbc-textsize" role="group" aria-label="Text size">
+                <button type="button" data-hb-font="-" aria-label="Smaller text">A−</button><output data-hb-font-value aria-live="polite">100%</output><button type="button" data-hb-font="+" aria-label="Larger text">A+</button>
+              </div>
+              <div class="hbc-pop-note">TMH Content Writer v0.0.0</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <h1>Lavender &amp; Neem Oil Drawer Liners <small>SDL-LAV-6</small></h1>
+      <p class="hbc-lede">Check this product's text, then send it to the PIM.</p>
+      <h2>What this sends</h2>
+      <table class="hbc-ptable">
+        <thead><tr><th scope="col">Field</th><th scope="col">Ours</th><th scope="col">Length</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Title</th><td>Lavender & Neem Oil Scented Drawer Liners, 6 Sheets</td><td>64/75</td></tr>
+          <tr><th scope="row">Bullet 1</th><td>Scented with lavender and neem oil</td><td>34/200</td></tr>
+          <tr><th scope="row">Bullet 2</th><td>Cut to fit any drawer or shelf with ordinary scissors</td><td>52/200</td></tr>
+          <tr><th scope="row">Bullet 3</th><td>Printed with our own pattern on coated paper</td><td>45/200</td></tr>
+          <tr><th scope="row">Bullet 4</th><td>Six sheets, each 42 x 59 cm</td><td>27/200</td></tr>
+          <tr><th scope="row">Bullet 5</th><td>Made in the UK</td><td>14/200</td></tr>
+          <tr><th scope="row">Description</th><td>A drawer liner scented with lavender and neem oil, printed in the UK.</td><td>69/2000</td></tr>
+          <tr><th scope="row">Search terms</th><td>drawer liners, scented paper, lavender drawer liner</td><td>51/250</td></tr>
+          <tr><th scope="row">Subtitle</th><td>Six scented sheets</td><td>18/80</td></tr>
+          <tr><th scope="row">Website title</th><td>Lavender & Neem Oil Drawer Liners</td><td>32/70</td></tr>
+          <tr><th scope="row">Meta description</th><td>Scented drawer liners with lavender and neem oil, six sheets.</td><td>60/160</td></tr>
+          <tr><th scope="row">Alt text</th><td>Lavender drawer liner sheet, unrolled</td><td>37/125</td></tr>
+        </tbody>
+      </table>
+      <p>The bar below stays at the foot of the window while you scroll, and rests here at the end of the page.</p>
+    </div>
+    <div class="hbc-actionbar" role="region" aria-label="Actions for this page">
+      <p class="hbc-actionbar-say">Sends the <b>Master text</b> of SDL-LAV-6 to the PIM: your first approval.</p>
+      <div class="hbc-actionbar-more">
+        <span class="hbc-handoff"><button type="button" class="hbc-btn">Ready for the Content chat</button><span class="hbc-tip hbc-tip--self hbc-tip--up"><button type="button" aria-label="What Ready for the Content chat does" aria-describedby="h2"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button><span role="tooltip" id="h2"><b>Does</b>Puts this product, with your edits and notes, on the Content chat's list to redraft.<b>Next</b>Nothing to paste: the chat picks it up when it next works its list.<b>Where</b>The new draft comes back to the Queue.</span></span></span>
+        <button type="button" class="hbc-btn">Check again</button>
+      </div>
+      <span class="hbc-handoff"><button type="button" class="hbc-btn hbc-btn--primary">Send to the PIM</button><span class="hbc-tip hbc-tip--self hbc-tip--up hbc-tip--end"><button type="button" aria-label="What Send to the PIM does" aria-describedby="h1"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button><span role="tooltip" id="h1"><b>Does</b>Sends this product's Master text to the PIM, approved by you: your first approval.<b>Next</b>Push live sends it to Amazon or the website: your second approval.<b>Where</b>In the PIM, under Go live.</span></span></span>
+    </div>
+  </main>
+
+  <div class="hbc-apps">
+    <div class="hbc-apps-panel" id="apps" role="dialog" aria-label="Herbot apps" hidden>
+      <strong>Herbot apps</strong>
+      <a class="hbc-app" href="#"><span class="hbc-app-ic"><span class="hbc-i hbc-i-needs" aria-hidden="true"></span></span>Herbot home</a>
+      <a class="hbc-app" href="#"><span class="hbc-app-ic"><span class="hbc-i hbc-i-products" aria-hidden="true"></span></span>Inventory</a>
+      <a class="hbc-app" href="#" aria-current="page"><span class="hbc-app-ic"><span class="hbc-i hbc-i-products" aria-hidden="true"></span></span>PIM</a>
+    </div>
+    <button type="button" class="hbc-tb" aria-expanded="false" aria-controls="apps" aria-label="Herbot apps" title="Herbot apps" data-hbc-pop><span class="hbc-i hbc-i-apps" aria-hidden="true"></span></button>
+  </div>
+</div>
+
+<script>
+/* The whole behaviour, as the PIM runs it: fold the menu (remembered per app), the phone menu with its scrim,
+   one roll-out at a time (Escape or a click outside closes it), "/" to search, and the text size. */
+(function () {
+  var KEY = "content.menuFolded";            /* one key per app: <app>.menuFolded */
+  var $ = function (id) { return document.getElementById(id); };
+  var shell = $("shell"), phone = matchMedia("(max-width:700px)");
+  var fold = function (on) { shell.classList.toggle("is-folded", on); try { localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) {} };
+  var menu = function (open) { $("menu").classList.toggle("is-open", open); $("scrim").classList.toggle("is-open", open); };
+  try { if (localStorage.getItem(KEY) === "1") shell.classList.add("is-folded"); } catch (e) {}
+  document.querySelector("[data-hbc-fold]").addEventListener("click", function () { phone.matches ? menu(false) : fold(true); });
+  document.querySelector("[data-hbc-unfold]").addEventListener("click", function () { phone.matches ? menu(true) : fold(false); });
+  $("scrim").addEventListener("click", function () { menu(false); });
+  var btns = document.querySelectorAll("[data-hbc-pop]");
+  function closeAll(except) {
+    btns.forEach(function (b) { if (b !== except) { b.setAttribute("aria-expanded", "false"); $(b.getAttribute("aria-controls")).hidden = true; } });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var pop = $(b.getAttribute("aria-controls"));
+      closeAll(b);
+      pop.hidden = !pop.hidden;
+      b.setAttribute("aria-expanded", pop.hidden ? "false" : "true");
+    });
+  });
+  document.addEventListener("click", function (e) { if (!e.target.closest(".hbc-pop,.hbc-apps-panel")) closeAll(null); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeAll(null); menu(false); }
+    if (e.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+      e.preventDefault(); if (phone.matches) menu(true); else fold(false); $("find").focus();
+    }
+  });
+  /* Text size: the same keys as every app (herbot.rootFontSize, 13 to 22 px, --hb-root-size). */
+  var MIN = 13, MAX = 22, DEFAULT = 16, size = DEFAULT;
+  try { size = parseInt(localStorage.getItem("herbot.rootFontSize"), 10) || DEFAULT; } catch (e) {}
+  function apply() {
+    size = Math.min(MAX, Math.max(MIN, size));
+    document.documentElement.style.setProperty("--hb-root-size", size + "px");
+    try { localStorage.setItem("herbot.rootFontSize", size); } catch (e) {}
+    document.querySelector("[data-hb-font-value]").textContent = Math.round(size / DEFAULT * 100) + "%";
+  }
+  document.querySelectorAll("[data-hb-font]").forEach(function (b) { b.addEventListener("click", function () { size += b.dataset.hbFont === "+" ? 1 : -1; apply(); }); });
+  apply();
+})();
+</script>
+</body>
+</html>
