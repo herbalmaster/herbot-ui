@@ -1128,3 +1128,52 @@ a.hbc-mark:focus-visible{outline:none}
   .hbc-slots-row{grid-template-columns:minmax(0,1fr)}
 }
 @media print{.hbc-markbar{position:static}.hbc-compare-wrap{max-height:none;overflow:visible}.hbc-compare-cap .hbc-compare-val{max-height:none;-webkit-mask-image:none;mask-image:none}}
+
+/* ===================================================================================================
+   APP KIT 1.6: the action bar and the hand-off tooltip (D424, D418).
+   Additions only, hbc- prefix. Asked for by TMH Content (CON-150), from Toby's words, 11 Nov 2026: "action buttons
+   can be duplicated at both the top and the bottom of the page or possibly fixed to the page. Bottom so. That they
+   are always in sight." Shown in app-kit/action-bar-example.html; guide docs/app-kit-calm-ui.md section 11. Two parts:
+   1. the action bar at the foot of the window (hbc-actionbar-*): one line saying what the main action does, the
+      secondary actions, then the main action on the right;
+   2. the hand-off button (hbc-handoff): a button that sends work to another app, with an info button beside it
+      whose tooltip says what it does, what comes next and where (hbc-tip--up opens it upwards, hbc-tip--end lines
+      it up on the right).
+   =================================================================================================== */
+
+/* 1. THE ACTION BAR. The last child of .hbc-main (after .hbc-content), so it stays at the foot of the window while
+   the page scrolls and rests under the content at the end; it never covers the last rows. One per page, only on a
+   page with a main action:
+   <div class="hbc-actionbar" role="region" aria-label="Actions for this page">
+     <p class="hbc-actionbar-say">What the main action will do, in one line</p>
+     <div class="hbc-actionbar-more">secondary .hbc-btn buttons</div>
+     <span class="hbc-handoff">main .hbc-btn--primary, then its hbc-tip</span>
+   </div> */
+.hbc-actionbar{position:sticky;bottom:0;z-index:6;display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;margin-top:auto;padding:10px 32px;background:var(--hbc-bg2);border-top:1px solid rgba(255,255,255,.18);box-shadow:0 -8px 20px rgba(0,0,0,.35)}
+.hbc-actionbar-say{flex:1 1 16rem;min-width:0;margin:0;color:var(--hbc-muted);font-size:var(--hb-text-xs);line-height:1.4}
+.hbc-actionbar-say b{color:var(--hbc-text);font-weight:600}
+.hbc-actionbar-more{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.hbc-actionbar>.hbc-handoff,.hbc-actionbar>.hbc-btn--primary{margin-left:auto}
+.hbc-shell.is-folded .hbc-actionbar{padding-left:120px}
+
+/* 2. THE HAND-OFF BUTTON: the button, then the info button with its tooltip in three parts (Does, Next, Where):
+   <span class="hbc-handoff"><button class="hbc-btn hbc-btn--primary">Send to the PIM</button><span class="hbc-tip
+   hbc-tip--self hbc-tip--up hbc-tip--end"><button type="button" aria-label="What Send to the PIM does"
+   aria-describedby="h1"><span class="hbc-i hbc-i-info" aria-hidden="true"></span></button><span role="tooltip"
+   id="h1"><b>Does</b>...<b>Next</b>...<b>Where</b>...</span></span></span>
+   Outside the bar leave out --up and --end; it opens below, as every tooltip. */
+.hbc-handoff{display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+.hbc-handoff .hbc-tip [role=tooltip]{white-space:normal;width:20rem;max-width:calc(100vw - 32px)}
+.hbc-tip--up [role=tooltip]{top:auto;bottom:calc(100% + 6px)}
+.hbc-tip--end [role=tooltip]{left:auto;right:0}
+
+@media (max-width:700px){
+  /* the Herbot apps button sits bottom left on a phone: the bar starts after it */
+  .hbc-actionbar,.hbc-shell.is-folded .hbc-actionbar{padding:8px 16px 8px 60px;gap:8px}
+  .hbc-actionbar-say{flex-basis:100%}
+  .hbc-actionbar>.hbc-handoff{flex:1 1 auto;justify-content:flex-end}
+  /* the shell's phone rule hides sideways overflow on .hbc-main, which would hold the bar at the page end; clip
+     does the same without that, on pages with the bar only */
+  .hbc-shell--words .hbc-main:has(>.hbc-actionbar){overflow-x:clip}
+}
+@media print{.hbc-actionbar{position:static;box-shadow:none}.hbc-handoff .hbc-tip{display:none}}
