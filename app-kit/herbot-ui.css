@@ -922,3 +922,209 @@ label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
 .hbc-btn--odoo{background:var(--hbc-odoo);border-color:var(--hbc-odoo);color:var(--hbc-text)}
 .hbc-btn--odoo:hover,.hbc-btn--odoo:focus-visible{background:var(--hbc-odoo-hover);border-color:var(--hbc-odoo-hover);color:var(--hbc-text)}
 @media print{.hbc-fbar,.hbc-fc-filters,.hbc-fc-showing,.hbc-ship-rail{display:none}}
+
+/* ===================================================================================================
+   APP KIT 1.5: the PIM's signed house parts (D420, D418).
+   Additions only, hbc- prefix. Taken from the PIM's signed mock-up round 5 (tmh-pim
+   docs/dev/mockups/2026-11-11-workspace-round5.html, Toby "Yes, build it", 11 Nov 2026) and redrawn on the kit's
+   tokens. Shown in app-kit/pim-parts-example.html; guide docs/app-kit-calm-ui.md section 10. Seven parts:
+   1. state icons, Ready, Same, Gap, Wrong live (hbc-state, hbc-i-ready, -same, -gap, -wrong);
+   2. the market mark and its filter bar (hbc-mark-*, hbc-markbar-*), with the kit's flag set (hbc-flag-*);
+   3. the "Where it stands" grid, kind by market (hbc-stands-*);
+   4. the Needs attention panel (hbc-attn-*);
+   5. the pop-up window (hbc-dialog-*);
+   6. the compare table, Ours then each market (hbc-compare-*);
+   7. the picture slot strip (hbc-slots, hbc-slot-*).
+   The PIM's Ready to go live row is the PIM's own and stays in the PIM.
+   =================================================================================================== */
+:root{
+  /* The four states of what we hold against what is live, one colour each, the same in every app */
+  --hbc-state-ready:var(--hbc-amber);--hbc-state-same:#4cc47f;--hbc-state-gap:var(--hbc-faint);--hbc-state-wrong:var(--hbc-red);
+  /* the dark glyph on a market mark's badge, and the ink on its red issue count */
+  --hbc-state-ink:#0b1614;--hbc-state-wrong-ink:#2a0d09;
+  /* the gap a market mark keeps between its flag and its ring: the ground it sits on (a panel sets its own) */
+  --hbc-mark-gap:var(--hbc-bg2);
+  /* the compare table: our column, and word changes (struck = ours, underlined = live) */
+  --hbc-compare-ours:rgba(92,194,182,.10);
+  --hbc-del-bg:rgba(226,122,110,.18);--hbc-ins-bg:rgba(76,196,127,.18);
+}
+
+/* 1. STATE ICONS. One icon a state; the word is its label (aria-label, and the tooltip); a figure after it is
+   optional: <span class="hbc-state hbc-state--ready" title="Ready: 3 fields"><span class="hbc-i hbc-i-ready"
+   role="img" aria-label="Ready"></span><span class="hbc-state-t">3</span></span>. The glyph is cut out of the disc,
+   so the ground shows through it. An icon on its own (no wrapper) takes its colour with hbc-state-c. */
+.hbc-i-ready{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><mask id="m"><circle cx="10" cy="10" r="9" fill="white"/><path d="M5 10h9M10.5 5.8 14.7 10l-4.2 4.2" fill="none" stroke="black" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></mask><circle cx="10" cy="10" r="9" mask="url(%23m)"/></svg>')}
+.hbc-i-same{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><mask id="m"><circle cx="10" cy="10" r="9" fill="white"/><path d="M5.5 10.4l3 3 6-6.6" fill="none" stroke="black" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></mask><circle cx="10" cy="10" r="9" mask="url(%23m)"/></svg>')}
+.hbc-i-gap{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="black" stroke-width="1.6" stroke-dasharray="2.2 2.4"/></svg>')}
+.hbc-i-wrong{--i:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><mask id="m"><circle cx="10" cy="10" r="9" fill="white"/><path d="M10 5v6.2" stroke="black" stroke-width="2.4" stroke-linecap="round"/><circle cx="10" cy="14.6" r="1.4" fill="black"/></mask><circle cx="10" cy="10" r="9" mask="url(%23m)"/></svg>')}
+.hbc-state{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-size:var(--hb-text-xs);color:var(--hbc-muted);vertical-align:middle}
+.hbc-state>.hbc-i{width:1.125rem;height:1.125rem}
+.hbc-state--ready>.hbc-i,.hbc-i-ready.hbc-state-c{color:var(--hbc-state-ready)}
+.hbc-state--same>.hbc-i,.hbc-i-same.hbc-state-c{color:var(--hbc-state-same)}
+.hbc-state--gap>.hbc-i,.hbc-i-gap.hbc-state-c{color:var(--hbc-state-gap)}
+.hbc-state--wrong>.hbc-i,.hbc-i-wrong.hbc-state-c{color:var(--hbc-state-wrong)}
+.hbc-state-t{color:var(--hbc-muted);font-variant-numeric:tabular-nums}
+/* where a state does not apply (a website field, a price the app does not manage): a dash */
+.hbc-state-na{color:var(--hbc-faint);font-size:var(--hb-text-xs)}
+
+/* FLAGS, the kit's first flag set: a round flag a market, drawn in CSS: <span class="hbc-flag hbc-flag-uk"></span>.
+   Simplified for 14 to 34 px. The website is a shopping bag. House order: UK, US, DE, FR, ES, IT, then Web. */
+.hbc-flag{display:inline-block;flex:none;width:1.125rem;height:1.125rem;border-radius:50%;vertical-align:middle;
+  background:var(--hbc-surface2) center/cover no-repeat;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.hbc-flag-uk{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%23012169"/><path d="M0 0l60 60M60 0 0 60" stroke="%23fff" stroke-width="12"/><path d="M0 0l60 60M60 0 0 60" stroke="%23C8102E" stroke-width="4"/><path d="M30 0v60M0 30h60" stroke="%23fff" stroke-width="18"/><path d="M30 0v60M0 30h60" stroke="%23C8102E" stroke-width="10"/></svg>')}
+.hbc-flag-us{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13"><rect width="13" height="13" fill="%23B22234"/><path d="M0 1.5h13M0 3.5h13M0 5.5h13M0 7.5h13M0 9.5h13M0 11.5h13" stroke="%23fff"/><rect width="6.5" height="7" fill="%233C3B6E"/><g fill="%23fff"><circle cx="1.3" cy="1.2" r=".35"/><circle cx="3.25" cy="1.2" r=".35"/><circle cx="5.2" cy="1.2" r=".35"/><circle cx="2.3" cy="2.6" r=".35"/><circle cx="4.2" cy="2.6" r=".35"/><circle cx="1.3" cy="4" r=".35"/><circle cx="3.25" cy="4" r=".35"/><circle cx="5.2" cy="4" r=".35"/><circle cx="2.3" cy="5.4" r=".35"/><circle cx="4.2" cy="5.4" r=".35"/></g></svg>')}
+.hbc-flag-de{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 3"><rect width="3" height="1" fill="%23000"/><rect y="1" width="3" height="1" fill="%23DD0000"/><rect y="2" width="3" height="1" fill="%23FFCE00"/></svg>')}
+.hbc-flag-fr{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 3"><rect width="1" height="3" fill="%23002395"/><rect x="1" width="1" height="3" fill="%23fff"/><rect x="2" width="1" height="3" fill="%23ED2939"/></svg>')}
+.hbc-flag-es{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 4"><rect width="4" height="4" fill="%23AA151B"/><rect y="1" width="4" height="2" fill="%23F1BF00"/></svg>')}
+.hbc-flag-it{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 3"><rect width="1" height="3" fill="%23009246"/><rect x="1" width="1" height="3" fill="%23fff"/><rect x="2" width="1" height="3" fill="%23CE2B37"/></svg>')}
+.hbc-flag-web{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%23e8f3dc"/><path d="M15 21h30l-2.6 28a3 3 0 0 1-3 2.6H20.6a3 3 0 0 1-3-2.6z" fill="%2395bf47"/><path d="M23 23v-5a7 7 0 0 1 14 0v5" fill="none" stroke="%235e8e3e" stroke-width="3.5"/></svg>')}
+
+/* 2. THE MARKET MARK. One a market: the flag in a ring, a badge bottom right, the red count of the market's issues top
+   left, the code under it. It is a link to the market's live listing:
+   <a class="hbc-mark hbc-mark--live" href="..." title="Amazon UK: live, for sale"><span class="hbc-mark-fl hbc-flag
+   hbc-flag-uk"></span><span class="hbc-mark-bd"></span><span class="hbc-mark-cd">UK</span></a>.
+   States: --live (green ring, tick), --listed (listed, not for sale: amber ring, pause), --missing (not listed, should
+   be: faded flag, red ring, plus), --off (not sold there on purpose: grey, dash). Add an hbc-mark-iss with the count;
+   --big adds the meaning under it (hbc-mark-wd); --bare hides the code (where the column heading has it). */
+.hbc-mark{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:1px;width:2.125rem;
+  color:var(--hbc-text);text-decoration:none;vertical-align:top;--hbc-mark-c:var(--hbc-line)}
+.hbc-mark .hbc-mark-fl{width:1.375rem;height:1.375rem;box-shadow:0 0 0 2px var(--hbc-mark-gap),0 0 0 4px var(--hbc-mark-c)}
+.hbc-mark-bd{position:absolute;left:1.3125rem;top:.8125rem;width:.875rem;height:.875rem;border-radius:50%;background:var(--hbc-mark-c);
+  box-shadow:0 0 0 1.5px var(--hbc-mark-gap)}
+.hbc-mark-bd::after{content:"";position:absolute;inset:0;background:var(--hbc-state-ink);-webkit-mask:var(--hbc-bd) center/72% no-repeat;mask:var(--hbc-bd) center/72% no-repeat}
+.hbc-mark-cd{margin-top:3px;font-size:var(--hb-text-3xs);line-height:1;color:var(--hbc-muted)}
+.hbc-mark-iss{position:absolute;left:-1px;top:-4px;min-width:.8125rem;height:.8125rem;padding:0 3px;box-sizing:border-box;border-radius:7px;
+  display:grid;place-items:center;background:var(--hbc-state-wrong);color:var(--hbc-state-wrong-ink);font-size:var(--hb-text-3xs);font-weight:700;line-height:1;
+  box-shadow:0 0 0 1.5px var(--hbc-mark-gap)}
+.hbc-mark--live{--hbc-mark-c:var(--hbc-state-same);--hbc-bd:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2.2 5.2l1.9 1.9 3.8-4.2" fill="none" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')}
+.hbc-mark--listed{--hbc-mark-c:var(--hbc-state-ready);--hbc-bd:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M3.6 2.6v4.8M6.4 2.6v4.8" stroke="black" stroke-width="1.8" stroke-linecap="round"/></svg>')}
+.hbc-mark--missing{--hbc-mark-c:var(--hbc-state-wrong);--hbc-bd:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M5 2.4v5.2M2.4 5h5.2" stroke="black" stroke-width="1.9" stroke-linecap="round"/></svg>')}
+.hbc-mark--off{--hbc-mark-c:var(--hbc-state-gap);--hbc-bd:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2.8 5h4.4" stroke="black" stroke-width="1.8" stroke-linecap="round"/></svg>')}
+.hbc-mark--missing .hbc-mark-fl{opacity:.4}
+.hbc-mark--off .hbc-mark-fl{opacity:.3;filter:grayscale(1);box-shadow:0 0 0 2px var(--hbc-mark-gap),0 0 0 4px var(--hbc-line)}
+a.hbc-mark:hover .hbc-mark-fl,a.hbc-mark:focus-visible .hbc-mark-fl{box-shadow:0 0 0 2px var(--hbc-mark-gap),0 0 0 4px var(--hbc-mark-c),0 0 0 6px var(--hbc-accent)}
+a.hbc-mark:focus-visible{outline:none}
+.hbc-mark--big{width:3.875rem}
+.hbc-mark--big .hbc-mark-fl{width:2.125rem;height:2.125rem}
+.hbc-mark--big .hbc-mark-bd{left:2.375rem;top:1.375rem;width:1rem;height:1rem}
+.hbc-mark--big .hbc-mark-cd{font-size:var(--hb-text-2xs);font-weight:600;color:var(--hbc-text);margin-top:5px}
+.hbc-mark-wd{font-size:var(--hb-text-3xs);line-height:1.15;text-align:center;color:var(--hbc-muted)}
+.hbc-mark--bare .hbc-mark-cd{display:none}
+/* a row of marks, one a market in the house order */
+.hbc-marks{display:inline-flex;flex-wrap:wrap;gap:3px 4px;padding-top:4px}
+
+/* THE MARKET FILTER BAR: one toggle a market (a button holding a span.hbc-mark, aria-pressed), then "UK only" and
+   "all" (the kit's hbc-chip). A market switched off fades; the page hides its columns. It stays at the top of the
+   page while it scrolls. */
+.hbc-markbar{position:sticky;top:0;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;width:fit-content;max-width:100%;box-sizing:border-box;
+  margin:0 0 10px;padding:6px 10px;border:1px solid var(--hbc-line);border-radius:10px;background:var(--hbc-solid);font-size:var(--hb-text-xs);--hbc-mark-gap:var(--hbc-solid)}
+.hbc-markbar-lbl{font-size:var(--hb-text-3xs);text-transform:uppercase;letter-spacing:.06em;color:var(--hbc-muted);margin-right:4px}
+.hbc-markbar-t{padding:5px 3px 3px;border:0;border-radius:8px;background:none;color:inherit;font:inherit;cursor:pointer}
+.hbc-markbar-t:hover{background:var(--hbc-surface2)}
+.hbc-markbar-t:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:1px}
+.hbc-markbar-t .hbc-mark-cd{color:var(--hbc-text);font-weight:600}
+.hbc-markbar-t[aria-pressed=false] .hbc-mark{opacity:.28;filter:grayscale(1)}
+.hbc-markbar .hbc-chip{margin-left:2px}
+
+/* 3. WHERE IT STANDS: kinds (Listing, Text, Facts, Pictures, Price) down, markets across. Every icon is a link to that
+   market's live listing; the reason sits in its tooltip (the kit's hbc-tip, around the link); SC under each flag is a
+   small link to Seller Central. Fixed layout: the columns never shift with what is in them. */
+.hbc-stands{border-collapse:collapse;table-layout:fixed;width:100%;max-width:44rem;font-size:var(--hb-text-xs);color:var(--hbc-text)}
+.hbc-stands th,.hbc-stands td{padding:5px 2px;border-bottom:1px solid var(--hbc-line);text-align:center;vertical-align:middle}
+.hbc-stands thead th{color:var(--hbc-muted);font-size:var(--hb-text-2xs);font-weight:600;vertical-align:bottom;line-height:1.2}
+.hbc-stands th[scope=row]{width:4.75rem;text-align:left;padding-left:4px;color:var(--hbc-text);font-size:var(--hb-text-xs);font-weight:600}
+.hbc-stands thead .hbc-flag{display:block;margin:0 auto 3px}
+.hbc-stands-sc{display:block;margin-top:2px;font-size:var(--hb-text-3xs);font-weight:500;color:var(--hbc-muted);text-decoration:underline dotted;text-underline-offset:2px}
+.hbc-stands-sc:hover,.hbc-stands-sc:focus-visible{color:var(--hbc-accent)}
+.hbc-stands-a{display:inline-grid;place-items:center;border-radius:50%;line-height:0;color:inherit}
+.hbc-stands-a:hover,.hbc-stands-a:focus-visible{box-shadow:0 0 0 2px var(--hbc-accent);outline:none}
+.hbc-stands .hbc-state>.hbc-i{width:1.25rem;height:1.25rem}
+.hbc-stands .hbc-tip [role=tooltip]{left:50%;right:auto;width:15rem;transform:translateX(-50%);top:calc(100% + 4px)}
+.hbc-stands td:last-child .hbc-tip [role=tooltip]{left:auto;right:0;transform:none}
+
+/* 4. NEEDS ATTENTION: a small box only as wide as its content. A line a finding: its icon (a state icon or a market
+   mark), the count, what it is, then the items as tags, each a link to the item. */
+.hbc-attn{width:fit-content;max-width:100%;box-sizing:border-box;margin:0 0 12px;padding:8px 12px;border:1px solid var(--hbc-line);border-radius:10px;background:var(--hbc-surface)}
+.hbc-attn>h3{margin:0 0 4px;font-family:var(--hb-font-head);font-size:var(--hb-text-sm);font-weight:600;color:var(--hbc-text)}
+.hbc-attn>h3 small{font:400 var(--hb-text-xs) var(--hb-font-body);color:var(--hbc-muted)}
+.hbc-attn-list{list-style:none;margin:0;padding:0}
+.hbc-attn-list>li{display:grid;grid-template-columns:2.25rem 1.875rem 18.75rem auto;gap:8px;align-items:center;padding:4px 0;border-top:1px solid var(--hbc-line);font-size:var(--hb-text-xs)}
+.hbc-attn-list>li:first-child{border-top:0}
+.hbc-attn-ic{display:flex;justify-content:center}
+.hbc-attn-n{font-size:var(--hb-text-base);font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.hbc-attn-tags{display:flex;flex-wrap:wrap;gap:4px}
+.hbc-attn-tag{padding:1px 7px;border:1px solid var(--hbc-line);border-radius:10px;background:var(--hbc-surface2);color:var(--hb-sku);
+  font-family:var(--hb-font-mono);font-size:var(--hb-text-2xs);font-weight:500;text-decoration:none;white-space:nowrap}
+.hbc-attn-tag:hover,.hbc-attn-tag:focus-visible{border-color:var(--hbc-accent);color:var(--hb-sku-hover)}
+
+/* 5. THE POP-UP WINDOW: a <dialog> opened with showModal() (modal, and Escape closes it), labelled by its title:
+   <dialog class="hbc-dialog" aria-labelledby="d1-t"><div class="hbc-dialog-h"><h2 id="d1-t">...</h2>
+   <button class="hbc-dialog-x" aria-label="Close"><span class="hbc-i hbc-i-x"></span></button></div>...</dialog>. */
+.hbc-dialog{width:min(1500px,94vw);max-height:90vh;box-sizing:border-box;padding:14px 18px;border:1px solid rgba(255,255,255,.22);border-radius:12px;
+  background:#10262a;color:var(--hbc-text);box-shadow:0 20px 60px rgba(0,0,0,.6);font-size:var(--hb-text-sm);--hbc-mark-gap:#10262a}
+.hbc-dialog::backdrop{background:rgba(0,0,0,.55)}
+.hbc-dialog--narrow{width:min(640px,94vw)}
+.hbc-dialog-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
+.hbc-dialog-h h2{margin:0;font-family:var(--hb-font-head);font-size:var(--hb-text-md);font-weight:600;color:var(--hbc-text)}
+.hbc-dialog-x{display:inline-grid;place-items:center;flex:none;width:32px;height:32px;padding:0;border:1px solid var(--hbc-line);border-radius:8px;background:none;color:var(--hbc-muted);cursor:pointer}
+.hbc-dialog-x:hover,.hbc-dialog-x:focus-visible{color:var(--hbc-text);background:var(--hbc-surface2)}
+.hbc-dialog-x:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:2px}
+.hbc-dialog-x .hbc-i{width:1rem;height:1rem}
+
+/* 6. THE COMPARE TABLE: the field, Ours, then one column a market in the house order. Word changes against ours are
+   marked in the market's cell (<del> struck = ours, <ins> underlined = live). The heading stays put while the table
+   scrolls inside its wrap; a long row is cut short until its "all of it" button opens it (tr.is-open). A coloured rule
+   on the left of a cell shows its state: --ready amber, --wrong red; --gap is hatched, --same plain. */
+.hbc-compare-wrap{overflow:auto;max-width:100%;max-height:80vh;border:1px solid var(--hbc-line);border-radius:10px}
+.hbc-compare{border-collapse:separate;border-spacing:0;table-layout:fixed;min-width:68.75rem;width:100%;font-size:var(--hb-text-xs);line-height:1.45;color:var(--hbc-text)}
+.hbc-compare th,.hbc-compare td{padding:6px 8px;border-bottom:1px solid var(--hbc-line);text-align:left;vertical-align:top}
+.hbc-compare td+td,.hbc-compare th+th{border-left:1px solid var(--hbc-col-line)}
+.hbc-compare thead th{position:sticky;top:0;z-index:2;background:var(--hbc-solid);color:var(--hbc-muted);font-size:var(--hb-text-2xs);font-weight:600;vertical-align:bottom;white-space:nowrap}
+.hbc-compare thead .hbc-flag{width:.875rem;height:.875rem;margin-right:4px;vertical-align:-2px}
+.hbc-compare thead .hbc-stands-sc{display:inline;margin-left:4px}
+.hbc-compare-fn{width:9.375rem;font-weight:600}
+.hbc-compare-code{display:block;font:400 var(--hb-text-3xs) var(--hb-font-mono);color:var(--hbc-muted);overflow-wrap:anywhere}
+.hbc-compare-more{display:block;margin-top:4px;padding:0;border:0;background:none;color:var(--hbc-accent);font:500 var(--hb-text-2xs) var(--hb-font-body);
+  text-decoration:underline dotted;text-underline-offset:2px;cursor:pointer}
+.hbc-compare-more:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:2px}
+.hbc-compare-val{overflow-wrap:anywhere}
+.hbc-compare-val p{margin:0 0 6px}
+.hbc-compare-val p:last-child{margin-bottom:0}
+.hbc-compare-cap:not(.is-open) .hbc-compare-val{max-height:9.6em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+.hbc-compare-meta{display:flex;flex-wrap:wrap;gap:3px 6px;align-items:center;margin-top:3px;font-size:var(--hb-text-2xs);color:var(--hbc-muted)}
+.hbc-compare-meta .hbc-i{width:1rem;height:1rem}
+.hbc-compare-why,.hbc-compare-over{color:var(--hbc-state-wrong);font-weight:600}
+.hbc-compare-v--ours{background:var(--hbc-compare-ours)}
+.hbc-compare-v--ready{box-shadow:inset 3px 0 0 var(--hbc-state-ready)}
+.hbc-compare-v--wrong{box-shadow:inset 3px 0 0 var(--hbc-state-wrong)}
+.hbc-compare-v--gap{background:repeating-linear-gradient(45deg,transparent 0 6px,var(--hbc-surface) 6px 12px)}
+.hbc-compare-v--na{color:var(--hbc-faint)}
+.hbc-compare-grp td{background:var(--hbc-surface2);font-weight:600;font-size:var(--hb-text-xs)}
+.hbc-compare-grp small{font-weight:400;color:var(--hbc-muted);font-size:var(--hb-text-2xs)}
+.hbc-compare del{background:var(--hbc-del-bg);color:var(--hbc-state-wrong);text-decoration:line-through}
+.hbc-compare ins{background:var(--hbc-ins-bg);color:var(--hbc-state-same);text-decoration:underline;text-underline-offset:2px}
+.hbc-compare-lock{display:block;color:var(--hbc-state-ready);font-size:var(--hb-text-3xs);font-weight:600;cursor:help}
+
+/* 7. THE PICTURE SLOT STRIP: MAIN, PT01 to PT09 and SWCH across the full width, one row a source (Ours, Live UK ...).
+   A slot that will be sent has the green outline (hbc-slot--send); a state icon sits top right (hbc-slot-bd):
+   <div class="hbc-slots-row"><span class="hbc-slots-lbl">Ours</span><div class="hbc-slots"><figure class="hbc-slot
+   hbc-slot--send"><img alt="MAIN" src="..."><span class="hbc-slot-bd">state icon</span><figcaption>MAIN</figcaption>
+   </figure>...</div></div>. An empty slot is a span.hbc-slot-empty in place of the img. */
+.hbc-slots-row{display:grid;grid-template-columns:4.375rem minmax(0,1fr);gap:8px;align-items:center;margin:0 0 6px}
+.hbc-slots-lbl{font-size:var(--hb-text-xs);font-weight:600;color:var(--hbc-text)}
+.hbc-slots{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:6px}
+.hbc-slot{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;margin:0;font-size:var(--hb-text-3xs);color:var(--hbc-muted)}
+.hbc-slot img,.hbc-slot-empty{display:block;width:100%;height:auto;aspect-ratio:1;box-sizing:border-box;border:1px solid var(--hbc-line);border-radius:5px;object-fit:cover;background:var(--hbc-surface)}
+.hbc-slot-empty{display:grid;place-items:center;color:var(--hbc-faint);font-size:var(--hb-text-3xs)}
+.hbc-slot--send img,.hbc-slot--send .hbc-slot-empty{outline:2.5px solid var(--hbc-state-same);outline-offset:1px}
+.hbc-slot-bd{position:absolute;top:3px;right:3px;display:grid;place-items:center;border-radius:50%;background:var(--hbc-mark-gap);line-height:0}
+.hbc-slot-bd .hbc-i{width:1rem;height:1rem}
+.hbc-slot figcaption{line-height:1.2;font-variant-numeric:tabular-nums}
+
+@media (max-width:700px){
+  .hbc-attn-list>li{grid-template-columns:2.25rem 1.875rem minmax(0,1fr)}
+  .hbc-attn-tags{grid-column:1/-1}
+  .hbc-slots{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .hbc-slots-row{grid-template-columns:minmax(0,1fr)}
+}
+@media print{.hbc-markbar{position:static}.hbc-compare-wrap{max-height:none;overflow:visible}.hbc-compare-cap .hbc-compare-val{max-height:none;-webkit-mask-image:none;mask-image:none}}
