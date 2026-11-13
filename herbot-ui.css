@@ -368,8 +368,8 @@ label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
    Inside .hbc-act it spans the row; elsewhere add hbc-tip--self. */
 .hbc-tip{display:inline-block;vertical-align:middle}
 .hbc-tip--self{position:relative}
-.hbc-tip>button{display:inline-grid;place-items:center;width:22px;height:22px;border:0;background:none;color:var(--hbc-faint);border-radius:50%;padding:0;cursor:pointer}
-.hbc-tip>button:hover,.hbc-tip>button:focus-visible{color:var(--hbc-text);background:var(--hbc-surface2)}
+.hbc-tip>button:where(:not(.hbc-rd)){display:inline-grid;place-items:center;width:22px;height:22px;border:0;background:none;color:var(--hbc-faint);border-radius:50%;padding:0;cursor:pointer}
+.hbc-tip>button:where(:not(.hbc-rd)):hover,.hbc-tip>button:where(:not(.hbc-rd)):focus-visible{color:var(--hbc-text);background:var(--hbc-surface2)}
 .hbc-tip [role=tooltip]{display:none;position:absolute;z-index:5;left:14px;right:14px;top:calc(100% - 4px);max-width:420px;padding:10px 12px;border-radius:10px;background:#0a1210;color:var(--hbc-text);border:1px solid rgba(255,255,255,.22);box-shadow:0 8px 24px rgba(0,0,0,.45);font-size:var(--hb-text-xs);line-height:1.45;text-align:left;font-weight:400}
 .hbc-tip--self [role=tooltip]{left:0;right:auto;width:300px}
 .hbc-tip [role=tooltip] b{display:block;color:var(--hbc-muted);font-weight:600;font-size:var(--hb-text-2xs);letter-spacing:.06em;text-transform:uppercase;margin:6px 0 1px}
@@ -1283,7 +1283,7 @@ table.hbc-colw--narrow:not(.hbc-compare) thead th:first-child,table.hbc-colw--wi
 /* The tap-open ⓘ and the ! button. Markup as hbc-tip: <span class="hbc-tip hbc-tip--self hbc-tip--tap"><button
    type="button" aria-label="About ...">ⓘ</button><span role="tooltip">...</span></span>. A tap focuses the button and
    the note opens; a tap anywhere else closes it. hbc-tip--warn turns the button into the amber ! for a warning. */
-.hbc-tip--tap>button{width:1.625rem;height:1.625rem;font-size:var(--hb-text-md);line-height:1}
+.hbc-tip--tap>button:where(:not(.hbc-rd)){width:1.625rem;height:1.625rem;font-size:var(--hb-text-md);line-height:1}
 .hbc-tip--warn>button{border:1px solid var(--hbc-amber);background:rgba(227,183,92,.14);color:var(--hbc-amber);font-size:var(--hb-text-sm);font-weight:700}
 .hbc-tip--warn>button:hover,.hbc-tip--warn>button:focus-visible{background:rgba(227,183,92,.26);color:var(--hbc-amber)}
 @media (max-width:40rem){
@@ -1304,3 +1304,11 @@ table.hbc-colw--narrow:not(.hbc-compare) thead th:first-child,table.hbc-colw--wi
 .hbc-ch-pinterest{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%23ffffff"/><path transform="translate(4 4) scale(2.1667)" fill="%23BD081C" d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>')}
 .hbc-ch-microsoft{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%23ffffff"/><rect x="15" y="15" width="14" height="14" fill="%23F25022"/><rect x="31" y="15" width="14" height="14" fill="%237FBA00"/><rect x="15" y="31" width="14" height="14" fill="%2300A4EF"/><rect x="31" y="31" width="14" height="14" fill="%23FFB900"/></svg>')}
 .hbc-flag-ie{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 3"><rect width="1" height="3" fill="%23169B62"/><rect x="1" width="1" height="3" fill="%23fff"/><rect x="2" width="1" height="3" fill="%23FF883E"/></svg>')}
+
+/* KIT 1.8.2: a roundel for a channel or market not connected yet (MKT-334). Dashed edge, greyed, not a filter; a tap
+   opens its note. <span class="hbc-tip hbc-tip--self hbc-tip--tap"><button type="button" class="hbc-rd hbc-rd--off
+   hbc-ch-pinterest" aria-disabled="true" aria-label="Pinterest, not connected" aria-describedby="n1"></button><span
+   role="tooltip" id="n1">...</span></span>. It carries no aria-pressed, so the filter skips it. */
+.hbc-rd--off{border-style:dashed;border-color:var(--hbc-faint);filter:grayscale(1);opacity:.45;cursor:help}
+.hbc-rd--off:hover,.hbc-rd--off:focus-visible{opacity:.7}
+.hbc-rds>.hbc-tip{display:inline-flex}
