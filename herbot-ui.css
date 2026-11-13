@@ -88,6 +88,13 @@
   --hb-mkt-shopify-sdl:#2f7a6c;   /* Shopify · Simply Drawer Liners */
   --hb-mkt-b2b:#c9a0dc;   /* B2B (Faire and trade) */
   --hb-mkt-other-marketplaces:#9aa3a0;   /* Other marketplaces (eBay, TikTok Shop, Walmart) */
+
+  /* Product category colours (kit 1.8): a chart or filter by product category, never a channel colour.
+     From config/marketplace-colours.json (categories). Dark ground here; .hb-on-paper has the paper values. */
+  --hb-cat-sdl:#d9728f;   /* Scented drawer liners */
+  --hb-cat-wcdl:#58b6e8;   /* Wipe clean drawer liners */
+  --hb-cat-wf:#9bcf6b;   /* Wardrobe fresheners */
+  --hb-cat-other:#8a8f93;   /* Other */
 }
 
 /* The CFO's warm paper (#fff1e5) and any light chart ground. */
@@ -113,6 +120,10 @@
   --hb-fl-fba-us:#dc7c75;
   --hb-fl-fba-eu:#6f93d6;
   --hb-fl-mwh:#407556;
+  --hb-cat-sdl:#d9728f;
+  --hb-cat-wcdl:#58b6e8;
+  --hb-cat-wf:#9bcf6b;
+  --hb-cat-other:#8a8f93;
 }
 
 .hb-on-paper{
@@ -135,6 +146,10 @@
   --hb-fl-fba-us:#d46e67;
   --hb-fl-fba-eu:#6b8dcd;
   --hb-fl-mwh:#39684c;
+  --hb-cat-sdl:#d06d89;
+  --hb-cat-wcdl:#4895be;
+  --hb-cat-wf:#71974e;
+  --hb-cat-other:#878c90;
 }
 /* .hb-auto — for a page that cannot swap a class: a saved report, a static file, anything with no
    JavaScript. Paper values at rest, dark values when the reader's system asks for dark. Use it
@@ -162,6 +177,10 @@
   --hb-fl-fba-us:#d46e67;
   --hb-fl-fba-eu:#6b8dcd;
   --hb-fl-mwh:#39684c;
+  --hb-cat-sdl:#d06d89;
+  --hb-cat-wcdl:#4895be;
+  --hb-cat-wf:#71974e;
+  --hb-cat-other:#878c90;
 }
 @media (prefers-color-scheme: dark){
   .hb-auto{
@@ -184,6 +203,10 @@
     --hb-fl-fba-us:#dc7c75;
     --hb-fl-fba-eu:#6f93d6;
     --hb-fl-mwh:#407556;
+    --hb-cat-sdl:#d9728f;
+    --hb-cat-wcdl:#58b6e8;
+    --hb-cat-wf:#9bcf6b;
+    --hb-cat-other:#8a8f93;
   }
 }
 
@@ -1219,3 +1242,51 @@ table.hbc-colw--narrow:not(.hbc-compare) thead th:first-child,table.hbc-colw--wi
 .hbc-link{color:var(--hbc-accent);text-decoration:none}
 .hbc-link:hover,.hbc-link:focus-visible{text-decoration:underline;text-underline-offset:2px}
 @media print{.hbc-colw{display:none}}
+
+/* ===================================================================================================
+   APP KIT 1.8: the filter parts from the CFO's Home (CFO-100, "Home parts into the design kit first";
+   D418, kit first). Paid Media is the second app. Guide: docs/app-kit-calm-ui.md section 13; working page:
+   app-kit/filter-parts-example.html.
+   1. hbc-seg: a segmented switch, one on (a period: 7 | 30 | 90 days; or what a graph is stacked by).
+   2. hbc-rds + hbc-rd: the roundel filter row, legend and filter in one, a round button edged in its series
+      colour (--c) holding a flag (any hbc-flag-*), with an Amazon badge (hbc-rd-az) or a store tag (hbc-rd-tag).
+   3. hbc-rd--disc: the same filter as a filled disc with letters, for a product category.
+   4. --hb-cat-*: four product category colours (top of this file, with paper values).
+   5. hbc-tip--tap and hbc-tip--warn: the ⓘ and ! button that opens on a tap; on a phone the note opens as a
+      sheet along the foot of the screen, so it is always inside the screen.
+   =================================================================================================== */
+.hbc-seg{display:inline-flex;border:1px solid var(--hbc-line);border-radius:8px;overflow:hidden;vertical-align:middle}
+.hbc-seg button{border:0;margin:0;background:var(--hbc-surface);color:var(--hbc-muted);padding:.375rem .75rem;min-height:2rem;font:inherit;font-size:var(--hb-text-sm);cursor:pointer}
+.hbc-seg button+button{border-left:1px solid var(--hbc-line)}
+.hbc-seg button:hover{color:var(--hbc-text)}
+.hbc-seg button[aria-pressed=true]{background:var(--hbc-text);color:var(--hbc-bg3);font-weight:var(--hb-weight-semibold)}
+.hbc-seg button:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:-2px}
+.hbc-seg--sm button{min-height:1.625rem;padding:.125rem .5rem;font-size:var(--hb-text-xs)}
+
+.hbc-rds{display:flex;flex-wrap:wrap;align-items:center;gap:.625rem;margin:.5rem 0 .25rem}
+.hbc-rd{position:relative;flex:none;width:2.25rem;height:2.25rem;padding:0;border-radius:50%;border:3px solid var(--c,var(--hbc-line));background-color:var(--hbc-surface2);background-position:center;background-size:cover;background-repeat:no-repeat;color:var(--hbc-text);cursor:pointer;transition:opacity .15s}
+.hbc-rd[aria-pressed=true]:not(.hbc-rd--all){box-shadow:0 0 0 2px var(--hbc-bg3),0 0 0 4px var(--c,var(--hbc-text))}
+.hbc-rds:has(.hbc-rd:not(.hbc-rd--all)[aria-pressed=true]) .hbc-rd[aria-pressed=false]{opacity:.3}
+.hbc-rd:focus-visible{outline:2px solid var(--hbc-accent);outline-offset:3px}
+.hbc-rd--all{border-color:var(--hbc-line);font:600 var(--hb-text-xs) var(--hb-font-head)}
+.hbc-rd--disc{background-color:var(--c,var(--hbc-surface2));border-color:var(--hbc-bg3);color:#12100e;font:700 .625rem/1 var(--hb-font-head);letter-spacing:.02em}
+.hbc-rd-az,.hbc-rd-tag{position:absolute;bottom:-5px;border:1.5px solid var(--hbc-bg3);font:700 10px/13px var(--hb-font-head);text-align:center;pointer-events:none}
+.hbc-rd-az{right:-5px;width:15px;height:15px;line-height:12px;border-radius:50%;background:var(--hbc-amber);color:#161210}
+.hbc-rd-tag{left:-5px;padding:0 3px;border-radius:7px;background:var(--hb-mkt-shopify-sdl);color:#fff;font-size:8px}
+@media (min-width:44rem){.hbc-rd{width:2.5rem;height:2.5rem}}
+
+/* Flags new in 1.8: the EU, B2B (a briefcase) and Other (three dots). The Shopify bag is hbc-flag-web. */
+.hbc-flag-eu{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%23003399"/><g fill="%23FFCC00"><circle cx="49" cy="30" r="2.6"/><circle cx="46.5" cy="39.5" r="2.6"/><circle cx="39.5" cy="46.5" r="2.6"/><circle cx="30" cy="49" r="2.6"/><circle cx="20.5" cy="46.5" r="2.6"/><circle cx="13.5" cy="39.5" r="2.6"/><circle cx="11" cy="30" r="2.6"/><circle cx="13.5" cy="20.5" r="2.6"/><circle cx="20.5" cy="13.5" r="2.6"/><circle cx="30" cy="11" r="2.6"/><circle cx="39.5" cy="13.5" r="2.6"/><circle cx="46.5" cy="20.5" r="2.6"/></g></svg>')}
+.hbc-flag-b2b{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%234a3a58"/><rect x="13" y="22" width="34" height="23" rx="3" fill="%23fff"/><path d="M23 22v-4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4" fill="none" stroke="%23fff" stroke-width="3"/></svg>')}
+.hbc-flag-other{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><rect width="60" height="60" fill="%233a3f42"/><circle cx="15" cy="30" r="5" fill="%23ddd"/><circle cx="30" cy="30" r="5" fill="%23ddd"/><circle cx="45" cy="30" r="5" fill="%23ddd"/></svg>')}
+
+/* The tap-open ⓘ and the ! button. Markup as hbc-tip: <span class="hbc-tip hbc-tip--self hbc-tip--tap"><button
+   type="button" aria-label="About ...">ⓘ</button><span role="tooltip">...</span></span>. A tap focuses the button and
+   the note opens; a tap anywhere else closes it. hbc-tip--warn turns the button into the amber ! for a warning. */
+.hbc-tip--tap>button{width:1.625rem;height:1.625rem;font-size:var(--hb-text-md);line-height:1}
+.hbc-tip--warn>button{border:1px solid var(--hbc-amber);background:rgba(227,183,92,.14);color:var(--hbc-amber);font-size:var(--hb-text-sm);font-weight:700}
+.hbc-tip--warn>button:hover,.hbc-tip--warn>button:focus-visible{background:rgba(227,183,92,.26);color:var(--hbc-amber)}
+@media (max-width:40rem){
+  .hbc-tip--tap [role=tooltip]{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto;max-width:none;z-index:60;font-size:var(--hb-text-sm)}
+}
+@media print{.hbc-tip--tap,.hbc-seg{display:none}}
