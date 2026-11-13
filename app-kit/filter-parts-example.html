@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filter parts</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312303a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%234cc47f'/%3E%3Cpath d='M11.5 16.4l3 3 6-6.6' fill='none' stroke='%2312303a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<!-- An app links the fixed address instead: https://herbalmaster.github.io/herbot-ui/herbot-ui.css (D271).
+     This copy links the file beside it so the repo can be checked before a release. -->
+<link rel="stylesheet" href="herbot-ui.css">
+</head>
+<body class="hbc-ground hb-dense" data-theme="teal">
+<!-- Kit 1.8 (CFO-100, "Home parts into the design kit first"): the period switch, the roundel and disc filters, the
+     category colours and the tap-open ⓘ and ! buttons, from the CFO's Home. No figures: this page shows the parts only.
+     The words in the notes are samples; each app writes its own from the house glossary. The series colours are set
+     by the script from a list, as an app sets them from its own settings. -->
+<main class="hbc-content">
+<h1>Filter parts</h1>
+<p class="hbc-lede">Kit 1.8: the parts from the CFO's Home that a second app needs.</p>
+
+<section class="hbc-sec" id="part-seg"><h2>1. Period switch <span class="hbc-tip hbc-tip--self hbc-tip--tap"><button type="button" aria-label="About the period switch" aria-describedby="t-seg">ⓘ</button><span role="tooltip" id="t-seg"><b>Period</b>Sets the days the card shows. The change is against the same number of days before.</span></span></h2>
+<span class="hbc-seg" role="group" aria-label="Period" data-seg><button type="button" aria-pressed="true">7 d</button><button type="button" aria-pressed="false">30 d</button><button type="button" aria-pressed="false">90 d</button></span>
+<p>The same part, small, for a second switch (what a graph is stacked by):
+<span class="hbc-seg hbc-seg--sm" role="group" aria-label="Split bars by" data-seg><button type="button" aria-pressed="true">Channel</button><button type="button" aria-pressed="false">Category</button></span></p>
+</section>
+
+<section class="hbc-sec" id="part-rd"><h2>2. Roundel filter <span class="hbc-tip hbc-tip--self hbc-tip--tap"><button type="button" aria-label="About the channel filter" aria-describedby="t-rd">ⓘ</button><span role="tooltip" id="t-rd"><b>Channel filter</b>First tap shows that channel alone. Further taps add channels. All, or the last one off, shows every channel.</span></span></h2>
+<div class="hbc-rds" role="group" aria-label="Filter by channel" data-rds>
+<button type="button" class="hbc-rd hbc-rd--all" aria-pressed="true" title="All channels">All</button>
+<button type="button" class="hbc-rd hbc-flag-uk" data-c="--hb-mkt-uk" aria-pressed="false" aria-label="Amazon UK" title="Amazon UK"><span class="hbc-rd-az">a</span></button>
+<button type="button" class="hbc-rd hbc-flag-us" data-c="--hb-mkt-us" aria-pressed="false" aria-label="Amazon US" title="Amazon US"><span class="hbc-rd-az">a</span></button>
+<button type="button" class="hbc-rd hbc-flag-eu" data-c="--hb-mkt-eu" aria-pressed="false" aria-label="Amazon EU" title="Amazon EU"><span class="hbc-rd-az">a</span></button>
+<button type="button" class="hbc-rd hbc-flag-web" data-c="--hb-mkt-shopify-tmh" aria-pressed="false" aria-label="Shopify, The Master Herbalist" title="Shopify, The Master Herbalist"></button>
+<button type="button" class="hbc-rd hbc-flag-web" data-c="--hb-mkt-shopify-sdl" aria-pressed="false" aria-label="Shopify, Simply Drawer Liners" title="Shopify, Simply Drawer Liners"><span class="hbc-rd-tag">SDL</span></button>
+<button type="button" class="hbc-rd hbc-flag-b2b" data-c="--hb-mkt-b2b" aria-pressed="false" aria-label="B2B" title="B2B"></button>
+<button type="button" class="hbc-rd hbc-flag-other" data-c="--hb-mkt-other-marketplaces" aria-pressed="false" aria-label="Other marketplaces" title="Other marketplaces"></button>
+</div>
+</section>
+
+<section class="hbc-sec" id="part-disc"><h2>3. Disc filter and 4. category colours</h2>
+<div class="hbc-rds" role="group" aria-label="Filter by category" data-rds>
+<button type="button" class="hbc-rd hbc-rd--all" aria-pressed="true" title="All categories">All</button>
+<button type="button" class="hbc-rd hbc-rd--disc" data-c="--hb-cat-sdl" aria-pressed="false" aria-label="Scented drawer liners" title="Scented drawer liners">SDL</button>
+<button type="button" class="hbc-rd hbc-rd--disc" data-c="--hb-cat-wcdl" aria-pressed="false" aria-label="Wipe clean drawer liners" title="Wipe clean drawer liners">WCDL</button>
+<button type="button" class="hbc-rd hbc-rd--disc" data-c="--hb-cat-wf" aria-pressed="false" aria-label="Wardrobe fresheners" title="Wardrobe fresheners">WF</button>
+<button type="button" class="hbc-rd hbc-rd--disc" data-c="--hb-cat-other" aria-pressed="false" aria-label="Other" title="Other">Other</button>
+</div>
+</section>
+
+<section class="hbc-sec" id="part-tap"><h2>5. The ⓘ and ! buttons</h2>
+<p>A note: <span class="hbc-tip hbc-tip--self hbc-tip--tap"><button type="button" aria-label="About this figure" aria-describedby="t-i">ⓘ</button><span role="tooltip" id="t-i"><b>What it is</b>A sample note. On a phone it opens along the foot of the screen; a tap anywhere else closes it.</span></span>
+ A warning: <span class="hbc-tip hbc-tip--self hbc-tip--tap hbc-tip--warn"><button type="button" aria-label="Warning about this figure" aria-describedby="t-w">!</button><span role="tooltip" id="t-w"><b>Check</b>A sample warning: what is wrong and what to do.</span></span></p>
+</section>
+</main>
+<script>
+/* The example's behaviour; an app writes its own. 1: one button on in a switch. 2 and 3: first tap shows that one
+   alone, further taps add, All or the last one off clears. The series colour comes from the list (data-c), as an
+   app sets --c from its own settings. #pick=uk,us presses those on load, for screenshots. */
+(function () {
+  document.querySelectorAll('[data-c]').forEach(function (b) { b.style.setProperty('--c', 'var(' + b.getAttribute('data-c') + ')'); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-seg] button');
+    if (b) { b.parentNode.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); return; }
+    b = e.target.closest('[data-rds] .hbc-rd');
+    if (!b) return;
+    var row = b.parentNode, all = row.querySelector('.hbc-rd--all'), rest = [].slice.call(row.querySelectorAll('.hbc-rd:not(.hbc-rd--all)'));
+    if (b === all) rest.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    else b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+    var n = rest.filter(function (x) { return x.getAttribute('aria-pressed') === 'true'; }).length;
+    if (n === rest.length) { rest.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); n = 0; }
+    all.setAttribute('aria-pressed', String(n === 0));
+  });
+  var m = /pick=([\w,]+)/.exec(location.hash);
+  if (m) m[1].split(',').forEach(function (k) { var x = document.querySelector('[data-rds] .hbc-flag-' + k + ', [data-rds] [data-c="--hb-cat-' + k + '"]'); if (x) x.click(); });
+})();
+</script>
+</body>
+</html>
