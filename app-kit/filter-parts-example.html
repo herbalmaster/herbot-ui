@@ -60,6 +60,7 @@
 <button type="button" class="hbc-rd hbc-ch-tiktok" aria-pressed="false" aria-label="TikTok" title="TikTok"></button>
 <button type="button" class="hbc-rd hbc-ch-pinterest" aria-pressed="false" aria-label="Pinterest" title="Pinterest"></button>
 <button type="button" class="hbc-rd hbc-ch-microsoft" aria-pressed="false" aria-label="Microsoft Ads" title="Microsoft Ads"></button>
+<span class="hbc-tip hbc-tip--self hbc-tip--tap"><button type="button" class="hbc-rd hbc-rd--off hbc-ch-pinterest" aria-disabled="true" aria-label="Pinterest, not connected" aria-describedby="t-off"></button><span role="tooltip" id="t-off"><b>Pinterest</b>Not started. A sample note: each app says why.</span></span>
 </div>
 <div class="hbc-rds" role="group" aria-label="Filter by market" data-rds>
 <button type="button" class="hbc-rd hbc-rd--all" aria-pressed="true" title="All markets">All</button>
@@ -83,9 +84,9 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-seg] button');
     if (b) { b.parentNode.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); return; }
-    b = e.target.closest('[data-rds] .hbc-rd');
+    b = e.target.closest('[data-rds] .hbc-rd:not(.hbc-rd--off)');
     if (!b) return;
-    var row = b.parentNode, all = row.querySelector('.hbc-rd--all'), rest = [].slice.call(row.querySelectorAll('.hbc-rd:not(.hbc-rd--all)'));
+    var row = b.parentNode, all = row.querySelector('.hbc-rd--all'), rest = [].slice.call(row.querySelectorAll('.hbc-rd:not(.hbc-rd--all):not(.hbc-rd--off)'));
     if (b === all) rest.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
     else b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
     var n = rest.filter(function (x) { return x.getAttribute('aria-pressed') === 'true'; }).length;
