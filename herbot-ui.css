@@ -83,6 +83,10 @@
   --hb-mkt-nl:#e69f00;   /* Netherlands */
   --hb-mkt-se:#f0f0f0;   /* Sweden */
   --hb-mkt-pl:#5a6b6b;   /* Poland */
+  --hb-mkt-ie:#3fb886;   /* Ireland */
+  --hb-mkt-ca:#e04a5f;   /* Canada */
+  --hb-mkt-tr:#9a86e8;   /* Turkey */
+  --hb-mkt-mx:#b9b84a;   /* Mexico */
   --hb-mkt-shopify:#7fbcae;   /* Shopify (both stores) */
   --hb-mkt-shopify-tmh:#9ad0c2;   /* Shopify · The Master Herbalist */
   --hb-mkt-shopify-sdl:#2f7a6c;   /* Shopify · Simply Drawer Liners */
@@ -111,6 +115,10 @@
   --hb-mkt-nl:#e69f00;
   --hb-mkt-se:#f0f0f0;
   --hb-mkt-pl:#5a6b6b;
+  --hb-mkt-ie:#3fb886;
+  --hb-mkt-ca:#e04a5f;
+  --hb-mkt-tr:#9a86e8;
+  --hb-mkt-mx:#b9b84a;
   --hb-mkt-shopify:#7fbcae;
   --hb-mkt-shopify-tmh:#9ad0c2;
   --hb-mkt-shopify-sdl:#2f7a6c;
@@ -137,6 +145,10 @@
   --hb-mkt-nl:#b87f00;
   --hb-mkt-se:#8b8b8b;
   --hb-mkt-pl:#5a6b6b;
+  --hb-mkt-ie:#2a8a62;
+  --hb-mkt-ca:#c23a50;
+  --hb-mkt-tr:#7462c4;
+  --hb-mkt-mx:#878634;
   --hb-mkt-shopify:#5c8478;
   --hb-mkt-shopify-tmh:#6c9288;
   --hb-mkt-shopify-sdl:#2f7a6c;
@@ -168,6 +180,10 @@
   --hb-mkt-nl:#b87f00;
   --hb-mkt-se:#8b8b8b;
   --hb-mkt-pl:#5a6b6b;
+  --hb-mkt-ie:#2a8a62;
+  --hb-mkt-ca:#c23a50;
+  --hb-mkt-tr:#7462c4;
+  --hb-mkt-mx:#878634;
   --hb-mkt-shopify:#5c8478;
   --hb-mkt-shopify-tmh:#6c9288;
   --hb-mkt-shopify-sdl:#2f7a6c;
@@ -194,6 +210,10 @@
     --hb-mkt-nl:#e69f00;
     --hb-mkt-se:#f0f0f0;
     --hb-mkt-pl:#5a6b6b;
+    --hb-mkt-ie:#3fb886;
+    --hb-mkt-ca:#e04a5f;
+    --hb-mkt-tr:#9a86e8;
+    --hb-mkt-mx:#b9b84a;
     --hb-mkt-shopify:#7fbcae;
     --hb-mkt-shopify-tmh:#9ad0c2;
     --hb-mkt-shopify-sdl:#2f7a6c;
@@ -571,6 +591,10 @@ label{font-size:var(--hb-text-sm);font-weight:var(--hb-weight-medium)}
 .hbc-mk-fr{--hbc-mk:var(--hb-mkt-fr);fill:var(--hb-mkt-fr)}
 .hbc-mk-es{--hbc-mk:var(--hb-mkt-es);fill:var(--hb-mkt-es)}
 .hbc-mk-it{--hbc-mk:var(--hb-mkt-it);fill:var(--hb-mkt-it)}
+.hbc-mk-ie{--hbc-mk:var(--hb-mkt-ie);fill:var(--hb-mkt-ie)}
+.hbc-mk-ca{--hbc-mk:var(--hb-mkt-ca);fill:var(--hb-mkt-ca)}
+.hbc-mk-tr{--hbc-mk:var(--hb-mkt-tr);fill:var(--hb-mkt-tr)}
+.hbc-mk-mx{--hbc-mk:var(--hb-mkt-mx);fill:var(--hb-mkt-mx)}
 .hbc-mk-web{--hbc-mk:var(--hb-mkt-shopify);fill:var(--hb-mkt-shopify)}
 /* A market tag: the market's short name on a chip edged in its colour. An app with its own flags may put a
    flag inside instead; the kit has no flag set yet. */
