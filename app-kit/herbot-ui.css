@@ -87,6 +87,11 @@
   --hb-mkt-ca:#e04a5f;   /* Canada */
   --hb-mkt-tr:#9a86e8;   /* Turkey */
   --hb-mkt-mx:#b9b84a;   /* Mexico */
+  --hb-app-ground:#132a2b;   /* the app-icon and project-mark ground (config/app-icons.json) */
+  --hb-area-ops:#7fd0a0;   /* area: Ops */
+  --hb-area-content:#e3b75c;   /* area: Content */
+  --hb-area-marketing:#e28ab4;   /* area: Marketing */
+  --hb-area-mine:#a8c8f0;   /* area: My tasks */
   --hb-mkt-shopify:#7fbcae;   /* Shopify (both stores) */
   --hb-mkt-shopify-tmh:#9ad0c2;   /* Shopify · The Master Herbalist */
   --hb-mkt-shopify-sdl:#2f7a6c;   /* Shopify · Simply Drawer Liners */
@@ -119,6 +124,10 @@
   --hb-mkt-ca:#e04a5f;
   --hb-mkt-tr:#9a86e8;
   --hb-mkt-mx:#b9b84a;
+  --hb-area-ops:#7fd0a0;
+  --hb-area-content:#e3b75c;
+  --hb-area-marketing:#e28ab4;
+  --hb-area-mine:#a8c8f0;
   --hb-mkt-shopify:#7fbcae;
   --hb-mkt-shopify-tmh:#9ad0c2;
   --hb-mkt-shopify-sdl:#2f7a6c;
@@ -149,6 +158,10 @@
   --hb-mkt-ca:#c23a50;
   --hb-mkt-tr:#7462c4;
   --hb-mkt-mx:#878634;
+  --hb-area-ops:#3f8a5f;
+  --hb-area-content:#957427;
+  --hb-area-marketing:#b8578a;
+  --hb-area-mine:#5c80ad;
   --hb-mkt-shopify:#5c8478;
   --hb-mkt-shopify-tmh:#6c9288;
   --hb-mkt-shopify-sdl:#2f7a6c;
@@ -184,6 +197,10 @@
   --hb-mkt-ca:#c23a50;
   --hb-mkt-tr:#7462c4;
   --hb-mkt-mx:#878634;
+  --hb-area-ops:#3f8a5f;
+  --hb-area-content:#957427;
+  --hb-area-marketing:#b8578a;
+  --hb-area-mine:#5c80ad;
   --hb-mkt-shopify:#5c8478;
   --hb-mkt-shopify-tmh:#6c9288;
   --hb-mkt-shopify-sdl:#2f7a6c;
@@ -214,6 +231,10 @@
     --hb-mkt-ca:#e04a5f;
     --hb-mkt-tr:#9a86e8;
     --hb-mkt-mx:#b9b84a;
+    --hb-area-ops:#7fd0a0;
+    --hb-area-content:#e3b75c;
+    --hb-area-marketing:#e28ab4;
+    --hb-area-mine:#a8c8f0;
     --hb-mkt-shopify:#7fbcae;
     --hb-mkt-shopify-tmh:#9ad0c2;
     --hb-mkt-shopify-sdl:#2f7a6c;
@@ -1336,3 +1357,25 @@ table.hbc-colw--narrow:not(.hbc-compare) thead th:first-child,table.hbc-colw--wi
 .hbc-rd--off{border-style:dashed;border-color:var(--hbc-faint);filter:grayscale(1);opacity:.45;cursor:help}
 .hbc-rd--off:hover,.hbc-rd--off:focus-visible{opacity:.7}
 .hbc-rds>.hbc-tip{display:inline-flex}
+
+/* KIT 1.9: areas, project marks and the status ring, for herbot.uk Home (Herbot Today, D437) and any app that shows a
+   project (D418). The map is config/project-marks.json. A mark is drawn in its area's colour; state never colours it.
+   <span class="hbc-pmark hbc-area-marketing" title="Paid ads">PA</span>
+   The status ring: one job or routine. <span class="hbc-ring hbc-ring--ok" role="img" aria-label="Ran ok"><svg ...></svg></span>
+   ok green, warn amber, fail red, unknown a dashed grey ring, off hollow. */
+.hbc-area-ops{--hbc-area:var(--hb-area-ops)}
+.hbc-area-content{--hbc-area:var(--hb-area-content)}
+.hbc-area-marketing{--hbc-area:var(--hb-area-marketing)}
+.hbc-area-mine{--hbc-area:var(--hb-area-mine)}
+.hbc-pmark{display:inline-grid;place-items:center;flex:none;width:2.4rem;height:2.4rem;border-radius:.6rem;box-sizing:border-box;background:var(--hb-app-ground);color:var(--hbc-area,var(--hbc-text));font:600 .85rem/1 var(--hb-font-ui);letter-spacing:.02em}
+.hbc-pmark--sm{width:2.1rem;height:2.1rem;border-radius:.5rem;font-size:.8rem}
+.hbc-area-head{color:var(--hbc-area,var(--hbc-muted))}
+.hbc-ring{display:inline-grid;place-items:center;flex:none;width:2rem;height:2rem;border-radius:50%;box-sizing:border-box;border:3px solid var(--hbc-faint);background:var(--hb-app-ground);color:var(--hbc-faint)}
+.hbc-ring svg{width:.9rem;height:.9rem;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.hbc-ring--sm{width:1.6rem;height:1.6rem;border-width:2.5px}
+.hbc-ring--sm svg{width:.75rem;height:.75rem}
+.hbc-ring--ok{border-color:var(--hbc-accent);color:var(--hbc-accent)}
+.hbc-ring--warn{border-color:var(--hbc-amber);color:var(--hbc-amber)}
+.hbc-ring--fail{border-color:var(--hbc-red);color:var(--hbc-red)}
+.hbc-ring--unk{border-style:dashed;border-color:var(--hbc-muted);color:var(--hbc-muted)}
+.hbc-ring--off{background:transparent;border-color:var(--hbc-line);color:var(--hbc-faint)}
