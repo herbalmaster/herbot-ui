@@ -104,6 +104,14 @@
   --hb-cat-wcdl:#58b6e8;   /* Wipe clean drawer liners */
   --hb-cat-wf:#9bcf6b;   /* Wardrobe fresheners */
   --hb-cat-other:#8a8f93;   /* Other */
+  --hb-src-paid:#f0a04b;   /* traffic source: Paid search */
+  --hb-src-organic:#7fd0a0;   /* traffic source: Organic search */
+  --hb-src-social:#e28ab4;   /* traffic source: Social */
+  --hb-src-email:#e3c75c;   /* traffic source: Email */
+  --hb-src-direct:#6fa8e8;   /* traffic source: Direct */
+  --hb-src-ai:#b9a0e8;   /* traffic source: AI assistants */
+  --hb-src-referral:#4fc4c4;   /* traffic source: Other sites */
+  --hb-src-unknown:#8a8f93;   /* traffic source: Not known */
 }
 
 /* The CFO's warm paper (#fff1e5) and any light chart ground. */
@@ -141,6 +149,14 @@
   --hb-cat-wcdl:#58b6e8;
   --hb-cat-wf:#9bcf6b;
   --hb-cat-other:#8a8f93;
+  --hb-src-paid:#f0a04b;
+  --hb-src-organic:#7fd0a0;
+  --hb-src-social:#e28ab4;
+  --hb-src-email:#e3c75c;
+  --hb-src-direct:#6fa8e8;
+  --hb-src-ai:#b9a0e8;
+  --hb-src-referral:#4fc4c4;
+  --hb-src-unknown:#8a8f93;
 }
 
 .hb-on-paper{
@@ -175,6 +191,14 @@
   --hb-cat-wcdl:#4895be;
   --hb-cat-wf:#71974e;
   --hb-cat-other:#878c90;
+  --hb-src-paid:#b06a1c;
+  --hb-src-organic:#3f8a5f;
+  --hb-src-social:#b8578a;
+  --hb-src-email:#8f7a24;
+  --hb-src-direct:#3f72b0;
+  --hb-src-ai:#7a62c0;
+  --hb-src-referral:#2a8686;
+  --hb-src-unknown:#848a8e;
 }
 /* .hb-auto — for a page that cannot swap a class: a saved report, a static file, anything with no
    JavaScript. Paper values at rest, dark values when the reader's system asks for dark. Use it
@@ -214,6 +238,14 @@
   --hb-cat-wcdl:#4895be;
   --hb-cat-wf:#71974e;
   --hb-cat-other:#878c90;
+  --hb-src-paid:#b06a1c;
+  --hb-src-organic:#3f8a5f;
+  --hb-src-social:#b8578a;
+  --hb-src-email:#8f7a24;
+  --hb-src-direct:#3f72b0;
+  --hb-src-ai:#7a62c0;
+  --hb-src-referral:#2a8686;
+  --hb-src-unknown:#848a8e;
 }
 @media (prefers-color-scheme: dark){
   .hb-auto{
@@ -248,6 +280,14 @@
     --hb-cat-wcdl:#58b6e8;
     --hb-cat-wf:#9bcf6b;
     --hb-cat-other:#8a8f93;
+    --hb-src-paid:#f0a04b;
+    --hb-src-organic:#7fd0a0;
+    --hb-src-social:#e28ab4;
+    --hb-src-email:#e3c75c;
+    --hb-src-direct:#6fa8e8;
+    --hb-src-ai:#b9a0e8;
+    --hb-src-referral:#4fc4c4;
+    --hb-src-unknown:#8a8f93;
   }
 }
 
@@ -1379,3 +1419,48 @@ table.hbc-colw--narrow:not(.hbc-compare) thead th:first-child,table.hbc-colw--wi
 .hbc-ring--fail{border-color:var(--hbc-red);color:var(--hbc-red)}
 .hbc-ring--unk{border-style:dashed;border-color:var(--hbc-muted);color:var(--hbc-muted)}
 .hbc-ring--off{background:transparent;border-color:var(--hbc-line);color:var(--hbc-faint)}
+
+/* KIT 1.10: the Home parts a second app needs (D418), asked for by TMH Brain - Marketing for its Home; drawn from the
+   CFO's Home. Traffic sources, KPI tiles, the stacked graph and the pie (the app draws the SVG, the kit gives the look),
+   and a list of Odoo cards. No figures here: an app works out its own. */
+.hbc-src-paid{--c:var(--hb-src-paid);fill:var(--hb-src-paid)}
+.hbc-src-organic{--c:var(--hb-src-organic);fill:var(--hb-src-organic)}
+.hbc-src-social{--c:var(--hb-src-social);fill:var(--hb-src-social)}
+.hbc-src-email{--c:var(--hb-src-email);fill:var(--hb-src-email)}
+.hbc-src-direct{--c:var(--hb-src-direct);fill:var(--hb-src-direct)}
+.hbc-src-ai{--c:var(--hb-src-ai);fill:var(--hb-src-ai)}
+.hbc-src-referral{--c:var(--hb-src-referral);fill:var(--hb-src-referral)}
+.hbc-src-unknown{--c:var(--hb-src-unknown);fill:var(--hb-src-unknown)}
+.hbc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.625rem}
+.hbc-kpi{position:relative;min-width:0;background:var(--hbc-surface);border:1px solid var(--hbc-line);border-radius:10px;padding:.55rem .7rem .5rem}
+.hbc-kpi-k{display:block;font-size:var(--hb-text-2xs);color:var(--hbc-muted);text-transform:uppercase;letter-spacing:var(--hb-tracking-caps);font-weight:500}
+.hbc-kpi-v{display:block;font-size:var(--hb-text-lg);font-weight:600;line-height:1.2;color:var(--hbc-text);font-variant-numeric:tabular-nums}
+.hbc-kpi-d{font-size:var(--hb-text-xs);color:var(--hbc-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hbc-kpi-d--up{color:var(--hbc-accent)}
+.hbc-kpi-d--up::before{content:"\25B2 "}
+.hbc-kpi-d--dn{color:var(--hbc-red)}
+.hbc-kpi-d--dn::before{content:"\25BC "}
+.hbc-kpi .hbc-tip{position:absolute;top:.35rem;right:.35rem}
+svg.hbc-spark{display:block;width:100%;height:1.6rem;margin-top:.25rem;overflow:visible}
+svg.hbc-spark polyline,svg.hbc-spark path{fill:none;stroke:var(--c,var(--hbc-accent));stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.hbc-chart{min-width:0;background:var(--hbc-surface);border:1px solid var(--hbc-line);border-radius:10px;padding:.6rem .7rem}
+.hbc-chart>h3{margin:0 0 .35rem;font-size:var(--hb-text-sm);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.hbc-chart>h3 small{font-weight:400;color:var(--hbc-muted);font-size:var(--hb-text-2xs)}
+svg.hbc-stack{display:block;width:100%;height:12rem;overflow:visible}
+svg.hbc-stack rect{shape-rendering:crispEdges;stroke:var(--hbc-bg3,#0a1519);stroke-width:.5}
+svg.hbc-stack .hbc-axis{stroke:var(--hbc-line);stroke-width:1;fill:none}
+svg.hbc-stack text,svg.hbc-pie text{fill:var(--hbc-muted);font-size:10px;font-family:var(--hb-font-ui);font-variant-numeric:tabular-nums}
+svg.hbc-pie{display:block;width:100%;max-width:12rem;height:auto;margin:0 auto}
+svg.hbc-pie path{stroke:var(--hbc-bg3,#0a1519);stroke-width:1;cursor:pointer;transition:opacity .15s}
+svg.hbc-pie .hbc-pie-off,svg.hbc-stack .hbc-pie-off{opacity:.25}
+.hbc-chart-legend{display:flex;flex-wrap:wrap;gap:.2rem .8rem;margin:.4rem 0 0;padding:0;list-style:none;font-size:var(--hb-text-2xs);color:var(--hbc-muted)}
+.hbc-chart-legend li::before{content:"";display:inline-block;width:.6rem;height:.6rem;border-radius:2px;margin-right:.3rem;vertical-align:middle;background:var(--c,var(--hbc-faint))}
+.hbc-tasks{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.hbc-tasks>li{display:flex;align-items:center;gap:.5rem;min-height:2.2rem;padding:.2rem .4rem;border-radius:8px}
+.hbc-tasks>li:hover{background:var(--hbc-surface)}
+.hbc-tasks a{flex:1;min-width:0;color:var(--hbc-text);text-decoration:none;font-size:var(--hb-text-sm);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbc-tasks a:hover{text-decoration:underline}
+.hbc-pmark--xs{width:1.6rem;height:1.6rem;border-radius:.4rem;font-size:.66rem}
+.hbc-task-due{flex:none;font-size:var(--hb-text-2xs);color:var(--hbc-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hbc-task-due--late{color:var(--hbc-red);font-weight:600}
+@media (max-width:40rem){.hbc-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.hbc-tasks a{white-space:normal}}
