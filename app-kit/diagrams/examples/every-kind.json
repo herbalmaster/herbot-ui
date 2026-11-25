@@ -1,0 +1,17 @@
+{
+  "title": "Example: every kind of step",
+  "made": "25 Nov 2026",
+  "steps": [
+    { "id": "a", "kind": "trigger", "label": "A delivery arrives", "next": "b" },
+    { "id": "b", "kind": "person",  "label": "Count the cartons", "note": "goods in", "next": "c" },
+    { "id": "c", "kind": "split",   "label": "Matches the order?", "next": [{ "to": "d", "label": "yes" }, { "to": "g", "label": "no" }] },
+    { "id": "d", "kind": "action",  "label": "Receipt validated", "note": "Odoo", "next": "e" },
+    { "id": "e", "kind": "delay",   "label": "Wait 1 day", "next": "f" },
+    { "id": "f", "kind": "subflow", "label": "Put-away flow", "next": "z" },
+    { "id": "g", "kind": "person",  "label": "Note the difference", "next": "h" },
+    { "id": "h", "kind": "wait",    "label": "Wait up to 3 days for the supplier", "next": [{ "to": "i", "label": "no reply" }, { "to": "s", "label": "reply" }] },
+    { "id": "i", "kind": "gap",     "label": "Claim step not written yet" },
+    { "id": "s", "kind": "stop",    "label": "Stops: resolved" },
+    { "id": "z", "kind": "end",     "label": "End" }
+  ]
+}

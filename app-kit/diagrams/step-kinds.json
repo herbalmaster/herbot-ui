@@ -1,0 +1,28 @@
+{
+  "about": "The one list of workflow step kinds (D509, standards 24). Every TMH workflow diagram uses these and only these. Colours are brand tokens from system/README.md.",
+  "version": 1,
+  "kinds": {
+    "trigger": { "name": "Start",          "means": "what starts the flow",                 "shape": "rounded", "fill": "#20494F", "stroke": "#20494F", "text": "#FFFFFF" },
+    "action":  { "name": "System step",    "means": "a system does something",              "shape": "box",     "fill": "#FFFFFF", "stroke": "#306B74", "text": "#1F1F1F" },
+    "person":  { "name": "Person step",    "means": "a person must act",                    "shape": "hexagon", "fill": "#FFFFFF", "stroke": "#20494F", "text": "#20494F" },
+    "wait":    { "name": "Wait for",       "means": "waits for something, with a time-out", "shape": "pill",    "fill": "#F5F7F0", "stroke": "#9AA77E", "text": "#1F1F1F" },
+    "delay":   { "name": "Wait",           "means": "waits a fixed time",                   "shape": "pill",    "fill": "#F5F7F0", "stroke": "#9AA77E", "text": "#1F1F1F", "dash": "5 3" },
+    "split":   { "name": "Choice",         "means": "a choice; each way out is labelled",   "shape": "diamond", "fill": "#C6D1AE", "stroke": "#306B74", "text": "#1F1F1F" },
+    "subflow": { "name": "Another flow",   "means": "hands over to another flow",           "shape": "double",  "fill": "#FFFFFF", "stroke": "#306B74", "text": "#1F1F1F" },
+    "stop":    { "name": "Stops early",    "means": "leaves the flow early",                "shape": "dot",     "fill": "#E8F0EF", "stroke": "#306B74", "text": "#20494F" },
+    "end":     { "name": "End",            "means": "the normal end",                       "shape": "dot",     "fill": "#FFFFFF", "stroke": "#8C9488", "text": "#55605F" },
+    "gap":     { "name": "To do",          "means": "missing, broken or still to do",       "shape": "box",     "fill": "#FFF4E5", "stroke": "#8A4B00", "text": "#8A4B00", "dash": "4 3" }
+  },
+  "page": {
+    "width": 676,
+    "why_width": "fits the text width of an A4 page (about 170 mm) and an Odoo Knowledge article without shrinking the 14 px text",
+    "max_columns": 3,
+    "font": "Lato, Arial, Helvetica, sans-serif",
+    "label_px": 14,
+    "small_px": 12,
+    "ink": "#1F1F1F",
+    "muted": "#55605F",
+    "line": "#55605F",
+    "title": "#20494F"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Welcome flow (Resend)",
+  "source": "github.com/herbalmaster/tmh-marketing-brain",
+  "made": "25 Nov 2026",
+  "steps": [
+    { "id": "t",   "kind": "trigger", "label": "Someone subscribes", "note": "n8n: Shopify sign-up", "next": "w1" },
+    { "id": "w1",  "kind": "action",  "label": "Send W1", "note": "welcome email", "tags": ["UK", "US", "EU"], "next": "wa" },
+    { "id": "wa",  "kind": "wait",    "label": "Wait up to 4 days for an order", "next": [{ "to": "w2", "label": "no order" }, { "to": "ord", "label": "they order" }] },
+    { "id": "w2",  "kind": "action",  "label": "Send W2", "note": "how to use the liners", "tags": ["UK", "US", "EU"], "next": "wb" },
+    { "id": "wb",  "kind": "wait",    "label": "Wait up to 6 days for an order", "next": [{ "to": "w3", "label": "no order" }, { "to": "ord", "label": "they order" }] },
+    { "id": "w3",  "kind": "action",  "label": "Send W3", "note": "our favourites", "tags": ["UK", "US", "EU"], "next": "end" },
+    { "id": "ord", "kind": "stop",    "label": "Stops: they ordered" },
+    { "id": "end", "kind": "end",     "label": "End" }
+  ]
+}
