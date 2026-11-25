@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TMH workflow (D509, standards 24)",
+  "description": "The neutral flow format that flow_diagram.py draws. Each chat writes a small adapter from its own system (Resend, n8n, Odoo) into this. Words on the steps are the owning chat's.",
+  "type": "object",
+  "required": ["steps"],
+  "properties": {
+    "title": { "type": "string", "description": "shown top left, for example 'Welcome flow'" },
+    "source": { "type": "string", "description": "GitHub link to the definition this was made from" },
+    "made": { "type": "string", "description": "date shown in the footer; today if left out" },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "label"],
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "enum": ["trigger", "action", "person", "wait", "delay", "split", "subflow", "stop", "end", "gap"] },
+          "label": { "type": "string", "description": "at most three lines at 14 px (about 70 characters)" },
+          "note": { "type": "string", "description": "a smaller line under the label: the system, the time-out, the code" },
+          "tags": { "type": "array", "items": { "type": "string" }, "description": "markets or channels, shown as UK · US · EU" },
+          "link": { "type": "string", "description": "where the step lives (template, n8n flow, SOP section); clickable inline, listed under an image" },
+          "next": {
+            "description": "the next step id, or a list; the first is the main way on, each other gets its own column",
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "oneOf": [
+                { "type": "string" },
+                { "type": "object", "required": ["to"], "properties": { "to": { "type": "string" }, "label": { "type": "string" } } }
+              ] } }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
